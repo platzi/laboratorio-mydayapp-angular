@@ -40,3 +40,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# TernJS port file
+.tern-port
+/test-results/
+/playwright-report/
+/playwright/.cache/
