@@ -184,5 +184,5 @@ Este proyecto se lanza bajo la licencia [MIT](https://opensource.org/licenses/MI
 
 ## Credits
 
-- [TodoMVC Project](https://todomvc.com/).
-- [MyDayApp - JavaScript](https://github.com/platzi/laboratorio-mydayapp-js).
+- [TodoMVC Project](https://todomvc.com/)
+- [MyDayApp - JavaScript](https://github.com/platzi/laboratorio-mydayapp-js)
