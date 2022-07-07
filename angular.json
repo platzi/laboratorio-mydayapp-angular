@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "laboratorio-mydayapp-angular": {
+    "myapp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/laboratorio-mydayapp-angular",
+            "outputPath": "dist/myapp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "laboratorio-mydayapp-angular:build:production"
+              "browserTarget": "myapp:build:production"
             },
             "development": {
-              "browserTarget": "laboratorio-mydayapp-angular:build:development"
+              "browserTarget": "myapp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "laboratorio-mydayapp-angular:build"
+            "browserTarget": "myapp:build"
           }
         },
         "test": {
@@ -98,11 +98,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "2b8fd7ea-07bd-4530-9cbb-544b1e563e35"
+    "analytics": "2b8fd7ea-07bd-4530-9cbb-544b1e563e35",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
