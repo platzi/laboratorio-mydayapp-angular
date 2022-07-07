@@ -9,14 +9,9 @@ import { TodoService } from '@services/todo.service';
 })
 export class FooterComponent {
 
-  pendingTodos$ = this.todoService.getPendingTodos();
   todos$ = this.todoService.getTodos();
   filter$ = this.todoService.getFilter();
 
   constructor(private todoService: TodoService) {}
-
-  clear() {
-    this.todoService.clearCompleted();
-  }
 
 }

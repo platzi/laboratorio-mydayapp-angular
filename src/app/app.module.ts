@@ -10,6 +10,7 @@ import { TodoComponent } from './components/todo/todo.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TodosComponent } from './components/todos/todos.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { ClearBtnComponent } from './components/clear-btn/clear-btn.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CounterComponent } from './components/counter/counter.component';
     TodoComponent,
     FooterComponent,
     TodosComponent,
-    CounterComponent
+    CounterComponent,
+    ClearBtnComponent
   ],
   imports: [
     BrowserModule,

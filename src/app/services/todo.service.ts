@@ -44,6 +44,13 @@ export class TodoService {
     );
   }
 
+  getCompletedTodos() {
+    return this.getTodos()
+    .pipe(
+      map(todos => todos.filter(todo => todo.completed))
+    );
+  }
+
   readStorage() {
     this.todos = this.storage.readStorage();
     this.save();
