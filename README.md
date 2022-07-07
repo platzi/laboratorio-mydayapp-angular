@@ -166,7 +166,7 @@ Las pruebas e2e corren bajo playwright con el comando `npm run e2e` y ya esta in
 
 Cuando corras el comando `npm run e2e` por primera vez y antes de crear todas las [funcionalidades](#funcionalidades), las pruebas van a fallar y se verán así:
 
-![failed]([img]https://i.imgur.com/C0jGlXl.png[/img])
+![failed](https://i.imgur.com/C0jGlXl.png)
 
 Una vez desarrolles todas las funcionalidades deberías pasar todas las pruebas y se verán así:
 
