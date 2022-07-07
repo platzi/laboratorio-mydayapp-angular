@@ -13,7 +13,7 @@ export class TodoService {
   private todos: Todo[] = [];
   private todosBS = new BehaviorSubject<Todo[]>(this.todos);
 
-  private filter: Filter= 'all';
+  private filter: Filter = 'all';
   private filterBS = new BehaviorSubject<Filter>(this.filter);
 
   constructor(private storage: StorageService) {}
@@ -23,14 +23,13 @@ export class TodoService {
   }
 
   getTodosByFilter() {
-    return this.getTodos()
-    .pipe(
-      map(todos => {
+    return this.getTodos().pipe(
+      map((todos) => {
         if (this.filter === 'pending') {
-          return todos.filter(todo => !todo.completed)
+          return todos.filter((todo) => !todo.completed);
         }
         if (this.filter === 'completed') {
-          return todos.filter(todo => todo.completed)
+          return todos.filter((todo) => todo.completed);
         }
         return todos;
       })
@@ -38,16 +37,14 @@ export class TodoService {
   }
 
   getPendingTodos() {
-    return this.getTodos()
-    .pipe(
-      map(todos => todos.filter(todo => !todo.completed))
+    return this.getTodos().pipe(
+      map((todos) => todos.filter((todo) => !todo.completed))
     );
   }
 
   getCompletedTodos() {
-    return this.getTodos()
-    .pipe(
-      map(todos => todos.filter(todo => todo.completed))
+    return this.getTodos().pipe(
+      map((todos) => todos.filter((todo) => todo.completed))
     );
   }
 
