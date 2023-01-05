@@ -8,7 +8,19 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     pathMatch: 'full'
-  }
+  },
+  {
+    path: 'completed',
+    component: HomeComponent,
+  },
+  {
+    path: 'pending',
+    component: HomeComponent,
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  },
 ];
 
 @NgModule({

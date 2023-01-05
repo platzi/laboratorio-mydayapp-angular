@@ -1,0 +1,8 @@
+<li [class]="item.completed ? 'completed' : editing ? 'editing' : ''" >
+    <div class="view">
+        <input class="toggle" type="checkbox" [checked]="item.completed" (change)="onInputChecked()"  />
+        <label (dblclick)="edit()">{{item.title}}</label>
+        <button class="destroy" (click)="onDeleteItem()"></button>
+    </div>
+    <input #inputEdit class="edit" [value]="item.title" (blur)="onChangeTitle()" (keyup.enter)="onChangeTitle()" (keyup.escape)="cancelEditing()"/>
+</li>
