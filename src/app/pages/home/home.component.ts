@@ -6,9 +6,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  public items = [];
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addItem(item: string): void {
+    console.log(item)
   }
 
 }
