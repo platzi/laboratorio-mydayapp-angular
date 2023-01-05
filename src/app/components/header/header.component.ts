@@ -4,7 +4,6 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
   @Output() addTask = new EventEmitter<string>();
@@ -15,7 +14,7 @@ export class HeaderComponent {
 
   onKeyEnter() {
     if (this.addTaskInput.value)
-    this.addTask.emit(this.addTaskInput.value);
+    this.addTask.emit(this.addTaskInput.value.trim());
     this.addTaskInput.setValue('');
   }
 }
