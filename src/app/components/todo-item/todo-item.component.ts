@@ -16,7 +16,7 @@ export class TodoItemComponent implements OnInit {
   
   changeTodo(){
     this.item.completed = !this.item.completed
-    this.todoService.completeTodo(this.item.id)
+    this.todoService.changeTodo(this.item)
   }
 
 }
