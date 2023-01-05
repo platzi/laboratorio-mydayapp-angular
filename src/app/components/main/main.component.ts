@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Task } from '../../models/task';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+
+  @Input() tasks: Task[] = [];
 
   constructor() { }
 

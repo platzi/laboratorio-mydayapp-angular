@@ -3,7 +3,7 @@
   <div class="container todoapp-wrapper">
     <ng-container *ngIf="showContent">
       <!-- This section should be hidden by default and shown when there are todos -->
-      <app-main></app-main>
+      <app-main [tasks]="tasks"></app-main>
       <!-- This footer should be hidden by default and shown when there are todos -->
       <app-footer></app-footer>
     </ng-container>

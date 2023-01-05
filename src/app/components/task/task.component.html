@@ -1,24 +1,12 @@
-<li class="completed">
-  <div class="view">
-    <input class="toggle" type="checkbox" checked />
-    <label>Learn JavaScript</label>
-    <button class="destroy"></button>
-  </div>
-  <input class="edit" value="Learn JavaScript" />
-</li>
-<li>
+<li
+  [ngClass]="{
+    completed: task?.completed
+  }"
+>
   <div class="view">
     <input class="toggle" type="checkbox" />
-    <label>Buy a unicorn</label>
+    <label>{{ task?.title }}</label>
     <button class="destroy"></button>
   </div>
-  <input class="edit" value="Buy a unicorn" />
-</li>
-<li class="editing">
-  <div class="view">
-    <input class="toggle" type="checkbox" />
-    <label>Make dishes</label>
-    <button class="destroy"></button>
-  </div>
-  <input class="edit" value="Make dishes" />
+  <input class="edit" value="{{ task?.title }}" />
 </li>
