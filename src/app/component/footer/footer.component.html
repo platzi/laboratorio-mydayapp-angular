@@ -1,0 +1,26 @@
+<!-- This footer should be hidden by default and shown when there are todos -->
+<footer class="footer">
+  <!-- This should be `0 items left` by default -->
+  <ng-container *ngIf="tareas.length == 1">
+    <span class="todo-count"><strong>{{tareas.length}}</strong> item left</span>
+  </ng-container>
+
+  <ng-container *ngIf="tareas.length < 1 || tareas.length > 1">
+    <span class="todo-count"><strong>{{tareas.length}}</strong> items left</span>
+  </ng-container>
+
+  <!-- Remove this if you don't implement routing -->
+  <ul class="filters">
+    <li>
+      <a routerLink="/" [ngClass]="{selected: estado == 'All'}">All</a>
+    </li>
+    <li>
+      <a routerLink="/pending" [ngClass]="{selected: estado == 'Pending'}">Pending</a>
+    </li>
+    <li>
+      <a routerLink="/completed" [ngClass]="{selected: estado == 'Completed'}">Completed</a>
+    </li>
+  </ul>
+  <!-- Hidden if no completed items are left ↓ -->
+  <button class="clear-completed" (click)="deleteChores()">Clear completed</button>
+</footer>
