@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Item } from '../items.interface';
 
 @Component({
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   }
 
   addItem(task: string): void {
-    this.items.push({
+    this.items = this.items.concat({
       task: task,
       done: false
     })

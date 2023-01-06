@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class HeaderComponent implements OnInit {
 
-  @Output() addNewItem = new EventEmitter<string>();
+  @Output() addItemEvent = new EventEmitter<string>();
 
   public formItems!: FormGroup;
 
@@ -23,7 +23,8 @@ export class HeaderComponent implements OnInit {
   }
 
   addItem(): void {
-    this.addNewItem.emit(this.formItems.get('task')?.value);
+    if (this.formItems.get('task')?.value)
+      this.addItemEvent.emit(this.formItems.get('task')?.value);
   }
 
 }

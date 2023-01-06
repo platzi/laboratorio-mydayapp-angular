@@ -1,7 +1,7 @@
 <section class="todoapp">
 
   <app-header
-    (addNewItem)="addItem($event)"
+    (addItemEvent)="addItem($event)"
   ></app-header>
 
   <div class="container todoapp-wrapper">
@@ -10,10 +10,10 @@
       [items]="items"
     ></app-item-list>
 
-
     <app-footer
-      [countItems]="items.length"
+      [setItems]="items"
     ></app-footer>
 
   </div>
+
 </section>
