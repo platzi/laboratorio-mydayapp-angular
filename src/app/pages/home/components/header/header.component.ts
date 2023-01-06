@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +13,6 @@ export class HeaderComponent implements OnInit {
   public formItems!: FormGroup;
 
   constructor(
-    private router: Router,
     private formBuilder: FormBuilder,
   ) { }
 
@@ -27,7 +25,6 @@ export class HeaderComponent implements OnInit {
   addItem(): void {
     if (this.formItems.get('task')?.value) {
       this.addItemEvent.emit(this.formItems.get('task')?.value);
-      this.router.navigate([`/all`]);
       this.formItems.patchValue({ task: '' });
     }
   }
