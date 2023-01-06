@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Item } from '../../../items.interface';
 
 @Component({
@@ -6,20 +6,22 @@ import { Item } from '../../../items.interface';
   templateUrl: './item-list.component.html',
   styleUrls: []
 })
-export class ItemListComponent implements OnInit {
+export class ItemListComponent {
 
   @Input() items: Item[] = [];
 
-  @Output() toggleItemEvent = new EventEmitter<Item>();
+  @Output() editItemEvent = new EventEmitter<Item>();
+  @Output() toggleItemEvent = new EventEmitter<number>();
   @Output() destroyItemEvent = new EventEmitter<number>();
 
   constructor() { }
 
-  ngOnInit(): void {
+  editItem(item: Item): void {
+
   }
 
-  toggleItem(item: Item, index: number): void {
-    this.toggleItemEvent.emit(item);
+  toggleItem(index: number): void {
+    this.toggleItemEvent.emit(index);
   }
 
   destroyItem(index: number): void {

@@ -3,7 +3,7 @@
 
     <li *ngFor="let i of items; index as j;" ngClass="{{ i.done ? 'completed' : '' }}">
       <div class="view">
-        <input (click)="toggleItem(i, j)" class="toggle" type="checkbox" [checked]="i.done" />
+        <input (click)="toggleItem(j)" class="toggle" type="checkbox" [checked]="i.done" />
         <label>{{ i.task }}</label>
         <button (click)="destroyItem(j)" class="destroy"></button>
       </div>

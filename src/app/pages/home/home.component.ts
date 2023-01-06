@@ -21,8 +21,11 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  toggleItem(item: Item): void {
-
+  toggleItem(index: number): void {
+    this.items = this.items.map((i: Item, j: number) => {
+      if (j == index) return { task: i.task, done: !i.done }  // Change task status
+      else return i;
+    })
   }
 
   destroyItem(index: number): void {
