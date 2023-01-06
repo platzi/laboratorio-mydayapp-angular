@@ -13,7 +13,7 @@ export class HeaderComponent {
   constructor() {}
 
   onKeyEnter() {
-    if (this.addTaskInput.value)
+    if (this.addTaskInput.value?.trim())
     this.addTask.emit(this.addTaskInput.value.trim());
     this.addTaskInput.setValue('');
   }

@@ -1,13 +1,14 @@
 <li
   *ngIf="task"
   [ngClass]="{
-    completed: task.completed
+    completed: task.completed,
+    editing: isEditing
   }"
 >
   <div class="view">
     <input class="toggle" type="checkbox" (click)="onClick()" />
-    <label>{{ task.title }}</label>
+    <label type="checkbox" (dblclick)="onDoubleClick()">{{ task.title }}</label>
     <button class="destroy"></button>
   </div>
-  <input class="edit" value="{{ task.title }}" />
+  <input #editionElement class="edit" (keyup.enter)="onEnterEdition()" (keyup.escape)="onEscapeEdition()" [formControl]="editionInput" />
 </li>
