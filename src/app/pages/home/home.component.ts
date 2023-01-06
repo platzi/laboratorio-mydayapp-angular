@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from '../items.interface';
 
 @Component({
   selector: 'app-home',
@@ -6,15 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  public items = [];
+  public items: Item[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  addItem(item: string): void {
-    console.log(item)
+  addItem(task: string): void {
+    this.items.push({
+      task: task,
+      done: false
+    })
   }
 
 }

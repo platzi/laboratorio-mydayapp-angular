@@ -1,0 +1,14 @@
+<section class="main">
+  <ul class="todo-list">
+
+    <li *ngFor="let i of items" class="completed">
+      <div class="view">
+        <input class="toggle" type="checkbox" [checked]="i.done" />
+        <label>{{ i.task }}</label>
+        <button class="destroy"></button>
+      </div>
+      <input class="edit" value="Learn JavaScript" />
+    </li>
+
+  </ul>
+</section>

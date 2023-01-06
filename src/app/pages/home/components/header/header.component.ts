@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,22 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Output() inputTask = new EventEmitter<string>();
+  @Output() addNewItem = new EventEmitter<string>();
 
-  constructor() { }
+  public formItems!: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
+    this.formItems = this.formBuilder.group({
+      task: ['', Validators.required],
+    });
+  }
+
+  addItem(): void {
+    this.addNewItem.emit(this.formItems.get('task')?.value);
   }
 
 }
