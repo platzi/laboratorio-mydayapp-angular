@@ -1,5 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
-import { Item } from '../items.interface';
+import { Item } from '../../shared/items.interface';
 
 @Component({
   selector: 'app-home',

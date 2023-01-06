@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Item } from '../../../items.interface';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Item } from '../../../../shared/items.interface';
 
 @Component({
   selector: 'app-item-list',
@@ -14,9 +15,11 @@ export class ItemListComponent {
   @Output() toggleItemEvent = new EventEmitter<number>();
   @Output() destroyItemEvent = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+  ) { }
 
-  editItem(item: Item): void {
+  editItem(item: Item, index: number): void {
 
   }
 
