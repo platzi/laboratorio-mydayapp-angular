@@ -5,10 +5,4 @@ import { EmitService } from './service/emit.service';
   selector: 'app-root',
   template: '<router-outlet></router-outlet>',
 })
-export class AppComponent {
-
-  constructor(public  loadData: EmitService){
-
-
-  }
-}
+export class AppComponent {}

@@ -119,7 +119,7 @@ test.describe('Item', () => {
     const todoItems = page.locator('.todo-list li');
     const secondTodo = todoItems.nth(1);
     await secondTodo.dblclick();
-    await expect(secondTodo.locator('.edit'))?.toHaveValue(TODO_ITEMS[1]);
+    await expect(secondTodo.locator('.edit')).toHaveValue(TODO_ITEMS[1]);
     await secondTodo.locator('.edit').fill('buy some sausages');
     await secondTodo.locator('.edit').press('Enter');
 
