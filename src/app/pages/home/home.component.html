@@ -4,7 +4,7 @@
     (addItemEvent)="addItem($event)"
   ></app-header>
 
-  <div class="container todoapp-wrapper">
+  <div *ngIf="itemsBackup.length > 0" class="container todoapp-wrapper">
 
     <app-item-list
       [items]="items"
@@ -14,6 +14,7 @@
 
     <app-footer
       [setItems]="items"
+      (changeFilterEvent)="changeFilter($event)"
     ></app-footer>
 
   </div>

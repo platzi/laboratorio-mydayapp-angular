@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Location } from '@angular/common';
 import { CategoryFilter } from '../../../../shared/category-filter.type';
 import { Item } from '../../../../shared/items.interface';
 
@@ -9,6 +10,13 @@ import { Item } from '../../../../shared/items.interface';
 })
 export class FooterComponent {
 
+  @Output() changeFilterEvent = new EventEmitter<CategoryFilter>();
+
+  @Input() set setItems(items: Item[]) {
+    this.items = items;
+    this.buildItemsInformation();
+  }
+
   public items: Item[] = [];
 
   public itemsLeft = 0;
@@ -16,14 +24,11 @@ export class FooterComponent {
 
   public filterSelected: CategoryFilter = 'all';
 
-  @Input() set setItems(items: Item[]) {
-    this.buildItemsInformation(items);
-  }
+  constructor(
+    private location: Location,
+  ) { }
 
-  constructor() { }
-
-  buildItemsInformation(items: Item[]): void {
-    this.items = items;
+  buildItemsInformation(): void {
     this.itemsLeft = 0;
     this.itemsDone = 0;
     this.items.forEach((i: Item) => {
@@ -32,16 +37,11 @@ export class FooterComponent {
     });
   }
 
-  seeAllItems(): void {
-    this.filterSelected = 'all';
-  }
-
-  seeItemsPendings(): void {
-    this.filterSelected = 'pending';
-  }
-
-  seeItemsCompleted(): void {
-    this.filterSelected = 'completed';
+  changeFilter(filter: CategoryFilter): void {
+    this.filterSelected = filter;
+    this.changeFilterEvent.emit(filter);
+    this.location.go(`/${filter}`);
+    this.buildItemsInformation();
   }
 
   clearItemsCompleted(): void {

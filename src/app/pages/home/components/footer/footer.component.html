@@ -1,16 +1,15 @@
-<footer *ngIf="items.length > 0" class="footer">
+<footer class="footer">
   <span class="todo-count"><strong>{{ itemsLeft }}</strong> item{{ itemsLeft == 1 ? '' : 's' }} left</span>
   <ul class="filters">
     <li>
-      <a (click)="seeAllItems()" class="my-pointer" ngClass="{{ filterSelected == 'all' ? 'selected' : '' }}">All</a>
+      <a (click)="changeFilter('all')" class="my-pointer" ngClass="{{ filterSelected == 'all' ? 'selected' : '' }}">All</a>
     </li>
     <li>
-      <a (click)="seeItemsPendings()" class="my-pointer" ngClass="{{ filterSelected == 'pending' ? 'selected' : '' }}">Pending</a>
+      <a (click)="changeFilter('pending')" class="my-pointer" ngClass="{{ filterSelected == 'pending' ? 'selected' : '' }}">Pending</a>
     </li>
     <li>
-      <a (click)="seeItemsCompleted()" class="my-pointer" ngClass="{{ filterSelected == 'completed' ? 'selected' : '' }}">Completed</a>
+      <a (click)="changeFilter('completed')" class="my-pointer" ngClass="{{ filterSelected == 'completed' ? 'selected' : '' }}">Completed</a>
     </li>
   </ul>
-  <!-- Hidden if no completed items are left ↓ -->
-  <button (click)="clearItemsCompleted()" class="clear-completed">Clear completed</button>
+  <button *ngIf="itemsDone > 0" (click)="clearItemsCompleted()" class="clear-completed">Clear completed</button>
 </footer>
