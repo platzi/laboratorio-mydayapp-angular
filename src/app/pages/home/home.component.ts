@@ -1,5 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ItemsStorageService } from '../../shared/services/items-storage.service';
 import { CategoryFilter } from '../../shared/category-filter.type';
 import { Item } from '../../shared/items.interface';
 
@@ -16,9 +17,11 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private storage: ItemsStorageService,
   ) { }
 
   ngOnInit(): void {
+    this.itemsBackup = this.storage.get();
     this.route.params
       .subscribe(p => {
         if (p['filter']) {
@@ -63,11 +66,13 @@ export class HomeComponent implements OnInit {
   clearCompletedEvent(clear: boolean): void {
     this.itemsBackup = this.itemsBackup.filter((i: Item) => !i.done );
     this.changeFilter();
+    this.storage.update(this.itemsBackup);
   }
 
   setBackup(): void {
     this.itemsBackup = this.items;
     this.changeFilter();
+    this.storage.update(this.itemsBackup);
   }
 
 }
