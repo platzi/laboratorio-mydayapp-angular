@@ -2,7 +2,7 @@
   <div class="container">
     <h1>My Day</h1>
     <p>All my tasks in one place</p>
-    <form [formGroup]="formItems" (ngSubmit)="addItem()">
+    <form [formGroup]="formItems" (keyup.enter)="addItem()">
       <input
         class="new-todo"
         placeholder="Type new todo"

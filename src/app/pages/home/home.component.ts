@@ -23,13 +23,13 @@ export class HomeComponent implements OnInit {
       .subscribe(p => {
         if (p['filter']) {
           this.filterSelected = p['filter'];
-          this.changeFilter()
+          this.changeFilter();
         }
       })
   }
 
   addItem(task: string): void {
-    this.items = this.items.concat({
+    this.items = this.itemsBackup.concat({
       task: task.trim(),
       done: false
     });
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   }
 
   toggleItem(index: number): void {
-    this.items = this.items.map((i: Item, j: number) => {
+    this.items = this.itemsBackup.map((i: Item, j: number) => {
       if (j == index) return { task: i.task, done: !i.done }  // Change task status
       else return i;
     });
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   destroyItem(index: number): void {
-    this.items = this.items.filter((i: Item, j: number) => {
+    this.items = this.itemsBackup.filter((i: Item, j: number) => {
       return j != index;
     });
     this.setBackup();

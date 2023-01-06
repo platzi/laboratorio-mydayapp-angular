@@ -12,7 +12,6 @@ const routes: Routes = [
   {
     path: ':filter',
     component: HomeComponent,
-    pathMatch: 'full'
   }
 ];
 
