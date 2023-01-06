@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Item } from '../../../items.interface';
 
 @Component({
@@ -6,7 +6,7 @@ import { Item } from '../../../items.interface';
   templateUrl: './footer.component.html',
   styleUrls: []
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   public items: Item[] = [];
 
@@ -24,8 +24,5 @@ export class FooterComponent implements OnInit {
   }
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

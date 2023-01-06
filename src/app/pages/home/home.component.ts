@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   addItem(task: string): void {
     this.items = this.items.concat({
-      task: task,
+      task: task.trim(),
       done: false
     })
   }
