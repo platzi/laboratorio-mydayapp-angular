@@ -21,4 +21,14 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  toggleItem(item: Item): void {
+
+  }
+
+  destroyItem(index: number): void {
+    this.items = this.items.filter((i: Item, j: number) => {
+      return j != index;
+    })
+  }
+
 }

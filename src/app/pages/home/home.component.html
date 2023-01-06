@@ -8,6 +8,8 @@
 
     <app-item-list
       [items]="items"
+      (toggleItemEvent)="toggleItem($event)"
+      (destroyItemEvent)="destroyItem($event)"
     ></app-item-list>
 
     <app-footer
