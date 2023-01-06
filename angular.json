@@ -96,8 +96,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
-            "codeCoverage": true
+            "scripts": []
+            
           }
         },
         "lint": {
