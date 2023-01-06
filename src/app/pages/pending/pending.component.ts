@@ -4,14 +4,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   selector: 'app-pending',
   templateUrl: './pending.component.html',
 })
-export class PendingComponent implements OnInit, OnDestroy {
+export class PendingComponent implements OnDestroy {
 
-  constructor() { }
+
   ngOnDestroy(): void {
     location.reload();
   }
 
-  ngOnInit(): void {
-  }
+
 
 }

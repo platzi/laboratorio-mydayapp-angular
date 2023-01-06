@@ -4,15 +4,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   selector: 'app-completed',
   templateUrl: './completed.component.html',
 })
-export class CompletedComponent implements OnInit, OnDestroy {
+export class CompletedComponent implements OnDestroy {
 
-  constructor() { }
   ngOnDestroy(): void {
     location.reload();
-  }
-
-
-  ngOnInit(): void {
   }
 
 }

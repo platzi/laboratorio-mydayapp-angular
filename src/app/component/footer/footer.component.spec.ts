@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NotasService } from 'src/app/service/notas.service';
+import {of} from 'rxjs';
 import { FooterComponent } from './footer.component';
+import { Nota } from 'src/app/models/nota.model';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -20,4 +22,17 @@ describe('FooterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should ejecute deleteChores', () => {
+    component.deleteChores();
+  });
+
+  it('should ejecute loadContadorItem', () => {
+    component.loadData.loadContadorItem.emit();
+  });
+
+
+
+
+
 });

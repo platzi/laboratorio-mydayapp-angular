@@ -20,4 +20,10 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should ejecut enterText', () => {
+    localStorage.removeItem('mydayapp-angular');
+    component.formGroup.setValue({tituloTarea: 'Noat 1'});
+    component.enterText();
+  });
 });

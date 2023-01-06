@@ -20,12 +20,12 @@ export class FooterComponent implements OnInit {
   ) {
     this.loadData.loadContadorItem.subscribe(()=>{
       this.tareas = [];
-      this.tareas = this.notasService.getChoresPending();
+      this.tareas = this.notasService.getPendingChores();
     });
   }
 
   ngOnInit(): void {
-    this.tareas = this.notasService.getChoresPending();
+    this.tareas = this.notasService.getPendingChores();
   }
 
   deleteChores(){

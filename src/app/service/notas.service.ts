@@ -47,6 +47,7 @@ export class NotasService {
     );
   }
 
+
   getCompletedChores(){
     this.tareas = this.getChores();
     return this.tareas.map(
@@ -64,23 +65,6 @@ export class NotasService {
     );
   }
 
-  getChoresPending(){
-
-    this.tareas = JSON.parse(localStorage.getItem('mydayapp-angular') || '[]');
-    return this.tareas.map(
-      (dato: Nota) => {
-        let auxDato!: Nota;
-        if(dato.completed == false){
-          auxDato = dato;
-        }
-        return auxDato;
-      }
-    ).filter(
-      (dato) => {
-        return dato !== undefined;
-      }
-    );
-  }
 
   updateChores(data: Nota[]){
     localStorage.setItem('mydayapp-angular', JSON.stringify(data));
@@ -104,7 +88,7 @@ export class NotasService {
   }
 
   deleteChoresCompleted(){
-    let newChores: Nota[] = this.getChoresPending();
+    let newChores: Nota[] = this.getPendingChores();
     localStorage.setItem('mydayapp-angular', JSON.stringify(newChores));
   }
 }
