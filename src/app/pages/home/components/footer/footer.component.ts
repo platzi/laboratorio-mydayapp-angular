@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryFilter } from '../../../../shared/category-filter.type';
 import { Item } from '../../../../shared/items.interface';
@@ -9,6 +9,8 @@ import { Item } from '../../../../shared/items.interface';
   styleUrls: []
 })
 export class FooterComponent {
+
+  @Output() clearCompletedEvent = new EventEmitter<boolean>();
 
   @Input() filterSelected: CategoryFilter = 'all';
 
@@ -42,7 +44,7 @@ export class FooterComponent {
   }
 
   clearItemsCompleted(): void {
-
+    this.clearCompletedEvent.emit(true);
   }
 
 }

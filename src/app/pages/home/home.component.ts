@@ -60,6 +60,11 @@ export class HomeComponent implements OnInit {
       this.items = this.itemsBackup;
   }
 
+  clearCompletedEvent(clear: boolean): void {
+    this.itemsBackup = this.itemsBackup.filter((i: Item) => !i.done );
+    this.changeFilter();
+  }
+
   setBackup(): void {
     this.itemsBackup = this.items;
     this.changeFilter();
