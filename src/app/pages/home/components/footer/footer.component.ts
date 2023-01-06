@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryFilter } from '../../../../shared/category-filter.type';
 import { Item } from '../../../../shared/items.interface';
 
@@ -10,7 +10,7 @@ import { Item } from '../../../../shared/items.interface';
 })
 export class FooterComponent {
 
-  @Output() changeFilterEvent = new EventEmitter<CategoryFilter>();
+  @Input() filterSelected: CategoryFilter = 'all';
 
   @Input() set setItems(items: Item[]) {
     this.items = items;
@@ -22,10 +22,8 @@ export class FooterComponent {
   public itemsLeft = 0;
   public itemsDone = 0;
 
-  public filterSelected: CategoryFilter = 'all';
-
   constructor(
-    private location: Location,
+    private router: Router,
   ) { }
 
   buildItemsInformation(): void {
@@ -39,8 +37,7 @@ export class FooterComponent {
 
   changeFilter(filter: CategoryFilter): void {
     this.filterSelected = filter;
-    this.changeFilterEvent.emit(filter);
-    this.location.go(`/${filter}`);
+    this.router.navigate([`/${filter}`]);
     this.buildItemsInformation();
   }
 

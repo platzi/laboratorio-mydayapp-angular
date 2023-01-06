@@ -1,4 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CategoryFilter } from '../../shared/category-filter.type';
 import { Item } from '../../shared/items.interface';
 
@@ -11,9 +12,20 @@ export class HomeComponent implements OnInit {
   public items: Item[] = [];
   public itemsBackup: Item[] = [];
 
-  constructor() { }
+  public filterSelected: CategoryFilter = 'all';
+
+  constructor(
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
+    this.route.params
+      .subscribe(p => {
+        if (p['filter']) {
+          this.filterSelected = p['filter'];
+          this.changeFilter()
+        }
+      })
   }
 
   addItem(task: string): void {
@@ -39,21 +51,18 @@ export class HomeComponent implements OnInit {
     this.setBackup();
   }
 
-  changeFilter(filter: CategoryFilter): void {
-    if (filter == 'pending') {
+  changeFilter(): void {
+    if (this.filterSelected == 'pending')
       this.items = this.itemsBackup.filter((i: Item) => !i.done );
-    } else if (filter == 'completed') {
+    else if (this.filterSelected == 'completed')
       this.items = this.itemsBackup.filter((i: Item) => i.done );
-    } else {
+    else
       this.items = this.itemsBackup;
-    }
-
-    console.log('this.items', this.items)
-    console.log('this.itemsBackup', this.itemsBackup)
   }
 
   setBackup(): void {
     this.itemsBackup = this.items;
+    this.changeFilter();
   }
 
 }
