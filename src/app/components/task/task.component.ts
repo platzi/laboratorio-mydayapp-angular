@@ -6,12 +6,13 @@ import { Task } from '../../models/task';
   templateUrl: './task.component.html',
 })
 export class TaskComponent implements OnInit {
+  @Input() task: Task | null = null;
 
-  @Input()task: Task | null = null
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  onClick() {
+    this.task!.completed = !this.task!.completed;
   }
-
 }
