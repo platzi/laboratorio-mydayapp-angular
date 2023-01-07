@@ -1,13 +1,19 @@
 <section class="main">
   <ul class="todo-list">
 
-    <li *ngFor="let i of items; index as j;" ngClass="{{ i.done ? 'completed' : '' }}">
+    <li *ngFor="let i of items; index as j;" (dblclick)="editingItem(i, j)" [ngClass]="{ 'completed': i.done, 'editing': (j == itemEdited?.index) }">
       <div class="view">
         <input (click)="toggleItem(j)" class="toggle" type="checkbox" [checked]="i.done" />
         <label>{{ i.task }}</label>
         <button (click)="destroyItem(j)" class="destroy"></button>
       </div>
-      <input class="edit" value="Learn JavaScript" />
+      <input
+        #inputEdit
+        class="edit"
+        value="{{ i.task }}"
+        (keyup.enter)="confirmEdition(j)"
+        (keyup.esc)="cancelEdition()"
+      />
     </li>
 
   </ul>

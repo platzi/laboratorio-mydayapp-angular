@@ -2,7 +2,7 @@ import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemsStorageService } from '../../shared/services/items-storage.service';
 import { CategoryFilter } from '../../shared/category-filter.type';
-import { Item } from '../../shared/items.interface';
+import { Item, ItemEdited } from '../../shared/items.interface';
 
 @Component({
   selector: 'app-home',
@@ -39,9 +39,17 @@ export class HomeComponent implements OnInit {
     this.setBackup();
   }
 
+  editItem(item: ItemEdited): void {
+    this.items = this.itemsBackup.map((i: Item, j: number) => {
+      if (j == item.index) return { task: item.task, done: item.done }
+      else return i;
+    });
+    this.setBackup();
+  }
+
   toggleItem(index: number): void {
     this.items = this.itemsBackup.map((i: Item, j: number) => {
-      if (j == index) return { task: i.task, done: !i.done }  // Change task status
+      if (j == index) return { task: i.task, done: !i.done }      // Change task status
       else return i;
     });
     this.setBackup();

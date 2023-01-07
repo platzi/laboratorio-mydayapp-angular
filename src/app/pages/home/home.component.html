@@ -8,6 +8,7 @@
 
     <app-item-list
       [items]="items"
+      (editItemEvent)="editItem($event)"
       (toggleItemEvent)="toggleItem($event)"
       (destroyItemEvent)="destroyItem($event)"
     ></app-item-list>
