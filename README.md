@@ -1,4 +1,4 @@
-Try it [here!](https://ng-list-todo.netlify.app/all)
+Try it [here!](https://ng-list-todo.netlify.app)
 
 # MyDayApp - Angular
 
