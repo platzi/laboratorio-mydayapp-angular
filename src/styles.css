@@ -306,6 +306,7 @@ body {
 }
 
 .filters li a {
+  cursor: pointer;
   color: inherit;
   margin: 3px;
   padding: 3px 7px;
@@ -384,8 +385,4 @@ html .clear-completed:active {
 
 :focus {
   outline: 0;
-}
-
-.my-pointer {
-  cursor: pointer;
 }
