@@ -23,4 +23,12 @@ export class HomeComponent implements OnInit {
       completed:false,
     })
   }
+
+  get pendingTasksCount(){
+    return this.tasks.filter(task => !task.completed).length
+  }
+
+  get canClear(){
+    return this.tasks.some(task => task.completed)
+  }
 }
