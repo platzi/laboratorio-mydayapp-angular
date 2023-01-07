@@ -1,0 +1,39 @@
+<div class="container todoapp-wrapper">
+  <!-- This section should be hidden by default and shown when there are todos -->
+  <section class="main">
+    <ul class="todo-list" *ngFor="let chore of tareas">
+      <ng-container *ngIf="titleEdit == undefined">
+        <li [ngClass]="{completed: chore.completed}">
+          <div class="view">
+            <ng-container *ngIf="chore.completed else nochecked">
+              <input class="toggle" type="checkbox" checked (click)="clickcheckbox(chore)"/>
+              <label>{{chore.title}}</label>
+            </ng-container>
+            <ng-template #nochecked >
+              <input class="toggle" type="checkbox" (click)="clickcheckbox(chore)"/>
+              <label (dblclick)="dobleClick(chore)">{{chore.title}}</label>
+            </ng-template>
+            <button class="destroy" (click)="deletOneChore(chore.id)"></button>
+          </div>
+          <input class="edit" [value]="'aaaa'" />
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="titleEdit == chore.id">
+        <li  class="editing">
+          <div [formGroup]="formGroup">
+            <input
+                 (keyup)="$event.keyCode == 27 ? escape() : null"
+                 (keyup)="$event.keyCode == 13 ? enterText() : null"
+                 class="edit"
+                 autofocus
+                 [value]="titleEdit"
+                 formControlName="newTitle"/>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+  </section>
+  <app-footer [estado]="estado"></app-footer>
+
+</div>

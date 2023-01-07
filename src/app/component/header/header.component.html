@@ -1,0 +1,17 @@
+<header class="header">
+  <div class="container">
+    <h1>Mi día</h1>
+    <p>Todas mis tareas en un solo lugar</p>
+    <div [formGroup]="formGroup">
+      <input
+      (keyup)="$event.keyCode == 13 ? enterText() : null"
+      class="new-todo"
+      placeholder="Escriba una nueva tarea"
+      autofocus
+      type="text"
+      formControlName="tituloTarea"
+    />
+    </div>
+
+  </div>
+</header>

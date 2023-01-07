@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EmitService } from './service/emit.service';
 
 @Component({
   selector: 'app-root',
