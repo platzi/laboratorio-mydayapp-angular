@@ -24,9 +24,9 @@ export class ItemListComponent {
 
   editingItem(item: Item, index: number): void {
     this.itemEdited = {
-      index: index,
-      task: item.task,
-      done: item.done,
+      id: index,
+      title: item.title,
+      completed: item.completed,
     }
     this.cdRef.detectChanges();
     this.inputEdit.toArray()[index].nativeElement.focus();
@@ -35,9 +35,9 @@ export class ItemListComponent {
   confirmEdition(index: number): void {
     if (this.inputEdit.toArray()[index].nativeElement.value) {
       this.editItemEvent.emit({
-        index: this.itemEdited?.index ?? 0,
-        task: this.inputEdit.toArray()[index].nativeElement.value.trim(),
-        done: this.itemEdited?.done ?? false,
+        id: this.itemEdited?.id ?? 0,
+        title: this.inputEdit.toArray()[index].nativeElement.value.trim(),
+        completed: this.itemEdited?.completed ?? false,
       });
       this.cancelEdition();
     }

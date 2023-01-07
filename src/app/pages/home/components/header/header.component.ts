@@ -18,14 +18,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.formItems = this.formBuilder.group({
-      task: ['', Validators.required],
+      title: ['', Validators.required],
     });
   }
 
   addItem(): void {
-    if (this.formItems.get('task')?.value) {
-      this.addItemEvent.emit(this.formItems.get('task')?.value);
-      this.formItems.patchValue({ task: '' });
+    if (this.formItems.get('title')?.value) {
+      this.addItemEvent.emit(this.formItems.get('title')?.value);
+      this.formItems.patchValue({ title: '' });
     }
   }
 

@@ -31,17 +31,17 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  addItem(task: string): void {
+  addItem(title: string): void {
     this.items = this.itemsBackup.concat({
-      task: task.trim(),
-      done: false
+      title: title.trim(),
+      completed: false
     });
     this.setBackup();
   }
 
   editItem(item: ItemEdited): void {
     this.items = this.itemsBackup.map((i: Item, j: number) => {
-      if (j == item.index) return { task: item.task, done: item.done }
+      if (j == item.id) return { title: item.title, completed: item.completed }
       else return i;
     });
     this.setBackup();
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
 
   toggleItem(index: number): void {
     this.items = this.itemsBackup.map((i: Item, j: number) => {
-      if (j == index) return { task: i.task, done: !i.done }      // Change task status
+      if (j == index) return { title: i.title, completed: !i.completed }      // Change title status
       else return i;
     });
     this.setBackup();
@@ -64,15 +64,15 @@ export class HomeComponent implements OnInit {
 
   changeFilter(): void {
     if (this.filterSelected == 'pending')
-      this.items = this.itemsBackup.filter((i: Item) => !i.done );
+      this.items = this.itemsBackup.filter((i: Item) => !i.completed );
     else if (this.filterSelected == 'completed')
-      this.items = this.itemsBackup.filter((i: Item) => i.done );
+      this.items = this.itemsBackup.filter((i: Item) => i.completed );
     else
       this.items = this.itemsBackup;
   }
 
   clearCompletedEvent(clear: boolean): void {
-    this.itemsBackup = this.itemsBackup.filter((i: Item) => !i.done );
+    this.itemsBackup = this.itemsBackup.filter((i: Item) => !i.completed );
     this.changeFilter();
     this.storage.update(this.itemsBackup);
   }

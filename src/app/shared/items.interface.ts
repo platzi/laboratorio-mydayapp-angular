@@ -1,10 +1,10 @@
 export interface Item {
-  task: string;
-  done: boolean;
+  title: string;
+  completed: boolean;
 }
 
 export interface ItemEdited {
-  index: number;
-  task: string;
-  done: boolean;
+  id: number;
+  title: string;
+  completed: boolean;
 }

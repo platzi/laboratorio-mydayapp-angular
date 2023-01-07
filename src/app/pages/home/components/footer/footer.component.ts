@@ -32,7 +32,7 @@ export class FooterComponent {
     this.itemsLeft = 0;
     this.itemsDone = 0;
     this.items.forEach((i: Item) => {
-      if (i.done) this.itemsDone++;
+      if (i.completed) this.itemsDone++;
       else this.itemsLeft++;
     });
   }
