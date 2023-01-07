@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
 import { Task } from '../../models/task';
 import { FormControl } from '@angular/forms';
 
@@ -6,18 +6,24 @@ import { FormControl } from '@angular/forms';
   selector: 'app-task',
   templateUrl: './task.component.html',
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit {
   @Input() task: Task | null = null;
 
   public isEditing: boolean = false;
 
   public editionInput = new FormControl();
 
+  public completeInput = new FormControl<boolean>(false);
+
   @ViewChild("editionElement") editionElement!: ElementRef<HTMLInputElement>;
 
   @Output()updateTask = new EventEmitter<Task>()
 
   constructor() {}
+
+  ngOnInit(): void {
+    this.completeInput.setValue(this.task!.completed)
+  }
 
   onClick() {
     this.task!.completed = !this.task!.completed;

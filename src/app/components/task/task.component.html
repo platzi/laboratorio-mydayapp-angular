@@ -6,8 +6,8 @@
   }"
 >
   <div class="view">
-    <input class="toggle" type="checkbox" (click)="onClick()" />
-    <label type="checkbox" (dblclick)="onDoubleClick()">{{ task.title }}</label>
+    <input class="toggle" type="checkbox" (click)="onClick()" [formControl]="completeInput" />
+    <label (dblclick)="onDoubleClick()">{{ task.title }}</label>
     <button class="destroy"></button>
   </div>
   <input #editionElement class="edit" (keyup.enter)="onEnterEdition()" (keyup.escape)="onEscapeEdition()" [formControl]="editionInput" />
