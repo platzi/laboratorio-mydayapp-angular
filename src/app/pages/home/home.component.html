@@ -3,7 +3,7 @@
   <div class="container todoapp-wrapper">
     <ng-container *ngIf="showContent">
       <!-- This section should be hidden by default and shown when there are todos -->
-      <app-main [tasks]="tasks"></app-main>
+      <app-main [tasks]="tasks" (updateTask)="onUpdateTask($event)"></app-main>
       <!-- This footer should be hidden by default and shown when there are todos -->
       <app-footer (clearCompleted)="onClearCompleted()" [canClear]="canClear" [pendingTasks]="pendingTasksCount" ></app-footer>
     </ng-container>

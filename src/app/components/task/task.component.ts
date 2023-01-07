@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../models/task';
 import { FormControl } from '@angular/forms';
 
@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
   selector: 'app-task',
   templateUrl: './task.component.html',
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
   @Input() task: Task | null = null;
 
   public isEditing: boolean = false;
@@ -15,17 +15,18 @@ export class TaskComponent implements OnInit {
 
   @ViewChild("editionElement") editionElement!: ElementRef<HTMLInputElement>;
 
-  constructor() {}
+  @Output()updateTask = new EventEmitter<Task>()
 
-  ngOnInit(): void {}
+  constructor() {}
 
   onClick() {
     this.task!.completed = !this.task!.completed;
+    this.onUpdateTask()
   }
 
   onDoubleClick() {
     this.editionInput.setValue(this.task!.title);
-    const timeId = setTimeout(()=>{
+    setTimeout(()=>{
       this.editionElement?.nativeElement.focus();
     },100)
     this.isEditing = true;
@@ -33,10 +34,15 @@ export class TaskComponent implements OnInit {
 
   onEnterEdition() {
     if (this.editionInput.value.trim()) this.task!.title = this.editionInput.value.trim();
+    this.onUpdateTask()
     this.isEditing = false;
   }
 
   onEscapeEdition(){
     this.isEditing = false;
+  }
+
+  onUpdateTask(){
+    this.updateTask.emit(this.task!)
   }
 }

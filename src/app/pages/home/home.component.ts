@@ -10,37 +10,56 @@ export class HomeComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadStoredTasks();
+  }
 
-  get showContent(){
-    return this.tasks.length > 0
+  get showContent() {
+    return this.tasks.length > 0;
+  }
+
+  get pendingTasks() {
+    return this.tasks.filter((task) => !task.completed);
+  }
+
+  get completedTasks() {
+    return this.tasks.filter((task) => task.completed);
+  }
+
+  get pendingTasksCount() {
+    return this.pendingTasks.length;
+  }
+
+  get canClear() {
+    return this.completedTasks.length > 0;
   }
 
   onAddTask(title: string) {
     this.tasks.push({
       id: this.tasks.length.toString(),
       title,
-      completed:false,
-    })
+      completed: false,
+    });
+    this.storeTasks();
   }
 
-  get pendingTasks(){
-    return this.tasks.filter(task => !task.completed)
+  onClearCompleted() {
+    this.tasks = this.pendingTasks;
+    this.storeTasks();
   }
 
-  get completedTasks(){
-    return this.tasks.filter(task => task.completed)
+  storeTasks() {
+    localStorage.setItem('mydayapp-angular', JSON.stringify(this.tasks));
   }
 
-  get pendingTasksCount(){
-    return this.pendingTasks.length
+  loadStoredTasks() {
+    const storedTasks = localStorage.getItem('mydayapp-angular');
+    if (storedTasks) this.tasks = JSON.parse(storedTasks);
   }
 
-  get canClear(){
-    return this.completedTasks.length > 0
-  }
-
-  onClearCompleted(){
-    this.tasks = this.pendingTasks
+  onUpdateTask(task: Task) {
+    const taskMatch = this.tasks.findIndex((t) => t.id === task.id);
+    if (taskMatch > -1) this.tasks[taskMatch] = task;
+    this.storeTasks()
   }
 }

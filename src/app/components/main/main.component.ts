@@ -1,17 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../models/task';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
 })
-export class MainComponent implements OnInit {
-
+export class MainComponent {
   @Input() tasks: Task[] = [];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  @Output() updateTask = new EventEmitter<Task>();
+
+  onUpdateTask(task: Task) {
+    this.updateTask.emit(task);
   }
-
 }
