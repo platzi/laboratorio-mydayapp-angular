@@ -24,10 +24,8 @@ export class HomeComponent implements OnInit {
     this.itemsBackup = this.storage.get();
     this.route.params
       .subscribe(p => {
-        if (p['filter']) {
-          this.filterSelected = p['filter'];
-          this.changeFilter();
-        }
+        this.filterSelected = p['filter'] || 'all';
+        this.changeFilter();
       })
   }
 
