@@ -4,5 +4,5 @@
   <!-- Remove this if you don't implement routing -->
   <app-filters></app-filters>
   <!-- Hidden if no completed items are left ↓ -->
-  <button *ngIf="canClear" class="clear-completed">Clear completed</button>
+  <button *ngIf="canClear" class="clear-completed" (click)="onClearCompleted()">Clear completed</button>
 </footer>
