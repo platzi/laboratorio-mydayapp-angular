@@ -10,7 +10,8 @@
     "test": "ng test",
     "e2e": "npm run build && playwright test",
     "e2e:install": "playwright install",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "deploy:github": "ng deploy --base-href=/laboratorio-mydayapp-angular/"
   },
   "private": true,
   "dependencies": {
