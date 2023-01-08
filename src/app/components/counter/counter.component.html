@@ -1,0 +1,7 @@
+
+<span class="todo-count">
+  <strong>{{counter$ | async}}</strong>
+  <span *ngIf="(counter$ | async) === 1"> item</span>
+  <span *ngIf="(counter$ | async) !== 1"> items</span>
+  left
+</span>
