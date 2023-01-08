@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.readPath()
     this.loadStoredTasks();
+    this.readPath()
   }
 
   get tasks() {
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   get showContent() {
-    return this.tasks.length > 0;
+    return this.tasks.length > 0 || this.filter !== 'all';
   }
 
   get pendingTasks() {
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
 
   onAddTask(title: string) {
     this.tasks.push({
-      id: this.tasks.length.toString(),
+      id: this.allTasks.length.toString(),
       title,
       completed: false,
     });
@@ -63,11 +63,11 @@ export class HomeComponent implements OnInit {
   }
 
   storeTasks() {
-    localStorage.setItem('mydayapp-angular', JSON.stringify(this.allTasks));
+    localStorage.setItem("mydayapp-angular", JSON.stringify(this.allTasks));
   }
 
   loadStoredTasks() {
-    const storedTasks = localStorage.getItem('mydayapp-angular');
+    const storedTasks = localStorage.getItem("mydayapp-angular");
     if (storedTasks) this.tasks = JSON.parse(storedTasks);
   }
 
