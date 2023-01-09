@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Task } from '../../models/task';
+import { StorageService } from '../../services/storage.service';
 
 interface Filters {
   [key: string]: Task[];
@@ -13,11 +14,11 @@ export class HomeComponent implements OnInit {
   private allTasks: Task[] = [];
   private filter: string = 'all';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private storageService: StorageService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.loadStoredTasks();
     this.readPath()
+    this.allTasks = this.storageService.load();
   }
 
   get tasks() {
@@ -54,27 +55,18 @@ export class HomeComponent implements OnInit {
       title,
       completed: false,
     });
-    this.storeTasks();
+    this.storageService.save(this.allTasks);
   }
 
   onClearCompleted() {
     this.tasks = this.pendingTasks;
-    this.storeTasks();
-  }
-
-  storeTasks() {
-    localStorage.setItem("mydayapp-angular", JSON.stringify(this.allTasks));
-  }
-
-  loadStoredTasks() {
-    const storedTasks = localStorage.getItem("mydayapp-angular");
-    if (storedTasks) this.tasks = JSON.parse(storedTasks);
+    this.storageService.save(this.allTasks);
   }
 
   onUpdateTask(task: Task) {
     const taskMatch = this.allTasks.findIndex((t) => t.id === task.id);
     if (taskMatch > -1) this.tasks[taskMatch] = task;
-    this.storeTasks();
+    this.storageService.save(this.allTasks);
   }
 
   filterTasks(filter: string) {
