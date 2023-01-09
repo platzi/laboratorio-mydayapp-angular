@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoItemComponent } from './todo-item/todo-item.component';
-
+import { FormsModule } from '@angular/forms'
 
 
 @NgModule({
@@ -9,7 +9,8 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
     TodoItemComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports : [
     TodoItemComponent
