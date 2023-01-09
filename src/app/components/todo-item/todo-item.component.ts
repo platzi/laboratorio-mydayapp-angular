@@ -4,19 +4,16 @@ import { TodoService } from 'src/app/services/todo.service';
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.css']
+  styleUrls: ['./todo-item.component.css'],
 })
 export class TodoItemComponent implements OnInit {
+  @Input() item!: todoItem;
+  constructor(private todoService: TodoService) {}
 
-  @Input()item!:todoItem
-  constructor(private todoService: TodoService) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  changeTodo() {
+    this.item.completed = !this.item.completed;
+    this.todoService.changeTodo(this.item);
   }
-  
-  changeTodo(){
-    this.item.completed = !this.item.completed
-    this.todoService.changeTodo(this.item)
-  }
-
 }
