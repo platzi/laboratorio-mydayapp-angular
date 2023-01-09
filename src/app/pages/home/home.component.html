@@ -2,7 +2,7 @@
   <app-header></app-header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
-    <section id="main" class="main" *ngIf ="countItems>0">
+    <section id="main" class="main"  [ngClass]="countItems>0 ? 'hidden': ''">
       <!-- <ul class="todo-list">
         <li class="completed">
           <div class="view">
