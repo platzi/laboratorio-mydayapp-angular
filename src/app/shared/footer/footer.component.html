@@ -1,6 +1,6 @@
     <!-- This footer should be hidden by default and shown when there are todos -->
     
-    <footer id="footer" class="footer"  [ngClass]="countItems>0 ? 'hidden': ''">
+    <footer id="footer" class="footer"  [ngClass]="countItems===0 ? 'hidden': ''">
       
         <!-- This should be `0 items left` by default -->
         <span class="todo-count"><strong> {{countItems}}</strong> item left</span>
