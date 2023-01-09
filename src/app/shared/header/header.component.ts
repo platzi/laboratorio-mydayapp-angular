@@ -12,17 +12,22 @@ export class HeaderComponent implements OnInit {
 
   constructor(private todoService:TodoService) { }
 
+  public itemTodo:string = "";
   ngOnInit(): void {
+    this.itemTodo = "";
   }
 
   addTodoItem(){
-    console.log(uniqid())
+    this.itemTodo = this.itemTodo.trim()
+    
+    if(this.itemTodo.length ===0) return 
+    
     let newTodoItem: todoItem = {
-      id : uniqid(),
-      title : 'Test',
-      completed : false
-    }
-
+      id: uniqid(),
+      title: this.itemTodo,
+      completed: false,
+    };
+    this.itemTodo = "";
     this.todoService.addTodoItem(newTodoItem)
   }
 

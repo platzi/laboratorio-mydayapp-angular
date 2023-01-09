@@ -7,7 +7,7 @@
         placeholder="Type new todo"
         autofocus
         type="text"
-        
+        [(ngModel)]="itemTodo" name="itemTodo"
         (keydown.enter)="addTodoItem()"
       />
     </div>
