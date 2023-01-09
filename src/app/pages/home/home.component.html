@@ -2,8 +2,8 @@
   <app-header></app-header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
-    <section class="main">
-      <ul class="todo-list">
+    <section id="main" class="main" *ngIf ="countItems>0">
+      <!-- <ul class="todo-list">
         <li class="completed">
           <div class="view">
             <input class="toggle" type="checkbox" checked />
@@ -28,6 +28,9 @@
           </div>
           <input class="edit" value="Make dishes" />
         </li>
+      </ul> -->
+      <ul class="todo-list" *ngFor="let item of todoItems$ | async">
+        <app-todo-item [item]="item"></app-todo-item>
       </ul>
     </section>
     <app-footer></app-footer>
