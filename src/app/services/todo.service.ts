@@ -11,13 +11,18 @@ export class TodoService {
   private todoItems: Array<todoItem> = []
   constructor() {
     const localStorageTodoItems = localStorage.getItem("mydayapp-angular")
+
+    if(localStorageTodoItems){
+    this.todoItems =  JSON.parse(localStorageTodoItems)
+    this.itemsSubject.next(this.todoItems);
+    }
     
   
    }
 
 
   addTodoItem(newTodoItem:todoItem){
-    this.todoItems.push({...newTodoItem});
+    this.todoItems = [ ...this.todoItems, {...newTodoItem}];
     localStorage.setItem("mydayapp-angular",JSON.stringify(this.todoItems))
     this.itemsSubject.next(this.todoItems);
   }
