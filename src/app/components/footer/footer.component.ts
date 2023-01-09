@@ -1,19 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent  {
 
   @Input()pendingTasks: number = 0
   @Input()canClear: Boolean = false
   @Output()clearCompleted = new EventEmitter()
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   onClearCompleted(){
     this.clearCompleted.emit()

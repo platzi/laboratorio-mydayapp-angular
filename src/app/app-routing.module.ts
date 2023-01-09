@@ -5,7 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
-    path: 'all',
+    path: '',
     component: HomeComponent,
   },
   {
@@ -18,9 +18,9 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/all',
-    pathMatch: 'full'
-  },
+    pathMatch:'full',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({
