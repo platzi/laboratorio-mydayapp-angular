@@ -1,0 +1,11 @@
+<li [ngClass]="{'completed' : item.completed,'editing': edit}">
+    <div class="view">
+      <input class="toggle" type="checkbox" [checked]="item.completed" (click)="changeTodo(true)" />
+      <label (dblclick)="editStatus(true, input)">{{item.title}}</label>
+      <button class="destroy" (click)="removeTodo()"></button>
+    </div>
+    <input #input class="edit" [value]="item.title"
+           [(ngModel)]="item.title" name="itemTodo" 
+           (keydown.enter)="changeTodo(false)"
+           (keydown.escape)="editStatus(false, input)"/>
+  </li>
