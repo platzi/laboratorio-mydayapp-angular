@@ -10,6 +10,7 @@ import { Observable, Subscription } from 'rxjs';
 export class FooterComponent implements OnInit,  OnDestroy  {
   totalItems$! :Subscription;
   public countItems = 0
+  public completeItems = 0;
   constructor(
     private todoService: TodoService
   ) { }
@@ -17,14 +18,23 @@ export class FooterComponent implements OnInit,  OnDestroy  {
   ngOnInit(): void {
      this.totalItems$ = this.todoService.todoItems$
                                 .pipe(
-                                  map(items => items.length )
+                                  map(items => {
+                                    return  [items.length,items.filter(f=>f.completed ==true).length]
+                                  } )
                                 ).subscribe(
-                                  response => this.countItems = response
+                                  response => {
+                                    this.countItems = response[0]
+                                    this.completeItems = response[1]
+                                  }
                                 )
   }
 
   ngOnDestroy(): void {
       this.totalItems$.unsubscribe()
+  }
+
+  removeCompleteTodo(){
+    this.todoService.removeCompleteTodo();
   }
 
   
