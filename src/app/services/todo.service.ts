@@ -41,4 +41,10 @@ export class TodoService {
     localStorage.setItem("mydayapp-angular",JSON.stringify(this.todoItems))
     this.itemsSubject.next(this.todoItems);
   }
+
+  removeTodo(removeTodoItem:todoItem){
+    this.todoItems = [ ...this.todoItems.filter(f=>f.id!=removeTodoItem.id) ]
+    localStorage.setItem("mydayapp-angular",JSON.stringify(this.todoItems))
+    this.itemsSubject.next(this.todoItems);
+  }
 }
