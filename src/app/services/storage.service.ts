@@ -23,12 +23,8 @@ export class StorageService {
   }
 
   fillListTodos(): void {
-    this.listOfTodos = this.getTodos();
+    this.listOfTodos = JSON.parse(localStorage.getItem(this.localStorageKeyName)!) ? JSON.parse(localStorage.getItem(this.localStorageKeyName)!) : [];
     this.todoReactiveStorage.next(this.listOfTodos);
-  }
-
-  getTodos(): Todos[] {
-    return JSON.parse(localStorage.getItem(this.localStorageKeyName)!) ? JSON.parse(localStorage.getItem(this.localStorageKeyName)!) : [];
   }
   addTodo(tempNewTodo: string): void {
     let newTodo = {
@@ -39,7 +35,7 @@ export class StorageService {
       completed: false                    //It starts by default on false
     };
 
-    this.listOfTodos = [...this.listOfTodos, newTodo];
+    this.listOfTodos = [...this.listOfTodos, {...newTodo}];
     this.updateTodos();
   }
   updateStatus(idParameter: string): void {

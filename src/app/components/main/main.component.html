@@ -1,22 +1,11 @@
-<!-- <section class="main"> -->
 <section class="main" *ngIf="(todoReactiveStorage$|async) as todos">
     <ul class="todo-list" *ngFor="let todo of todos">
-        <li *ngIf="todo.completed && ruta!='pending'" (dblclick)="changeToEditMode(todo.id)"
-            (keydown.esc)="removeEditMode()" [class.completed]="todo.id != todoForEditing"
+        <li (dblclick)="changeToEditMode(todo.id)"
+            (keydown.esc)="removeEditMode()" [class.completed]="todo.completed && todo.id != todoForEditing"
             [class.editing]="todo.id == todoForEditing">
             <div class="view">
-                <input class="toggle" type="checkbox" [checked]="todo.completed" *ngIf="todo.completed"
+                <input class="toggle" type="checkbox" [checked]="todo.completed"
                     (change)="changeStatus(todo.id)" />
-                <label>{{todo.title}}</label>
-                <button class="destroy" (click)="deleteTodo(todo.id)"></button>
-            </div>
-            <input class="edit" [value]="todo.title.trim()" #titleForTodo
-                (keyup.enter)="changeTodoTitle(titleForTodo, todo.id)" />
-        </li>
-        <li *ngIf="!todo.completed && ruta!='completed'" (dblclick)="changeToEditMode(todo.id)"
-            (keydown.esc)="removeEditMode()" [class.editing]="todo.id == todoForEditing">
-            <div class="view">
-                <input class="toggle" type="checkbox" (change)="changeStatus(todo.id)" />
                 <label>{{todo.title}}</label>
                 <button class="destroy" (click)="deleteTodo(todo.id)"></button>
             </div>
