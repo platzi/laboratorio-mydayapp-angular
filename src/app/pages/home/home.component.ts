@@ -10,6 +10,7 @@ import { TaskService } from 'src/app/services/task.service';
 export class HomeComponent implements OnInit {
   @ViewChild('inputEdit') inputEdit!: ElementRef<HTMLInputElement>;
 
+  isHiddenClearButton = true;
   completeTasksList: ITaskInterface[] = [];
   filterTasksList: ITaskInterface[] = [];
   newTask: ITaskInterface = {
@@ -27,7 +28,20 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.completeTasksList = this.taskService.getTasks();
     this.filtTasks();
+    this.changeHiddenStatus();
     this.newTask.id = this.completeTasksList.length.toString();
+  }
+
+  changeHiddenStatus() {
+    for (let index = 0; index < this.completeTasksList.length; index++) {
+      const task = this.completeTasksList[index];
+      if (task.completed == true) {
+        this.isHiddenClearButton = false;
+        break;
+      }
+      this.isHiddenClearButton = true;
+      
+    }
   }
 
   filtTasks() {
@@ -74,6 +88,7 @@ export class HomeComponent implements OnInit {
     task.completed = !task.completed;
     this.taskService.saveTasks(this.completeTasksList);
     this.filtTasks();
+    this.changeHiddenStatus();
   }
 
   activeEditMode(task: ITaskInterface) {
@@ -95,18 +110,24 @@ export class HomeComponent implements OnInit {
   }
 
   deleteTask(task: ITaskInterface) {
-    this.completeTasksList = this.completeTasksList.filter((taskA: ITaskInterface) => {
-      return taskA.id != task.id;
-    });
+    this.completeTasksList = this.completeTasksList.filter(
+      (taskA: ITaskInterface) => {
+        return taskA.id != task.id;
+      }
+    );
 
     this.taskService.saveTasks(this.completeTasksList);
   }
 
   clearCompleted() {
-    this.completeTasksList = this.completeTasksList.filter((task: ITaskInterface) => {
-      return task.completed == false;
-    });
+    this.completeTasksList = this.completeTasksList.filter(
+      (task: ITaskInterface) => {
+        return task.completed == false;
+      }
+    );
 
     this.taskService.saveTasks(this.completeTasksList);
+    this.filtTasks();
+    this.isHiddenClearButton = true;
   }
 }
