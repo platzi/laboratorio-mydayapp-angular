@@ -24,6 +24,13 @@ export class TaskService {
         else this._list.push(element)
         this._taskList.next(this._list)
         this._flag.next(false)
+        window.localStorage.setItem('mydayapp-angular',JSON.stringify(this._list))
+    }
+
+    set localTasks (element: any) {
+        this._list = element
+        this._taskList.next(this._list)
+        this._flag.next(false)
     }
 
 }
