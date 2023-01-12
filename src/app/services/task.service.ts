@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ITask } from '../models/task.interface';
+import { ITask, ITaskInterface } from '../models/task.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -7,19 +7,37 @@ import { ITask } from '../models/task.interface';
 export class TaskService {
   constructor() {}
 
-  getTasks(): ITask[] {
+  getTasks(): ITaskInterface[] {
     var arrayTask = localStorage.getItem('mydayapp-angular');
 
     if (arrayTask !== null) {
-      return JSON.parse(arrayTask);
+      var tasks = JSON.parse(arrayTask);
+      tasks = tasks.map((task: ITask) => {
+        return {
+          ...task,
+          editMode: false,
+        };
+      });
+
+      return tasks;
     }
 
     return [];
   }
 
-  saveTasks(tasks: ITask[]): void {
+  saveTasks(tasks: ITaskInterface[]): void {
     localStorage.removeItem('mydayapp-angular');
-    localStorage.setItem('mydayapp-angular', JSON.stringify(tasks));
+    localStorage.setItem(
+      'mydayapp-angular',
+      JSON.stringify(
+        tasks.map((task: ITaskInterface) => {
+          return {
+            id: task.id,
+            title: task.title,
+            completed: task.completed,
+          };
+        })
+      )
+    );
   }
-
 }
