@@ -18,4 +18,8 @@ export class HomeComponent implements OnInit {
     this.tasks = this.taskService.getTask();
   }
 
+  clearCompleted(){
+    this.tasks = this.taskService.clearCompleted()
+  }
+
 }

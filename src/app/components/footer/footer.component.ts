@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -9,8 +9,10 @@ import { TasksService } from 'src/app/services/tasks.service';
 })
 export class FooterComponent implements OnInit {
 
+  @Output() clearCompleted = new EventEmitter();
 
   pendingTasks: number = 0;
+  completedTasks: number = 0;
 
   itemMap = {
     '=1': 'item left',
@@ -28,8 +30,16 @@ export class FooterComponent implements OnInit {
     .subscribe(pendingTask => {
       this.pendingTasks = pendingTask.length
     })
+    this.taskService.completedTask$
+    .subscribe(completedTask => {
+      this.completedTasks = completedTask.length
+    })
   }
 
+  clear(){
+    this.clearCompleted.emit();  
+    this.completedTasks = 0; 
+  }
 
 
 }

@@ -1,4 +1,8 @@
-<li [class.completed]="task.completed">
+<li 
+[class.completed]="task.completed" 
+(dblclick)="isEditable = true"
+[class.editing]="isEditable"
+>
     <div class="view">
         <input 
         class="toggle" 
@@ -8,7 +12,12 @@
         <label>{{task.title}}</label>
         <button class="destroy" (click)="delete()"></button>
     </div>
-    <input class="edit" value="Learn JavaScript" />
+    <input 
+    class="edit" 
+    [(ngModel)]="newValue"
+    autofocus
+    (keyup.enter)="editTask()"
+    (keyup.esc)="discard()"/>
 </li>
 
 <!-- <li>

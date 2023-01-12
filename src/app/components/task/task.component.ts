@@ -11,12 +11,15 @@ import { Task } from '../interfaces/task.interface';
 export class TaskComponent implements OnInit {
 
   @Input() task!: Task;
+  isEditable : boolean = false;
+  newValue: string = ''
 
   constructor(
     private taskService: TasksService
   ) { }
 
   ngOnInit(): void {
+    this.newValue = this.task.title
   }
 
   toogleComplete(){
@@ -26,6 +29,17 @@ export class TaskComponent implements OnInit {
 
   delete(){
     this.taskService.deleteTask(this.task);
+  }
+
+  editTask(){
+    this.task.title = this.newValue.trim();
+    this.taskService.updateTask(this.task);;
+    this.isEditable = false;
+  }
+
+  discard(){
+    this.isEditable = false;
+    this.newValue = this.task.title
   }
 
 }

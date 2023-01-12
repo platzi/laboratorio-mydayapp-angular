@@ -7,17 +7,19 @@ import { Task } from '../components/interfaces/task.interface';
 })
 export class TasksService {
 
-  private _tasks : Task[] = []; 
+  private _tasks: Task[] = [];
 
-  constructor() { 
+  constructor() {
     this._tasks = this.loadStg();
     this.updatePendingTask();
   }
 
+  private _complete = new BehaviorSubject<Task[]>(this._tasks.filter(item => item.completed == true))
   private _pending = new BehaviorSubject<Task[]>(this._tasks.filter(item => item.completed == false));
-  pendingTask$ = this._pending.asObservable()
+  pendingTask$ = this._pending.asObservable();
+  completedTask$ = this._complete.asObservable();
 
-  addTask ( task: string ){
+  addTask(task: string) {
     const toDo: Task = {
       completed: false,
       id: (this._tasks.length + 1).toString(),
@@ -28,36 +30,42 @@ export class TasksService {
     this.updatePendingTask();
   }
 
-  getTask(){
+  getTask() {
     return this._tasks;
   }
 
-  saveInStg(){
+  saveInStg() {
     localStorage.setItem('mydayapp-angular', JSON.stringify(this._tasks))
   }
 
-  loadStg(){
+  loadStg() {
     return JSON.parse(
       localStorage.getItem('mydayapp-angular') || '[]'
     )
   }
 
-  updateTask(task: Task){
+  updateTask(task: Task) {
     const index = this._tasks.indexOf(task);
     this._tasks[index] = task;
     this.saveInStg();
     this.updatePendingTask();
   }
 
-  deleteTask(task: Task){
+  deleteTask(task: Task) {
     const index = this._tasks.indexOf(task);
-    this._tasks.splice(index,1);
+    this._tasks.splice(index, 1);
     this.saveInStg();
     this.updatePendingTask();
   }
 
-  updatePendingTask(){
+  updatePendingTask() {
     this._pending.next(this._tasks.filter(item => item.completed == false))
+    this._complete.next(this._tasks.filter(item => item.completed == true))
   }
 
+  clearCompleted() {
+    this._tasks = this._tasks.filter(task => task.completed == false)
+    this.saveInStg();
+    return this._tasks
+  }
 }
