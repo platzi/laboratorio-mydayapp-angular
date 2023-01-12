@@ -1,0 +1,30 @@
+<li [class.completed]="task.completed">
+    <div class="view">
+        <input 
+        class="toggle" 
+        type="checkbox" 
+        [checked]="task.completed"
+        (click)="toogleComplete()"/>
+        <label>{{task.title}}</label>
+        <button class="destroy" (click)="delete()"></button>
+    </div>
+    <input class="edit" value="Learn JavaScript" />
+</li>
+
+<!-- <li>
+    <div class="view">
+        <input class="toggle" type="checkbox" />
+        <label>Buy a unicorn</label>
+        <button class="destroy"></button>
+    </div>
+    <input class="edit" value="Buy a unicorn" />
+</li>
+
+<li class="editing">
+    <div class="view">
+        <input class="toggle" type="checkbox" />
+        <label>Make dishes</label>
+        <button class="destroy"></button>
+    </div>
+    <input class="edit" value="Make dishes" />
+</li> -->
