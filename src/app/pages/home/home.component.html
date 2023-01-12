@@ -13,7 +13,7 @@
   </header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
-    <section class="main">
+    <section class="main" *ngIf="tasks.length !== 0">
       <ul class="todo-list">
         <li class="completed">
           <div class="view">
@@ -42,7 +42,7 @@
       </ul>
     </section>
     <!-- This footer should be hidden by default and shown when there are todos -->
-    <footer class="footer">
+    <footer class="footer" *ngIf="tasks.length !== 0">
       <!-- This should be `0 items left` by default -->
       <span class="todo-count"><strong>0</strong> item left</span>
       <!-- Remove this if you don't implement routing -->
