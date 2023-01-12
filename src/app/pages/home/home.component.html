@@ -29,7 +29,7 @@
               (click)="changeStatus(task)"
             />
             <label (dblclick)="activeEditMode(task)">{{ task.title }}</label>
-            <button class="destroy"></button>
+            <button class="destroy" (click)="deleteTask(task)"></button>
           </div>
           <input
             class="edit"
@@ -37,31 +37,6 @@
             (keydown)="updateTask($event, task)"
             [(ngModel)]="this.task.title"
           />
-        </li>
-        <!-- <li class="completed">
-          <div class="view">
-            <input class="toggle" type="checkbox" checked />
-            <label>Learn JavaScript</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Learn JavaScript" />
-        </li>
-        <li>
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Buy a unicorn" />
-        </li>
-        <li class="editing">
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Make dishes</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Make dishes" />
-        </li> -->
       </ul>
     </section>
     <!-- This footer should be hidden by default and shown when there are todos -->
@@ -84,7 +59,7 @@
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
-      <button class="clear-completed">Clear completed</button>
+      <button class="clear-completed" (click)="clearCompleted()">Clear completed</button>
     </footer>
   </div>
 </section>

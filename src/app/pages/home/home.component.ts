@@ -56,4 +56,20 @@ export class HomeComponent implements OnInit {
       task.editMode = false;
     }
   }
+
+  deleteTask(task: ITaskInterface) {
+    this.tasks = this.tasks.filter((taskA: ITaskInterface) => {
+      return taskA.id != task.id;
+    });
+
+    this.taskService.saveTasks(this.tasks);
+  }
+
+  clearCompleted() {
+    this.tasks = this.tasks.filter((task: ITaskInterface) => {
+      return task.completed == false;
+    });
+
+    this.taskService.saveTasks(this.tasks);
+  }
 }
