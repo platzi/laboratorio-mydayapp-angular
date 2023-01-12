@@ -8,6 +8,11 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class HomeComponent implements OnInit {
   tasks: ITask[] = [];
+  newTask: ITask = {
+    id: '0',
+    title: '',
+    completed: false,
+  };
   tasksNumber: number = 0;
   taskTitle: string = '';
 
@@ -15,21 +20,19 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.tasks = this.taskService.getTasks();
-    this.tasksNumber = this.tasks.length;
+    this.newTask.id = this.tasks.length.toString();
   }
 
   addTask(event: KeyboardEvent) {
-    if (event.key == 'Enter' && this.taskTitle.trim() !== '') {
-      this.tasks.push({
-        id: this.tasksNumber.toString(),
-        title: this.taskTitle.trim(),
-        completed: false,
-      });
-
+    this.newTask.title = this.newTask.title.trim();
+    if (event.key == 'Enter' && this.newTask.title !== '') {
+      //? Se utiliza el factor de propagacion para crear un  nuevo objeto, ya que si no se realiza esta accion ocasionara un problema de copia 
+      //? en todos los elementos del arreglo, ya que el valor se esta pasando por referencia, es decir que todos los valores del arreglo apuntan
+      //? a mismo espacio en memoria, y si este espacio en memoria modifica su valor, todos los valores seran modificados.
+      this.tasks.push({ ...this.newTask });
       this.taskService.addTask(this.tasks);
-
-      this.tasksNumber++;
-      this.taskTitle = '';
+      this.newTask.id = this.tasks.length.toString();
+      this.newTask.title = '';
     }
   }
 }
