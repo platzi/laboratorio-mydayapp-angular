@@ -40,10 +40,20 @@ export class HomeComponent implements OnInit {
   changeStatus(task: ITask) {
     task.completed = !task.completed;
     this.taskService.saveTasks(this.tasks);
-    console.log(task);
   }
 
-  activeEditMode(task: ITaskInterface){
+  activeEditMode(task: ITaskInterface) {
     task.editMode = true;
+  }
+
+  updateTask(event: KeyboardEvent, task: ITaskInterface) {
+    if (event.key == 'Escape') {
+      task.editMode = false;
+    }
+    if (event.key == 'Enter' && this.newTask.title.trim() !== '') {
+      task.title = task.title.trim();
+      this.taskService.saveTasks(this.tasks);
+      task.editMode = false;
+    }
   }
 }
