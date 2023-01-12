@@ -6,8 +6,10 @@
       <input
         class="new-todo"
         placeholder="Type new todo"
-        autofocus
+        autofocus="true"
         type="text"
+        (keydown)="addTask($event)"
+        [(ngModel)]="taskTitle"
       />
     </div>
   </header>
