@@ -8,7 +8,7 @@ export class TaskService {
   constructor() {}
 
   getTasks(): ITask[] {
-    var arrayTask = localStorage.getItem('tasks');
+    var arrayTask = localStorage.getItem('mydayapp-angular');
 
     if (arrayTask !== null) {
       return JSON.parse(arrayTask);
@@ -17,8 +17,9 @@ export class TaskService {
     return [];
   }
 
-  addTask(tasks: ITask[]): void {
-    localStorage.removeItem('tasks');
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+  saveTasks(tasks: ITask[]): void {
+    localStorage.removeItem('mydayapp-angular');
+    localStorage.setItem('mydayapp-angular', JSON.stringify(tasks));
   }
+
 }

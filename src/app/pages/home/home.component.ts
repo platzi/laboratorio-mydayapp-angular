@@ -24,15 +24,24 @@ export class HomeComponent implements OnInit {
   }
 
   addTask(event: KeyboardEvent) {
-    this.newTask.title = this.newTask.title.trim();
-    if (event.key == 'Enter' && this.newTask.title !== '') {
+    
+    if (event.key == 'Enter' && this.newTask.title.trim() !== '') {
+      this.newTask.title = this.newTask.title.trim();
       //? Se utiliza el factor de propagacion para crear un  nuevo objeto, ya que si no se realiza esta accion ocasionara un problema de copia 
       //? en todos los elementos del arreglo, ya que el valor se esta pasando por referencia, es decir que todos los valores del arreglo apuntan
       //? a mismo espacio en memoria, y si este espacio en memoria modifica su valor, todos los valores seran modificados.
       this.tasks.push({ ...this.newTask });
-      this.taskService.addTask(this.tasks);
+      this.taskService.saveTasks(this.tasks);
       this.newTask.id = this.tasks.length.toString();
       this.newTask.title = '';
     }
   }
+
+
+  changeStatus(task: ITask) {
+    task.completed = !task.completed
+    this.taskService.saveTasks(this.tasks);
+    console.log(task)
+  }
+
 }
