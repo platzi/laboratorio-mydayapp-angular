@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+
+  pendingTasks: number = 0;
+
+  itemMap = {
+    '=1': 'item left',
+    'other': 'items left'
+  }
+
+  constructor(
+    private taskService: TasksService
+  ) { 
+
+  }
 
   ngOnInit(): void {
+    this.taskService.pendingTask$
+    .subscribe(pendingTask => {
+      this.pendingTasks = pendingTask.length
+    })
   }
+
+
 
 }
