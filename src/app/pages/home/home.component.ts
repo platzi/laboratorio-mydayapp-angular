@@ -116,6 +116,8 @@ export class HomeComponent implements OnInit {
     );
 
     this.taskService.saveTasks(this.completeTasksList);
+    this.filtTasks();
+    this.newTask.id = this.completeTasksList.length.toString();
   }
 
   clearCompleted() {
