@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
         break;
       }
       this.isHiddenClearButton = true;
-      
     }
   }
 
@@ -102,7 +101,7 @@ export class HomeComponent implements OnInit {
     if (event.key == 'Escape') {
       task.editMode = false;
     }
-    if (event.key == 'Enter' && this.newTask.title.trim() !== '') {
+    if (event.key == 'Enter' && task.title.trim() !== '') {
       task.title = task.title.trim();
       this.taskService.saveTasks(this.completeTasksList);
       task.editMode = false;
