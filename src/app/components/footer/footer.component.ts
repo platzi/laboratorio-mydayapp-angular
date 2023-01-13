@@ -11,6 +11,7 @@ export class FooterComponent implements OnInit {
 
   @Output() clearCompleted = new EventEmitter();
 
+  tasks: number = 0;
   pendingTasks: number = 0;
   completedTasks: number = 0;
 
@@ -26,6 +27,8 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.taskService.allTasks$
+    .subscribe(tasks => this.tasks = tasks.length)
     this.taskService.pendingTask$
     .subscribe(pendingTask => {
       this.pendingTasks = pendingTask.length

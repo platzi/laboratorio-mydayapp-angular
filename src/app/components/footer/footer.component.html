@@ -1,21 +1,21 @@
 <!-- This footer should be hidden by default and shown when there are todos -->
-<footer class="footer">
-    <!-- This should be `0 items left` by default -->
-    <span class="todo-count">
-      <strong>{{pendingTasks}}</strong> 
-      {{pendingTasks | i18nPlural:itemMap}}</span>
-    <!-- Remove this if you don't implement routing -->
-    <ul class="filters">
-      <li>
-        <a routerLink="/" class="selected">All</a>
-      </li>
-      <li>
-        <a routerLink="/pending">Pending</a>
-      </li>
-      <li>
-        <a routerLink="/completed">Completed</a>
-      </li>
-    </ul>
-    <!-- Hidden if no completed items are left ↓ -->
-    <button class="clear-completed" *ngIf="completedTasks > 0" (click)="clear()">Clear completed</button>
-  </footer>
+<footer class="footer" *ngIf="tasks">
+  <!-- This should be `0 items left` by default -->
+  <span class="todo-count">
+    <strong>{{pendingTasks}}</strong>
+    {{pendingTasks | i18nPlural:itemMap}}</span>
+  <!-- Remove this if you don't implement routing -->
+  <ul class="filters">
+    <li>
+      <a routerLink="/all" routerLinkActive="selected">All</a>
+    </li>
+    <li>
+      <a routerLink="/pending" routerLinkActive="selected">Pending</a>
+    </li>
+    <li>
+      <a routerLink="/completed" routerLinkActive="selected">Completed</a>
+    </li>
+  </ul>
+  <!-- Hidden if no completed items are left ↓ -->
+  <button class="clear-completed" *ngIf="completedTasks > 0" (click)="clear()">Clear completed</button>
+</footer>

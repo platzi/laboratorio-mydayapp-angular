@@ -14,10 +14,12 @@ export class TasksService {
     this.updatePendingTask();
   }
 
+  private _allTasks = new BehaviorSubject<Task[]>(this._tasks)
   private _complete = new BehaviorSubject<Task[]>(this._tasks.filter(item => item.completed == true))
   private _pending = new BehaviorSubject<Task[]>(this._tasks.filter(item => item.completed == false));
   pendingTask$ = this._pending.asObservable();
   completedTask$ = this._complete.asObservable();
+  allTasks$ = this._allTasks.asObservable();
 
   addTask(task: string) {
     const toDo: Task = {
@@ -35,7 +37,7 @@ export class TasksService {
   }
 
   saveInStg() {
-    localStorage.setItem('mydayapp-angular', JSON.stringify(this._tasks))
+    localStorage.setItem('mydayapp-angular', JSON.stringify(this._tasks));
   }
 
   loadStg() {
@@ -59,13 +61,22 @@ export class TasksService {
   }
 
   updatePendingTask() {
-    this._pending.next(this._tasks.filter(item => item.completed == false))
-    this._complete.next(this._tasks.filter(item => item.completed == true))
+    this._pending.next(this.getPendingTask())
+    this._complete.next(this.getCompletedTask())
+    this._allTasks.next(this._tasks)
   }
 
   clearCompleted() {
-    this._tasks = this._tasks.filter(task => task.completed == false)
+    this._tasks = this.getPendingTask();
     this.saveInStg();
     return this._tasks
+  }
+
+  getPendingTask(){
+    return this._tasks.filter(task => task.completed == false)
+  }
+
+  getCompletedTask(){
+    return this._tasks.filter(task => task.completed == true)
   }
 }
