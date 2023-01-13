@@ -18,12 +18,10 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        let local = window.localStorage.getItem('mydayapp-angular')
+        const local = window.localStorage.getItem('mydayapp-angular')
         if (local) {
-            console.log(local)
-            local = JSON.parse(local)
-            console.log(local)
-            this.task.localTasks = local!
+            const localParced = JSON.parse(local)
+            this.task.localTasks = localParced!
         }
         this.task.listAlone.subscribe({
             next: (element:boolean) => {
@@ -34,7 +32,7 @@ export class HomeComponent implements OnInit {
 
     onSubmit(){
         const sendElement = this.taskInput.get('task')?.value
-        if (sendElement !== '') this.task.newTask = sendElement
+        if (sendElement) this.task.newTask = sendElement.trim()
     }
 
     onSend(e:KeyboardEvent){
