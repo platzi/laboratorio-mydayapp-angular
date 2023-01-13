@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  changeStatus(task: ITask) {
+  changeStatus(task: ITaskInterface) {
     task.completed = !task.completed;
     this.taskService.saveTasks(this.completeTasksList);
     this.filtTasks();
