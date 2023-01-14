@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -14,6 +15,8 @@ export class FooterComponent implements OnInit {
   tasks: number = 0;
   pendingTasks: number = 0;
   completedTasks: number = 0;
+  route: string = 'all';
+  tasksCount: number = 0;
 
   itemMap = {
     '=1': 'item left',
@@ -21,14 +24,20 @@ export class FooterComponent implements OnInit {
   }
 
   constructor(
-    private taskService: TasksService
+    private taskService: TasksService,
+    private router: ActivatedRoute,
   ) { 
 
   }
 
   ngOnInit(): void {
-    this.taskService.allTasks$
-    .subscribe(tasks => this.tasks = tasks.length)
+
+    this.taskService.allTask$.subscribe(tasks => this.tasksCount = tasks.length)
+
+    this.router.params.subscribe(route => {
+      this.route = route['type']
+    })
+
     this.taskService.pendingTask$
     .subscribe(pendingTask => {
       this.pendingTasks = pendingTask.length

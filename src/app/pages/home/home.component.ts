@@ -11,36 +11,24 @@ import { Location } from '@angular/common';
 export class HomeComponent implements OnInit {
 
   tasks: Task[] = [];
-  taskType: string = '';
 
   constructor(
     private taskService: TasksService,
-    private route: ActivatedRoute,
-    private location: Location
+    private router: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-
-    this.tasks = this.taskService.getTask();
-
-    this.route.url.subscribe(urlUbication => {
-      this.taskType = urlUbication[0].path
-
-      switch (this.taskType) {
+    this.router.params.subscribe(route => {
+      switch (route['type']){
         case 'pending':
-          this.taskService.pendingTask$
-            .subscribe(tasks => this.tasks = tasks);
+          this.taskService.pendingTask$.subscribe(task=> this.tasks = task)
           break;
         case 'completed':
-          this.taskService.completedTask$
-            .subscribe(tasks => this.tasks = tasks);
+          this.taskService.completedTask$.subscribe(task=> this.tasks = task)
           break;
-      }
-    })
-
-    this.taskService.allTasks$.subscribe(listado => {
-      if(listado.length == 0){
-        this.location.go('/all')
+        default:
+          this.taskService.allTask$.subscribe(tasks => this.tasks = tasks);
+          break;
       }
     })
 
