@@ -19,22 +19,23 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.params.subscribe(route => {
-      switch (route['type']){
+      switch (route['type']) {
         case 'pending':
-          this.taskService.pendingTask$.subscribe(task=> this.tasks = task)
+          console.log('Se cambio a pending')
+          this.taskService.allTask$.subscribe(tasks => this.tasks = tasks.filter(task => task.completed == false));
           break;
         case 'completed':
-          this.taskService.completedTask$.subscribe(task=> this.tasks = task)
+          console.log('Se cambio a completed')
+          this.taskService.allTask$.subscribe(tasks => this.tasks = tasks.filter(task => task.completed == true));
           break;
         default:
+          console.log('Se cambio a all')
           this.taskService.allTask$.subscribe(tasks => this.tasks = tasks);
           break;
       }
     })
 
   }
-
-
 
   clearCompleted() {
     this.tasks = this.taskService.clearCompleted();

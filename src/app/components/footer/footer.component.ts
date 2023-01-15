@@ -38,19 +38,13 @@ export class FooterComponent implements OnInit {
       this.route = route['type']
     })
 
-    this.taskService.pendingTask$
-    .subscribe(pendingTask => {
-      this.pendingTasks = pendingTask.length
-    })
-    this.taskService.completedTask$
-    .subscribe(completedTask => {
-      this.completedTasks = completedTask.length
-    })
+    this.taskService.allTask$.subscribe(tasks => this.pendingTasks = tasks.filter(task => task.completed == false).length)
+    this.taskService.allTask$.subscribe(tasks => this.completedTasks = tasks.filter(task => task.completed == true).length)
   }
 
   clear(){
     this.clearCompleted.emit();  
-    this.completedTasks = 0; 
+    this.tasksCount = 0; 
   }
 
 

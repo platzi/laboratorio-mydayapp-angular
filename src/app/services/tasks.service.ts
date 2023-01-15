@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Task } from '../components/interfaces/task.interface';
 
 @Injectable({
@@ -15,10 +15,6 @@ export class TasksService {
   }
 
   private _allTasks = new BehaviorSubject<Task[]>(this._tasks)
-  private _complete = new BehaviorSubject<Task[]>(this._tasks.filter(item => item.completed == true))
-  private _pending = new BehaviorSubject<Task[]>(this._tasks.filter(item => item.completed == false));
-  pendingTask$ = this._pending.asObservable();
-  completedTask$ = this._complete.asObservable();
   allTask$ = this._allTasks.asObservable();
 
   addTask(task: string) {
@@ -30,7 +26,6 @@ export class TasksService {
     this._tasks.push(toDo);
     this.saveInStg();
     this.updatePendingTask();
-
   }
 
   getTask() {
@@ -62,9 +57,7 @@ export class TasksService {
   }
 
   updatePendingTask() {
-    this._allTasks.next(this._tasks)
-    this._pending.next(this._tasks.filter(item => item.completed == false))
-    this._complete.next(this._tasks.filter(item => item.completed == true))
+    this._allTasks.next(this._tasks);
   }
 
   clearCompleted() {
@@ -80,4 +73,5 @@ export class TasksService {
   getCompletedTask(){
     return this._tasks.filter(task => task.completed == true)
   }
+  
 }
