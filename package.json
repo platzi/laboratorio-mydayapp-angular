@@ -10,7 +10,8 @@
     "test": "ng test",
     "e2e": "npm run build && playwright test",
     "e2e:install": "playwright install",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "deploy:github": "ng deploy --base-href=/laboratorio-mydayapp-angular/"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +40,7 @@
     "@types/jasmine": "4.0.0",
     "@typescript-eslint/eslint-plugin": "5.29.0",
     "@typescript-eslint/parser": "5.29.0",
+    "angular-cli-ghpages": "^1.0.5",
     "eslint": "^8.18.0",
     "http-server": "14.1.1",
     "jasmine-core": "4.1.0",

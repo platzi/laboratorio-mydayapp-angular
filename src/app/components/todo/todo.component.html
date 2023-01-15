@@ -1,0 +1,10 @@
+<li [ngClass]="{'completed': todo.completed, 'editing': editMode}" (dblclick)="onDbClickEnabledEdit()">
+  <div class="view">
+    <input class="toggle" type="checkbox" [checked]="todo.completed"
+           (change)="onChangeStatus()" />
+    <label>{{todo.title}}</label>
+    <button class="destroy" (click)="onRemove()"></button>
+  </div>
+  <input class="edit" [formControl]="input"
+         (keydown.enter)="onUpdate()" (keydown.escape)="onEscape()" [autofocus]="editMode" />
+</li>
