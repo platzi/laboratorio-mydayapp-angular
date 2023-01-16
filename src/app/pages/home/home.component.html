@@ -46,8 +46,8 @@
     <footer class="footer" *ngIf="completeTasksList.length !== 0">
       <!-- This should be `0 items left` by default -->
       <span class="todo-count"
-        ><strong>{{ filterTasksList.length }}</strong>
-        {{ filterTasksList.length !== 1 ? "items" : "item" }} left</span
+        ><strong>{{ completeTasksList.length }}</strong>
+        {{ completeTasksList.length !== 1 ? "items" : "item" }} left</span
       >
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
@@ -55,6 +55,7 @@
           <a
             routerLink="/all"
             routerLinkActive="selected"
+            [class.selected]="filter === ''"
             >All</a
           >
         </li>

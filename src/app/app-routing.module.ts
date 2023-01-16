@@ -6,8 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/all',
-    pathMatch: 'full'
+    component: HomeComponent,
   },
   {
     path: 'all',

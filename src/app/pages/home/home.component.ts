@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
     editMode: false,
   };
 
+  filter = this.route.routeConfig?.path;
+
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute
@@ -48,6 +50,11 @@ export class HomeComponent implements OnInit {
       case 'all':
         this.filterTasksList = this.completeTasksList;
         break;
+
+        case '':
+          this.filterTasksList = this.completeTasksList;
+          break;
+  
 
       case 'pending':
         this.filterTasksList = this.completeTasksList.filter(
