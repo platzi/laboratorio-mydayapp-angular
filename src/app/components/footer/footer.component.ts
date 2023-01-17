@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from 'src/app/interfaces/task.interface';
+import { Tarea } from 'src/app/interfaces/task.interface';
 import { TaksService } from 'src/app/services/taks.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { TaksService } from 'src/app/services/taks.service';
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-  public listTasks!: Task[];
+  public listTasks!: Tarea[];
   public countList: number = 0;
 
   constructor(private tasksService: TaksService) {}

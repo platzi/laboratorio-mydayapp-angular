@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from 'src/app/interfaces/task.interface';
+import { Tarea } from 'src/app/interfaces/task.interface';
 import { TaksService } from '../../services/taks.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { TaksService } from '../../services/taks.service';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  public listTasks!: Task[];
+  public listTasks!: Tarea[];
   public countList: number = 0;
 
   constructor(private tasksService: TaksService) {}
