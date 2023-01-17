@@ -2,7 +2,7 @@
   <app-header></app-header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
-    <section class="main">
+    <section *ngIf="countList > 0" class="main">
       <app-list-taks></app-list-taks>
     </section>
     <!-- This footer should be hidden by default and shown when there are todos -->
