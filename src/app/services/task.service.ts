@@ -58,4 +58,16 @@ export class TaskService {
         this._taskList.next(this._list)
         window.localStorage.setItem('mydayapp-angular', JSON.stringify(this._list))
     }
+
+    setUpdateValue(element:number, label:string) {
+        this._list = this._list.map((_listElement:TaskInterface) => {
+            if(_listElement.id === element) {
+                _listElement.label = label
+                return _listElement
+            }
+            return _listElement
+        })
+        this._taskList.next(this._list)
+        window.localStorage.setItem('mydayapp-angular', JSON.stringify(this._list))
+    }
 }

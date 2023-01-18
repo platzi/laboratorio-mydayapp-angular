@@ -56,6 +56,12 @@ export class ListComponent implements OnInit, AfterViewInit{
         }
     }
 
+    editElement(e:KeyboardEvent|any, id:number){
+        if (e.key === 'Enter'){
+            this.task.setUpdateValue(id, e.target.value.trim())
+        }
+    }
+
     ups(){
         console.log('ups')
     }

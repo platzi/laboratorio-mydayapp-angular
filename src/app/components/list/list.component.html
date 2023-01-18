@@ -30,7 +30,7 @@
                 <label (dblclick)="editState($event)">{{taskObject.label}}</label>
                 <button class="destroy"></button>
             </div>
-            <input class="edit" [value]="taskObject.label" (cancel)="ups()" />
+            <input class="edit" [value]="taskObject.label" (cancel)="ups()" (keypress)="editElement($event,taskObject.id)"/>
         </li>
     </ul>
 </section>
