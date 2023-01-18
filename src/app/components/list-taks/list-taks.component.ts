@@ -17,4 +17,13 @@ export class ListTaksComponent implements OnInit {
       console.log('List', resp), (this.listTasks = resp);
     });
   }
+
+  cambiarEstadoTask(task: Tarea) {
+    let taskTemp = { ...task };
+    taskTemp.completed = taskTemp.completed ? false : true;
+    let listTemp = [...this.listTasks];
+    let index = listTemp.findIndex((element) => element.id === taskTemp.id);
+    listTemp[index] = taskTemp;
+    this.tasksListenerService.setListTaks(listTemp);
+  }
 }

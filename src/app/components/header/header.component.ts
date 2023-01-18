@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit {
         completed: false,
       };
 
-      console.log(task);
       this.listTask.push(task);
       const newList = [...this.listTask];
       this.tasksListenerService.setListTaks(newList);

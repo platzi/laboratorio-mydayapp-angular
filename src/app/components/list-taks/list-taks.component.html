@@ -1,13 +1,18 @@
-<ul class="todo-list">
-  <li class="completed">
+<ul class="todo-list" *ngFor="let task of listTasks">
+  <li class="completed" [ngClass]="{ completed: task.completed }">
     <div class="view">
-      <input class="toggle" type="checkbox" checked />
-      <label>Learn JavaScript</label>
+      <input
+        class="toggle"
+        type="checkbox"
+        [checked]="task.completed"
+        (click)="cambiarEstadoTask(task)"
+      />
+      <label>{{ task.title }}</label>
       <button class="destroy"></button>
     </div>
-    <input class="edit" value="Learn JavaScript" />
+    <input class="edit" [value]="task.title" />
   </li>
-  <li>
+  <!--   <li>
     <div class="view">
       <input class="toggle" type="checkbox" />
       <label>Buy a unicorn</label>
@@ -22,5 +27,5 @@
       <button class="destroy"></button>
     </div>
     <input class="edit" value="Make dishes" />
-  </li>
+  </li> -->
 </ul>
