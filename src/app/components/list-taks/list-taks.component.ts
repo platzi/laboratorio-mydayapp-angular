@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tarea } from 'src/app/interfaces/task.interface';
-import { TaksService } from 'src/app/services/taks.service';
+import { TaskListenerService } from '../../services/task-listener.service';
 
 @Component({
   selector: 'app-list-taks',
@@ -10,10 +10,10 @@ import { TaksService } from 'src/app/services/taks.service';
 export class ListTaksComponent implements OnInit {
   public listTasks!: Tarea[];
 
-  constructor(private taksService: TaksService) {}
+  constructor(private tasksListenerService: TaskListenerService) {}
 
   ngOnInit(): void {
-    this.taksService.getListTasks().subscribe((resp) => {
+    this.tasksListenerService.getListTasks().subscribe((resp) => {
       console.log('List', resp), (this.listTasks = resp);
     });
   }

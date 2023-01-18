@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tarea } from 'src/app/interfaces/task.interface';
-import { TaksService } from 'src/app/services/taks.service';
+import { TaskListenerService } from 'src/app/services/task-listener.service';
 
 @Component({
   selector: 'app-header',
@@ -9,28 +9,33 @@ import { TaksService } from 'src/app/services/taks.service';
 })
 export class HeaderComponent implements OnInit {
   public newTask: string = '';
+  public listTask: Tarea[] = [];
 
-  constructor(private taskService: TaksService) {}
+  constructor(private tasksListenerService: TaskListenerService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.tasksListenerService.getListTasks().subscribe((listTask) => {
+      this.listTask = listTask;
+    });
+  }
 
   crearNewTask(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       // Agregar tarea
 
+      const id = (this.listTask.length + 1).toString();
+
       const task: Tarea = {
-        id: '0',
-        title: this.newTask,
+        id,
+        title: this.newTask.trim(),
         completed: false,
       };
 
       console.log(task);
-
-      let listTasks = [];
-
-      listTasks.push(task);
-
-      this.taskService.setListTaks(listTasks);
+      this.listTask.push(task);
+      const newList = [...this.listTask];
+      this.tasksListenerService.setListTaks(newList);
+      this.newTask = '';
     }
   }
 }
