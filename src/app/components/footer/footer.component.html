@@ -7,7 +7,7 @@
   <!-- Remove this if you don't implement routing -->
   <ul class="filters">
     <li>
-      <a routerLink="/all" routerLinkActive="selected">All</a>
+      <a routerLink="/" routerLinkActive="selected">All</a>
     </li>
     <li>
       <a routerLink="/pending" routerLinkActive="selected">Pending</a>
@@ -17,7 +17,11 @@
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->
-  <button class="clear-completed" (click)="clearCompleted.emit()">
+  <button
+    *ngIf="completedTasks"
+    class="clear-completed"
+    (click)="clearCompleted.emit()"
+  >
     Clear completed
   </button>
 </footer>

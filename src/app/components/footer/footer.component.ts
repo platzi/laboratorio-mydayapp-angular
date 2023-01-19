@@ -7,5 +7,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class FooterComponent {
   @Input() pendingTasks = 0;
+  @Input() completedTasks = 0;
   @Output() clearCompleted: EventEmitter<void> = new EventEmitter();
 }

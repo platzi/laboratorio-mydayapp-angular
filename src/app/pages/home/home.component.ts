@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
   private _tasks: Task[] = [];
   private _viewTasks: Task[] = [];
+  private _filter = '';
   get viewTasks(): Task[] {
     return this._viewTasks;
   }
@@ -31,19 +32,26 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this._tasks = this._tasksService.tasks;
-    this._activatedRoute.data.subscribe((data) => {
-      switch (data['filter']) {
-        case 'pending':
-          this._viewTasks = this._tasks.filter((task) => !task.completed);
-          break;
-        case 'completed':
-          this._viewTasks = this._tasks.filter((task) => task.completed);
-          break;
-        default:
-          this._viewTasks = this._tasks;
-          break;
-      }
-    });
+    this._activatedRoute.data
+      .subscribe((data) => {
+        this._filter = data['filter'];
+        this._loadViewTasks();
+      })
+      .unsubscribe();
+  }
+
+  private _loadViewTasks(): void {
+    switch (this._filter) {
+      case 'pending':
+        this._viewTasks = this._tasks.filter((task) => !task.completed);
+        break;
+      case 'completed':
+        this._viewTasks = this._tasks.filter((task) => task.completed);
+        break;
+      default:
+        this._viewTasks = this._tasks;
+        break;
+    }
   }
 
   saveTask(task: string): void {
@@ -70,6 +78,7 @@ export class HomeComponent implements OnInit {
   clearCompleted(): void {
     this._tasks = this._tasks.filter((task) => !task.completed);
     this.saveTasks();
+    this._loadViewTasks();
   }
 
   saveTasks(): void {

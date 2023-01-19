@@ -23,6 +23,7 @@
     <app-footer
       *ngIf="totalTasks"
       [pendingTasks]="pendingTasks"
+      [completedTasks]="totalTasks - pendingTasks"
       (clearCompleted)="clearCompleted()"
     >
     </app-footer>
