@@ -28,4 +28,13 @@ export class HomeComponent {
     this.selectedTask = taskId;
     this.changeDetectorRef.detectChanges();
   }
+
+  deleteTask(taskId: string): void {
+    const taskIndex = this.tasks.findIndex((task) => task.id === taskId);
+    this.tasks.splice(taskIndex, 1);
+  }
+
+  clearCompleted(): void {
+    this.tasks = this.tasks.filter((task) => !task.completed);
+  }
 }

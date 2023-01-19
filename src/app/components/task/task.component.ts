@@ -17,6 +17,7 @@ import { Task } from '../../core/models/task.model';
 export class TaskComponent {
   @Input() task!: Task;
   @Output() selectedTask: EventEmitter<string> = new EventEmitter();
+  @Output() deleteTask: EventEmitter<string> = new EventEmitter();
   @ViewChild('taskEditInput') taskEditInput!: ElementRef<HTMLInputElement>;
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}

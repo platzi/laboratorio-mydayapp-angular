@@ -12,11 +12,18 @@
           <app-task
             [task]="task"
             (selectedTask)="selectTask($event)"
-          ></app-task>
+            (deleteTask)="deleteTask($event)"
+          >
+          </app-task>
         </li>
       </ul>
     </section>
     <!-- This footer should be hidden by default and shown when there are todos -->
-    <app-footer *ngIf="tasks.length" [pendingTasks]="pendingTasks"></app-footer>
+    <app-footer
+      *ngIf="tasks.length"
+      [pendingTasks]="pendingTasks"
+      (clearCompleted)="clearCompleted()"
+    >
+    </app-footer>
   </div>
 </section>

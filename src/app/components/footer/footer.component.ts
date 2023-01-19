@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class FooterComponent {
   @Input() pendingTasks = 0;
+  @Output() clearCompleted: EventEmitter<void> = new EventEmitter();
 }
