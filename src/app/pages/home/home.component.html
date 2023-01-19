@@ -11,24 +11,8 @@
         >
           <app-task
             [task]="task"
-            (selectedTask)="selectedTask = $event"
+            (selectedTask)="selectTask($event)"
           ></app-task>
-        </li>
-        <!-- <li>
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Buy a unicorn" />
-        </li> -->
-        <li class="editing">
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Make dishes</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Make dishes" />
         </li>
       </ul>
     </section>

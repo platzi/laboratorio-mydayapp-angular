@@ -1,6 +1,11 @@
 <div class="view">
   <input class="toggle" type="checkbox" [(ngModel)]="task.completed" />
-  <label (dblclick)="selectedTask.emit(task.id)">{{ task.title }}</label>
+  <label (dblclick)="selectTask()">{{ task.title }}</label>
   <button class="destroy"></button>
 </div>
-<input class="edit" [value]="task.title" />
+<input
+  #taskEditInput
+  class="edit"
+  [value]="task.title"
+  (keyup)="editTask($event)"
+/>

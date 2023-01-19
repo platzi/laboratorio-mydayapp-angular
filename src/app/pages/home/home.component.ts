@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Task } from '../../core/models/task.model';
 
 @Component({
@@ -9,7 +9,7 @@ export class HomeComponent {
   tasks: Task[] = [];
   selectedTask: string = '';
 
-  constructor() {}
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   saveTask(task: string): void {
     const newTask: Task = {
@@ -18,5 +18,10 @@ export class HomeComponent {
       title: task,
     };
     this.tasks.push(newTask);
+  }
+
+  selectTask(taskId: string): void {
+    this.selectedTask = taskId;
+    this.changeDetectorRef.detectChanges();
   }
 }
