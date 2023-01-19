@@ -34,8 +34,10 @@ export class TaskComponent {
       const input = event.target as HTMLInputElement;
       const value = input.value.trim();
       if (value) this.task.title = value;
+      this.changeTask.emit();
       this.selectedTask.emit('');
     } else if (event.key === 'Escape') {
+      this.taskEditInput.nativeElement.value = this.task.title;
       this.selectedTask.emit('');
     }
   }

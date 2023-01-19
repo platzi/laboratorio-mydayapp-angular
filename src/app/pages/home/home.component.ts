@@ -1,57 +1,78 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TasksService } from '../../core/services/tasks.service';
 import { Task } from '../../core/models/task.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  tasks: Task[] = [];
+  private _tasks: Task[] = [];
+  private _viewTasks: Task[] = [];
+  get viewTasks(): Task[] {
+    return this._viewTasks;
+  }
   selectedTask: string = '';
 
+  get totalTasks(): number {
+    return this._tasks.length;
+  }
+
   get pendingTasks(): number {
-    return this.tasks.reduce((acc, task) => (task.completed ? acc : ++acc), 0);
+    return this._tasks.reduce((acc, task) => (task.completed ? acc : ++acc), 0);
   }
 
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
-    private _tasksService: TasksService
+    private _tasksService: TasksService,
+    private _activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.tasks = this._tasksService.tasks;
+    this._tasks = this._tasksService.tasks;
+    this._activatedRoute.data.subscribe((data) => {
+      switch (data['filter']) {
+        case 'pending':
+          this._viewTasks = this._tasks.filter((task) => !task.completed);
+          break;
+        case 'completed':
+          this._viewTasks = this._tasks.filter((task) => task.completed);
+          break;
+        default:
+          this._viewTasks = this._tasks;
+          break;
+      }
+    });
   }
 
   saveTask(task: string): void {
     const newTask: Task = {
       completed: false,
-      id: `task-${this.tasks.length + 1}`,
+      id: `task-${this._tasks.length + 1}`,
       title: task,
     };
-    this.tasks.push(newTask);
+    this._tasks.push(newTask);
     this.saveTasks();
   }
 
   selectTask(taskId: string): void {
-    if (taskId) {
-      this.selectedTask = taskId;
-      this._changeDetectorRef.detectChanges();
-    } else this.saveTasks();
+    this.selectedTask = taskId;
+    this._changeDetectorRef.detectChanges();
   }
 
   deleteTask(taskId: string): void {
-    const taskIndex = this.tasks.findIndex((task) => task.id === taskId);
-    this.tasks.splice(taskIndex, 1);
+    const taskIndex = this._tasks.findIndex((task) => task.id === taskId);
+    this._tasks.splice(taskIndex, 1);
     this.saveTasks();
   }
 
   clearCompleted(): void {
-    this.tasks = this.tasks.filter((task) => !task.completed);
+    this._tasks = this._tasks.filter((task) => !task.completed);
     this.saveTasks();
   }
 
   saveTasks(): void {
-    this._tasksService.tasks = this.tasks;
+    this._tasksService.tasks = this._tasks;
   }
 }
