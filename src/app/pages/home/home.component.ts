@@ -7,6 +7,7 @@ import { Task } from '../../core/models/task.model';
 })
 export class HomeComponent {
   tasks: Task[] = [];
+  selectedTask: string = '';
 
   constructor() {}
 

@@ -6,14 +6,13 @@
       <ul class="todo-list">
         <li
           *ngFor="let task of tasks"
-          [ngStyle]="{
-            completed: task.completed
-          }"
+          [class.completed]="task.completed"
+          [class.editing]="selectedTask === task.id"
         >
-          <app-task [task]="task"></app-task>
-        </li>
-        <li class="completed">
-          <app-task [task]="tasks[0]"></app-task>
+          <app-task
+            [task]="task"
+            (selectedTask)="selectedTask = $event"
+          ></app-task>
         </li>
         <!-- <li>
           <div class="view">
