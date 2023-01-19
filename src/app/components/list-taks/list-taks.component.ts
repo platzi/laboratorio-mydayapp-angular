@@ -9,12 +9,15 @@ import { TaskListenerService } from '../../services/task-listener.service';
 })
 export class ListTaksComponent implements OnInit {
   public listTasks!: Tarea[];
+  public isEdit: boolean = false;
+  public idEdit: string = '';
+  public valueTask: string = '';
 
   constructor(private tasksListenerService: TaskListenerService) {}
 
   ngOnInit(): void {
     this.tasksListenerService.getListTasks().subscribe((resp) => {
-      console.log('List', resp), (this.listTasks = resp);
+      this.listTasks = resp;
     });
   }
 
@@ -25,5 +28,32 @@ export class ListTaksComponent implements OnInit {
     let index = listTemp.findIndex((element) => element.id === taskTemp.id);
     listTemp[index] = taskTemp;
     this.tasksListenerService.setListTaks(listTemp);
+  }
+
+  editarTask(task: Tarea) {
+    this.isEdit = true;
+    this.idEdit = task.id;
+    this.valueTask = task.title;
+    console.log(this.isEdit);
+  }
+
+  actualizarTask(event: KeyboardEvent) {
+    const code = event.code;
+    if (code === 'Escape') {
+      this.isEdit = false;
+      this.idEdit = '';
+      return;
+    }
+    if (code === 'Enter') {
+      let listTemp = [...this.listTasks];
+      let index = listTemp.findIndex((element) => element.id === this.idEdit);
+      listTemp[index].title = this.valueTask.trim();
+      this.isEdit = false;
+      this.idEdit = '';
+    }
+  }
+
+  eliminarTask(id: string) {
+    console.log('Eliminar', id);
   }
 }

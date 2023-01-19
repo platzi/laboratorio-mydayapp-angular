@@ -1,5 +1,11 @@
 <ul class="todo-list" *ngFor="let task of listTasks">
-  <li class="completed" [ngClass]="{ completed: task.completed }">
+  <li
+    [ngClass]="{
+      completed: task.completed,
+      view: !isEdit,
+      editing: isEdit && task.id === idEdit
+    }"
+  >
     <div class="view">
       <input
         class="toggle"
@@ -7,10 +13,16 @@
         [checked]="task.completed"
         (click)="cambiarEstadoTask(task)"
       />
-      <label>{{ task.title }}</label>
-      <button class="destroy"></button>
+      <label (click)="editarTask(task)">{{ task.title }}</label>
+      <button class="destroy" (click)="eliminarTask(task.id)"></button>
     </div>
-    <input class="edit" [value]="task.title" />
+    <input
+      class="edit"
+      [value]="valueTask"
+      autofocus
+      [(ngModel)]="valueTask"
+      (keydown)="actualizarTask($event)"
+    />
   </li>
   <!--   <li>
     <div class="view">
