@@ -1,20 +1,28 @@
 <section class="todoapp">
-  <app-header></app-header>
+  <app-header (emitTask)="saveTask($event)"></app-header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
     <section *ngIf="tasks.length" class="main">
       <ul class="todo-list">
-        <li class="completed">
-          <app-task></app-task>
+        <li
+          *ngFor="let task of tasks"
+          [ngStyle]="{
+            completed: task.completed
+          }"
+        >
+          <app-task [task]="task"></app-task>
         </li>
-        <li>
+        <li class="completed">
+          <app-task [task]="tasks[0]"></app-task>
+        </li>
+        <!-- <li>
           <div class="view">
             <input class="toggle" type="checkbox" />
             <label>Buy a unicorn</label>
             <button class="destroy"></button>
           </div>
           <input class="edit" value="Buy a unicorn" />
-        </li>
+        </li> -->
         <li class="editing">
           <div class="view">
             <input class="toggle" type="checkbox" />
