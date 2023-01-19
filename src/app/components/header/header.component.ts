@@ -8,8 +8,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class HeaderComponent {
   @Output() emitTask: EventEmitter<string> = new EventEmitter();
 
-  constructor() {}
-
   saveTask(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       const input = event.target as HTMLInputElement;

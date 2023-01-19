@@ -1,5 +1,10 @@
 <div class="view">
-  <input class="toggle" type="checkbox" [(ngModel)]="task.completed" />
+  <input
+    class="toggle"
+    type="checkbox"
+    [ngModel]="task.completed"
+    (click)="changeTaskState()"
+  />
   <label (dblclick)="selectTask()">{{ task.title }}</label>
   <button class="destroy" (click)="deleteTask.emit(task.id)"></button>
 </div>

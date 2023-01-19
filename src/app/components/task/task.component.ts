@@ -18,13 +18,14 @@ export class TaskComponent {
   @Input() task!: Task;
   @Output() selectedTask: EventEmitter<string> = new EventEmitter();
   @Output() deleteTask: EventEmitter<string> = new EventEmitter();
+  @Output() changeTask: EventEmitter<void> = new EventEmitter();
   @ViewChild('taskEditInput') taskEditInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
   selectTask(): void {
     this.selectedTask.emit(this.task.id);
-    this.changeDetectorRef.detectChanges();
+    this._changeDetectorRef.detectChanges();
     this.taskEditInput.nativeElement.focus();
   }
 
@@ -37,5 +38,10 @@ export class TaskComponent {
     } else if (event.key === 'Escape') {
       this.selectedTask.emit('');
     }
+  }
+
+  changeTaskState(): void {
+    this.task.completed = !this.task.completed;
+    this.changeTask.emit();
   }
 }
