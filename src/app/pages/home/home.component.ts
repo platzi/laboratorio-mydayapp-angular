@@ -9,6 +9,10 @@ export class HomeComponent {
   tasks: Task[] = [];
   selectedTask: string = '';
 
+  get pendingTasks(): number {
+    return this.tasks.reduce((acc, task) => (task.completed ? acc : ++acc), 0);
+  }
+
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   saveTask(task: string): void {
