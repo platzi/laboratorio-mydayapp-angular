@@ -10,6 +10,7 @@ import { TaskListenerService } from 'src/app/services/task-listener.service';
 export class FooterComponent implements OnInit {
   public listTasks!: Tarea[];
   public countList: number = 0;
+  public labelItems: string = 'items';
 
   constructor(private tasksListenerService: TaskListenerService) {}
 
@@ -17,6 +18,7 @@ export class FooterComponent implements OnInit {
     this.tasksListenerService.getListTasks().subscribe((resp) => {
       this.listTasks = resp;
       this.countList = this.listTasks.length;
+      this.labelItems = this.countList === 1 ? 'item' : 'items';
     });
   }
 }

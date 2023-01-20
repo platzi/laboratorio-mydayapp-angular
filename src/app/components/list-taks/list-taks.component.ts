@@ -44,7 +44,7 @@ export class ListTaksComponent implements OnInit {
       this.idEdit = '';
       return;
     }
-    if (code === 'Enter') {
+    if (code === 'Enter' && this.valueTask.length > 0) {
       let listTemp = [...this.listTasks];
       let index = listTemp.findIndex((element) => element.id === this.idEdit);
       listTemp[index].title = this.valueTask.trim();
