@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TaskInterface } from 'src/app/interfaces/task.model';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -6,27 +7,31 @@ import { TaskService } from 'src/app/services/task.service';
     selector: 'app-list',
     templateUrl: './list.component.html',
 })
-export class ListComponent implements OnInit, AfterViewInit{
+export class ListComponent implements OnInit{
 
-    taskList!: [TaskInterface]
+    taskList!: TaskInterface[]
+    taskListFull!: TaskInterface[]
 
-    constructor(private task: TaskService) { }
+    constructor(private task: TaskService, private route: ActivatedRoute) { }
 
 
     ngOnInit(): void {
         this.task.taskList.subscribe({
             next: list => {
                 this.taskList = list
+                this.taskListFull = this.taskList
             }
         })
-    }
-
-    ngAfterViewInit() {
-        this.taskList.forEach(taskElement => {
-            if (taskElement.completed) {
-                const target:HTMLInputElement | any = document.getElementById(`${taskElement.id}`)
-                target.checked = true
-                target.parentElement?.parentElement?.classList.add('completed')
+        const Route$ = this.route.url
+        Route$.subscribe((url:any) => {
+            if (url[0] === undefined){
+                this.taskList = this.taskListFull
+            }
+            else if (url[0].path === 'pending'){
+                this.taskList = this.taskListFull.filter((element: TaskInterface) => element.completed === false)
+            }
+            else if (url[0].path === 'completed'){
+                this.taskList = this.taskListFull.filter((element: TaskInterface) => element.completed === true)
             }
         })
     }

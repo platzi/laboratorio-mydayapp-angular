@@ -24,13 +24,15 @@
             </div>
             <input class="edit" value="Make dishes" />
         </li> -->
-        <li *ngFor="let taskObject of taskList" (keypress)="editEvent($event)" >
-            <div class="view">
-                <input class="toggle" type="checkbox" (click)="changeState($event)" [attr.data-id]="taskObject.id" [id]="taskObject.id">
-                <label (dblclick)="editState($event)">{{taskObject.title}}</label>
-                <button class="destroy" (click)="deleteElement(taskObject.id)"></button>
-            </div>
-            <input class="edit" [value]="taskObject.title" (cancel)="ups()" (keypress)="editElement($event,taskObject.id)"/>
-        </li>
+        <ng-container *ngFor="let taskObject of taskList">
+            <li [ngClass]="{'completed': taskObject.completed}" (keypress)="editEvent($event)" >
+                <div class="view">
+                    <input class="toggle" type="checkbox" (click)="changeState($event)" [attr.data-id]="taskObject.id" [id]="taskObject.id" [checked]="taskObject.completed">
+                    <label (dblclick)="editState($event)">{{taskObject.title}}</label>
+                    <button class="destroy" (click)="deleteElement(taskObject.id)"></button>
+                </div>
+                <input class="edit" [value]="taskObject.title" (cancel)="ups()" (keypress)="editElement($event,taskObject.id)"/>
+            </li>
+        </ng-container>
     </ul>
 </section>
