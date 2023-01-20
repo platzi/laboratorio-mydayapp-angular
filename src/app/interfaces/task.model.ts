@@ -1,5 +1,5 @@
 export interface TaskInterface {
     id: number,
-    label: string,
+    title: string,
     completed: boolean
 }

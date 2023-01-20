@@ -62,6 +62,10 @@ export class ListComponent implements OnInit, AfterViewInit{
         }
     }
 
+    deleteElement(id:number){
+        this.task.deleteValue = id
+    }
+
     ups(){
         console.log('ups')
     }

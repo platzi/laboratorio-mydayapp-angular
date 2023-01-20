@@ -27,10 +27,10 @@
         <li *ngFor="let taskObject of taskList" (keypress)="editEvent($event)" >
             <div class="view">
                 <input class="toggle" type="checkbox" (click)="changeState($event)" [attr.data-id]="taskObject.id" [id]="taskObject.id">
-                <label (dblclick)="editState($event)">{{taskObject.label}}</label>
-                <button class="destroy"></button>
+                <label (dblclick)="editState($event)">{{taskObject.title}}</label>
+                <button class="destroy" (click)="deleteElement(taskObject.id)"></button>
             </div>
-            <input class="edit" [value]="taskObject.label" (cancel)="ups()" (keypress)="editElement($event,taskObject.id)"/>
+            <input class="edit" [value]="taskObject.title" (cancel)="ups()" (keypress)="editElement($event,taskObject.id)"/>
         </li>
     </ul>
 </section>

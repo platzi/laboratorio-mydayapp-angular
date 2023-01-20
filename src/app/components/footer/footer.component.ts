@@ -8,6 +8,7 @@ import { TaskService } from 'src/app/services/task.service';
 export class FooterComponent implements OnInit {
 
     taskList = []
+    check = false
 
     constructor(private task: TaskService) { }
 
@@ -17,5 +18,13 @@ export class FooterComponent implements OnInit {
                 this.taskList = list
             }
         })
+        this.task.listCompleted.subscribe({
+            next: element => {
+                this.check = element
+            }
+        })
+    }
+    ngClear(){
+        this.task.clearValues()
     }
 }
