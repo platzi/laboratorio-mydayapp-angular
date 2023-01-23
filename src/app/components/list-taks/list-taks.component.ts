@@ -34,7 +34,6 @@ export class ListTaksComponent implements OnInit {
     this.isEdit = true;
     this.idEdit = task.id;
     this.valueTask = task.title;
-    console.log(this.isEdit);
   }
 
   actualizarTask(event: KeyboardEvent) {
@@ -54,6 +53,9 @@ export class ListTaksComponent implements OnInit {
   }
 
   eliminarTask(id: string) {
-    console.log('Eliminar', id);
+    let listTemp = [...this.listTasks];
+    let index = listTemp.findIndex((element) => element.id === id);
+    listTemp.splice(index, 1);
+    this.tasksListenerService.setListTaks(listTemp);
   }
 }
