@@ -47,6 +47,7 @@ export class ListTaksComponent implements OnInit {
       let listTemp = [...this.listTasks];
       let index = listTemp.findIndex((element) => element.id === this.idEdit);
       listTemp[index].title = this.valueTask.trim();
+      this.tasksListenerService.setListTaks(listTemp);
       this.isEdit = false;
       this.idEdit = '';
     }
