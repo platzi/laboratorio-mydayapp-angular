@@ -2,10 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { Todo } from '../pages/home/todo.model';
 import { LocalStorageService } from './local-storage.service';
 
-import { TodosServiceService } from './todos-service.service';
+import { TodosService } from './todos-service.service';
 
-describe('TodosServiceService', () => {
-  let service: TodosServiceService;
+describe('TodosService', () => {
+  let service: TodosService;
   let localStorageService: jasmine.SpyObj<LocalStorageService>;
   const localStorageKey = 'mydayapp-angular';
 
@@ -19,7 +19,7 @@ describe('TodosServiceService', () => {
         { provide: LocalStorageService, useValue: localStorageServiceSpy },
       ],
     });
-    service = TestBed.inject(TodosServiceService);
+    service = TestBed.inject(TodosService);
     localStorageService = TestBed.inject(
       LocalStorageService
     ) as jasmine.SpyObj<LocalStorageService>;

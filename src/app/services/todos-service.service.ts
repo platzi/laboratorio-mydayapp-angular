@@ -7,7 +7,7 @@ import { LocalStorageService } from './local-storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TodosServiceService {
+export class TodosService {
   #localStorageKey = 'mydayapp-angular';
   #todosSubject: BehaviorSubject<Todo[]> = new BehaviorSubject([] as Todo[]);
 
