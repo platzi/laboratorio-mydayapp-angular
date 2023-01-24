@@ -46,11 +46,7 @@ describe('TodosService', () => {
         expect(todos[0].completed).toEqual(false);
       }
     );
-    const todo: Todo = {
-      title: 'title',
-    };
-
-    service.addNewTodo(todo);
+    service.addNewTodo('title');
     expect(localStorageService.setItems).toHaveBeenCalled();
     service.getTodos('all').subscribe((todos) => {
       expect(todos.length).toBe(1);

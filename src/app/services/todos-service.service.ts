@@ -18,11 +18,14 @@ export class TodosService {
     this.#todosSubject.next(todosStorage);
   }
 
-  addNewTodo(todo: Todo) {
+  addNewTodo(title: string) {
     const todosList = this.#todosSubject.value;
-    todo.id = this.#generateTodoId();
-    todo.completed = false;
-    todosList.push(todo);
+    const newTodo: Todo = {
+      id: this.#generateTodoId(),
+      completed: false,
+      title
+    }
+    todosList.push(newTodo);
 
     this.#todosSubject.next(todosList);
     this._localStorageService.setItems(this.#localStorageKey, todosList);
