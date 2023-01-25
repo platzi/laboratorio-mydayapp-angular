@@ -28,4 +28,12 @@ export class HomeComponent implements OnInit {
     this._todosService.addNewTodo(cleanInput);
     this.todoInput = '';
   }
+
+  updateTodoCompletedStatus(todoId: string): void {
+    this._todosService.toggleTodoCompletedStatus(todoId);
+  }
+
+  updateTodoTitle(todoId: string, newTitle: string): void {
+    this._todosService.updateTodoTitle(todoId, newTitle);
+  }
 }

@@ -14,12 +14,18 @@
       />
     </div>
   </header>
-  <ng-container *ngIf="todos$ | async as todos" >
+  <ng-container *ngIf="todos$ | async as todos">
     <div class="container todoapp-wrapper">
       <!-- This section should be hidden by default and shown when there are todos -->
       <section class="main" data-testid="main" *ngIf="todos.length > 0">
         <ul class="todo-list">
-          <li class="completed">
+          <app-todo-element
+            *ngFor="let todo of todos"
+            [todo]="todo"
+            (updateCompletedStatus)="updateTodoCompletedStatus(todo.id!)"
+            (updateTodoTitle)="updateTodoTitle(todo.id!, $event)"
+          ></app-todo-element>
+          <!-- <li class="completed">
             <div class="view">
               <input class="toggle" type="checkbox" checked />
               <label>Learn JavaScript</label>
@@ -42,11 +48,11 @@
               <button class="destroy"></button>
             </div>
             <input class="edit" value="Make dishes" />
-          </li>
+          </li> -->
         </ul>
       </section>
       <!-- This footer should be hidden by default and shown when there are todos -->
-      <footer class="footer" data-testid="footer" *ngIf="todos.length > 0" >
+      <footer class="footer" data-testid="footer" *ngIf="todos.length > 0">
         <!-- This should be `0 items left` by default -->
         <span class="todo-count"><strong>0</strong> item left</span>
         <!-- Remove this if you don't implement routing -->
@@ -66,5 +72,4 @@
       </footer>
     </div>
   </ng-container>
-
 </section>
