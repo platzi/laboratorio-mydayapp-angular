@@ -8,17 +8,30 @@ import { TaskListenerService } from 'src/app/services/task-listener.service';
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-  public listTasks!: Tarea[];
+  public listTasks: Tarea[] = [];
   public countList: number = 0;
   public labelItems: string = 'items';
+  public isTaskComplete: boolean = false;
 
   constructor(private tasksListenerService: TaskListenerService) {}
 
   ngOnInit(): void {
-    this.tasksListenerService.getListTasks().subscribe((resp) => {
+    this.tasksListenerService.getListTasks().subscribe((resp: Tarea[]) => {
       this.listTasks = resp;
       this.countList = this.listTasks.length;
       this.labelItems = this.countList === 1 ? 'item' : 'items';
+
+      this.isTaskComplete = this.listTasks.some(
+        (task: Tarea) => task.completed === true
+      );
     });
+  }
+
+  clearComplete() {
+    const listTemp = [...this.listTasks];
+    const notCompleteList = listTemp.filter(
+      (element) => element.completed !== true
+    );
+    this.tasksListenerService.setListTaks(notCompleteList);
   }
 }
