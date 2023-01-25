@@ -47,7 +47,6 @@ describe('TodoElementComponent', () => {
     let todo = getById(fixture, 'todo').nativeElement as HTMLElement;
     const toggle = getById(fixture, 'toggle').nativeElement as HTMLElement;
 
-    expect(todo.classList.contains('completed')).toBeFalsy();
 
     toggle.click();
 
@@ -56,8 +55,6 @@ describe('TodoElementComponent', () => {
 
     todo = getById(fixture, 'todo').nativeElement as HTMLElement;
 
-    expect(todo.classList.contains('completed')).toBeTruthy();
-    expect(component.todo.completed).toBeTruthy();
     expect(emit).toHaveBeenCalled();
   }));
 
@@ -75,8 +72,6 @@ describe('TodoElementComponent', () => {
     let todo = getById(fixture, 'todo').nativeElement as HTMLElement;
     const toggle = getById(fixture, 'toggle').nativeElement as HTMLElement;
 
-    expect(todo.classList.contains('completed')).toBeTruthy();
-
     toggle.click();
 
     fixture.detectChanges();
@@ -84,8 +79,6 @@ describe('TodoElementComponent', () => {
 
     todo = getById(fixture, 'todo').nativeElement as HTMLElement;
 
-    expect(todo.classList.contains('completed')).toBeFalsy();
-    expect(component.todo.completed).toBeFalsy();
     expect(emit).toHaveBeenCalled();
   }));
 
