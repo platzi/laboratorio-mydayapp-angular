@@ -9,7 +9,7 @@
         type="checkbox"
         checked
         data-testid="toggle"
-        [value]="todo.completed"
+        [checked]="todo.completed"
         (click)="updateTodoCompletedStatus()"
       />
       <label data-testid="label" (dblclick)="activateEditMode()"
