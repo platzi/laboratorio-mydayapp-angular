@@ -8,8 +8,8 @@ export class TaskService {
   constructor() {}
 
   getListTask() {
-    const list = localStorage.getItem('mydayapp-angular') || '';
-    const listTask = JSON.parse(list);
+    const list = localStorage.getItem('mydayapp-angular');
+    const listTask = list ? JSON.parse(list) : [];
     return listTask;
   }
 

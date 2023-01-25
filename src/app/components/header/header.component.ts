@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit {
   crearNewTask(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       // Agregar tarea
-
       const id = (this.listTask.length + 1).toString();
 
       const task: Tarea = {

@@ -1,8 +1,8 @@
-<ul class="todo-list" *ngFor="let task of listTasks">
+<ul class="todo-list">
   <li
+    *ngFor="let task of listTasks"
     [ngClass]="{
       completed: task.completed,
-      view: !isEdit,
       editing: isEdit && task.id === idEdit
     }"
   >
@@ -24,7 +24,8 @@
       (keydown)="actualizarTask($event)"
     />
   </li>
-  <!--  
+</ul>
+<!--  
      <li>
     <div class="view">
       <input class="toggle" type="checkbox" />
@@ -41,4 +42,3 @@
     </div>
     <input class="edit" value="Make dishes" />
   </li> -->
-</ul>
