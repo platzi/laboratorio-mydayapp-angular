@@ -16,7 +16,6 @@ export class TodoElementComponent {
   constructor() { }
 
   updateTodoCompletedStatus(): void {
-    this.todo.completed = !this.todo.completed;
     this.updateCompletedStatus.emit();
   }
 
