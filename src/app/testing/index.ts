@@ -1,1 +1,1 @@
-export { getById } from './getElements';
+export { getById, getAllById } from './getElements';
