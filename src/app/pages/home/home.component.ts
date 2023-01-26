@@ -19,7 +19,10 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._activatedRoute.url.subscribe(url => this.#setTodosFilterTypeFromPath(url[0].path))
+    this._activatedRoute.url.subscribe(url => {
+      if (url[0])
+        this.#setTodosFilterTypeFromPath(url[0].path)
+    });
     this.#getTodos();
   }
 
