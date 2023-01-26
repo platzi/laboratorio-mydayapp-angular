@@ -64,6 +64,11 @@ export class TodosService {
     this.#updateTodosStorage(todosList);
   }
 
+  clearCompletedTodos(): void {
+    const uncompletedTodos = this.#todosSubject.value.filter(t => t.completed === false);
+    this.#updateTodosStorage(uncompletedTodos);
+  }
+
   #generateTodoId(): string {
     const idLength = 10;
     let newId = '';

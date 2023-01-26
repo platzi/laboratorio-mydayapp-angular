@@ -199,4 +199,37 @@ describe('TodosService', () => {
       doneFn();
     });
   });
+
+  it('Test 8: clear completed todos', (doneFn) => {
+    localStorageService.getItems.and.returnValue([
+      {
+        id: 'abc123',
+        title: 'Title',
+        completed: false,
+      },
+      {
+        id: 'abc1234',
+        title: 'Title 2',
+        completed: false,
+      },
+      {
+        id: 'asdnbd123',
+        title: 'Title 3',
+        completed: true,
+      },
+      {
+        id: 'asd123098',
+        title: 'Title 4',
+        completed: true,
+      },
+    ]);
+
+    service.loadTodosFromLocalStorage();
+    service.clearCompletedTodos();
+
+    service.getTodos('all').subscribe(todos => {
+      expect(todos.length).toEqual(2);
+      doneFn();
+    })
+  })
 });
