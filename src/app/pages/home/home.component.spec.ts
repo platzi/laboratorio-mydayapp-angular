@@ -1,9 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { HomeComponent } from './home.component';
 import { TodosService } from 'src/app/services/todos-service.service';
-import { getById } from 'src/app/testing';
+import { getAllById, getById } from 'src/app/testing';
+import { Component, Input } from '@angular/core';
+import { Todo } from './todo.model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+
+@Component({
+  selector: 'app-todo-element',
+})
+class AppTodoElementComponent {
+  @Input() todo!: Todo;
+}
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -18,10 +33,11 @@ describe('HomeComponent', () => {
       'updateTodoTitle',
       'toggleTodoCompletedStatus',
       'removeTodo',
+      'clearCompletedTodos',
     ]);
     await TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [HomeComponent],
+      declarations: [HomeComponent, AppTodoElementComponent],
       providers: [
         {
           provide: TodosService,
@@ -66,7 +82,7 @@ describe('HomeComponent', () => {
       expect(todosService.addNewTodo).toHaveBeenCalledWith(todoTitle.trim());
       expect(component.todoInput).toEqual('');
       doneFn();
-    })
+    });
   });
 
   it('Test 4: do not create todo if input is empty', (doneFn) => {
@@ -84,7 +100,128 @@ describe('HomeComponent', () => {
     fixture.whenStable().then(() => {
       expect(todosService.addNewTodo).not.toHaveBeenCalled();
       doneFn();
-    })
+    });
   });
 
+  it('Test 5: show number of pending todos in the right format', fakeAsync(() => {
+    todosService.loadTodosFromLocalStorage.and.callFake;
+    todosService.getTodos.and.returnValue(
+      of([
+        {
+          id: 'id1',
+          title: 'title 1',
+          completed: false,
+        },
+        {
+          id: 'id2',
+          title: 'title 2',
+          completed: true,
+        },
+        {
+          id: 'id3',
+          title: 'title 3',
+          completed: false,
+        },
+        {
+          id: 'id4',
+          title: 'title 4',
+          completed: true,
+        },
+      ])
+    );
+
+    component.ngOnInit();
+    fixture.detectChanges();
+    tick();
+
+    let counter = getById(fixture, 'todo-counter').nativeElement as HTMLElement;
+
+    expect(counter.textContent).toContain('2 items');
+
+    todosService.getTodos.and.returnValue(
+      of([
+        {
+          id: 'id1',
+          title: 'title 1',
+          completed: false,
+        },
+      ])
+    );
+
+    component.ngOnInit();
+    fixture.detectChanges();
+    tick();
+
+    counter = getById(fixture, 'todo-counter').nativeElement as HTMLElement;
+
+    expect(counter.textContent).toContain('1 item');
+  }));
+});
+
+describe('HomeComponent: integration', () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FormsModule],
+      declarations: [HomeComponent, AppTodoElementComponent],
+      providers: [
+        TodosService,
+        LocalStorageService,
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('Test 1: Should be created', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('Test 2: clear completed todos', fakeAsync(() => {
+    const arr = JSON.stringify([
+      {
+        id: 'id1',
+        title: 'title 1',
+        completed: false,
+      },
+      {
+        id: 'id2',
+        title: 'title 2',
+        completed: true,
+      },
+      {
+        id: 'id3',
+        title: 'title 3',
+        completed: false,
+      },
+      {
+        id: 'id4',
+        title: 'title 4',
+        completed: true,
+      },
+    ]);
+    spyOn(localStorage, 'getItem').and.returnValue(arr);
+
+    component.ngOnInit();
+    fixture.detectChanges();
+    tick();
+
+    let todoElements = getAllById(fixture, 'todo-element');
+    const clearButton = getById(fixture, 'clear-button')
+      .nativeElement as HTMLButtonElement;
+
+    expect(todoElements.length).toEqual(4);
+
+    clearButton.click();
+
+    fixture.detectChanges();
+    tick();
+
+    todoElements = getAllById(fixture, 'todo-element');
+    expect(todoElements.length).toEqual(2);
+  }));
 });

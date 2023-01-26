@@ -36,4 +36,19 @@ export class HomeComponent implements OnInit {
   updateTodoTitle(todoId: string, newTitle: string): void {
     this._todosService.updateTodoTitle(todoId, newTitle);
   }
+
+  pendingTodos(todos: Todo[]): number {
+    return todos.filter(t => t.completed === false).length;
+  }
+
+  addSToLeftItemsMessage(todos: Todo[]): string {
+    const nPending = todos.filter(t => t.completed === false).length;
+    if (nPending === 1) return '';
+    return 's'
+  }
+
+  clearCompletedTodos(): void {
+    this._todosService.clearCompletedTodos();
+    this.todos$ = this._todosService.getTodos('all');
+  }
 }

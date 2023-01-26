@@ -24,6 +24,7 @@
             [todo]="todo"
             (updateCompletedStatus)="updateTodoCompletedStatus(todo.id!)"
             (updateTodoTitle)="updateTodoTitle(todo.id!, $event)"
+            data-testid="todo-element"
           ></app-todo-element>
           <!-- <li class="completed">
             <div class="view">
@@ -54,7 +55,12 @@
       <!-- This footer should be hidden by default and shown when there are todos -->
       <footer class="footer" data-testid="footer" *ngIf="todos.length > 0">
         <!-- This should be `0 items left` by default -->
-        <span class="todo-count"><strong>0</strong> item left</span>
+        <span class="todo-count" data-testid="todo-counter"
+          ><strong>{{ pendingTodos(todos) }}</strong> item{{
+            addSToLeftItemsMessage(todos)
+          }}
+          left</span
+        >
         <!-- Remove this if you don't implement routing -->
         <ul class="filters">
           <li>
@@ -68,7 +74,7 @@
           </li>
         </ul>
         <!-- Hidden if no completed items are left ↓ -->
-        <button class="clear-completed">Clear completed</button>
+        <button class="clear-completed" data-testid="clear-button" (click)="clearCompletedTodos()">Clear completed</button>
       </footer>
     </div>
   </ng-container>
