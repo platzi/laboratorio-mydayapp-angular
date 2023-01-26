@@ -38,10 +38,7 @@ describe('HomeComponent', () => {
     ]);
     await TestBed.configureTestingModule({
       imports: [FormsModule, AppRoutingModule],
-      declarations: [
-        HomeComponent,
-        AppTodoElementComponent,
-      ],
+      declarations: [HomeComponent, AppTodoElementComponent],
       providers: [
         {
           provide: TodosService,
@@ -159,6 +156,31 @@ describe('HomeComponent', () => {
     counter = getById(fixture, 'todo-counter').nativeElement as HTMLElement;
 
     expect(counter.textContent).toContain('1 item');
+  }));
+
+  it('Test 6: clear button must be hidden when there are no completed todos', fakeAsync(() => {
+    todosService.getTodos.and.returnValue(
+      of([
+        {
+          id: 'id1',
+          title: 'title 1',
+          completed: false,
+        },
+        {
+          id: 'id2',
+          title: 'title 2',
+          completed: false,
+        },
+      ])
+    );
+
+    component.ngOnInit();
+    fixture.detectChanges();
+    tick();
+
+    const clearButton = getById(fixture, 'clear-button');
+
+    expect(clearButton).toBeFalsy();
   }));
 });
 

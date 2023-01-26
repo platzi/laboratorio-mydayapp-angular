@@ -48,6 +48,10 @@ export class HomeComponent implements OnInit {
     return todos.filter((t) => t.completed === false).length;
   }
 
+  completedTodos(todos: Todo[]): number {
+    return todos.filter((t) => t.completed === true).length;
+  }
+
   addSToLeftItemsMessage(todos: Todo[]): string {
     const nPending = todos.filter((t) => t.completed === false).length;
     if (nPending === 1) return '';

@@ -82,6 +82,7 @@
         <button
           class="clear-completed"
           data-testid="clear-button"
+          *ngIf="completedTodos(todos) > 0"
           (click)="clearCompletedTodos()"
         >
           Clear completed
