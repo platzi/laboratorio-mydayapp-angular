@@ -15,7 +15,7 @@
       <label data-testid="label" (dblclick)="activateEditMode()"
         >{{ todo.title }}</label
       >
-      <button class="destroy"></button>
+      <button class="destroy" (click)="removeThisTodo()"></button>
     </div>
     <input
       class="edit"

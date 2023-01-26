@@ -52,6 +52,11 @@ export class HomeComponent implements OnInit {
     return todos.filter((t) => t.completed === true).length;
   }
 
+  removeTodo(todoId: string): void {
+    this._todosService.removeTodo(todoId);
+    this.todos$ = this._todosService.getTodos(this.todosFilter);
+  }
+
   addSToLeftItemsMessage(todos: Todo[]): string {
     const nPending = todos.filter((t) => t.completed === false).length;
     if (nPending === 1) return '';

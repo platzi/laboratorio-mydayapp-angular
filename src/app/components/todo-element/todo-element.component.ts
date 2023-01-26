@@ -12,6 +12,7 @@ export class TodoElementComponent {
   @Input() todo!: Todo;
   @Output() updateCompletedStatus: EventEmitter<any> = new EventEmitter();
   @Output() updateTodoTitle: EventEmitter<string> = new EventEmitter();
+  @Output() removeTodo: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -21,6 +22,10 @@ export class TodoElementComponent {
 
   activateEditMode(): void {
     this.isEditMode = true;
+  }
+
+  removeThisTodo(): void {
+    this.removeTodo.emit()
   }
 
   handleEditInput(event: KeyboardEvent): void {

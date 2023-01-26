@@ -17,43 +17,28 @@
   <ng-container *ngIf="todos$ | async as todos">
     <div class="container todoapp-wrapper">
       <!-- This section should be hidden by default and shown when there are todos -->
-      <section class="main" data-testid="main" *ngIf="todos.length > 0 || todosFilter !== 'all'">
+      <section
+        class="main"
+        data-testid="main"
+        *ngIf="todos.length > 0 || todosFilter !== 'all'"
+      >
         <ul class="todo-list">
           <app-todo-element
             *ngFor="let todo of todos"
             [todo]="todo"
             (updateCompletedStatus)="updateTodoCompletedStatus(todo.id!)"
             (updateTodoTitle)="updateTodoTitle(todo.id!, $event)"
+            (removeTodo)="removeTodo(todo.id!)"
             data-testid="todo-element"
           ></app-todo-element>
-          <!-- <li class="completed">
-            <div class="view">
-              <input class="toggle" type="checkbox" checked />
-              <label>Learn JavaScript</label>
-              <button class="destroy"></button>
-            </div>
-            <input class="edit" value="Learn JavaScript" />
-          </li>
-          <li>
-            <div class="view">
-              <input class="toggle" type="checkbox" />
-              <label>Buy a unicorn</label>
-              <button class="destroy"></button>
-            </div>
-            <input class="edit" value="Buy a unicorn" />
-          </li>
-          <li class="editing">
-            <div class="view">
-              <input class="toggle" type="checkbox" />
-              <label>Make dishes</label>
-              <button class="destroy"></button>
-            </div>
-            <input class="edit" value="Make dishes" />
-          </li> -->
         </ul>
       </section>
       <!-- This footer should be hidden by default and shown when there are todos -->
-      <footer class="footer" data-testid="footer" *ngIf="todos.length > 0 || todosFilter !== 'all'">
+      <footer
+        class="footer"
+        data-testid="footer"
+        *ngIf="todos.length > 0 || todosFilter !== 'all'"
+      >
         <!-- This should be `0 items left` by default -->
         <span class="todo-count" data-testid="todo-counter"
           ><strong>{{ pendingTodos(todos) }}</strong> item{{
