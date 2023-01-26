@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Todo } from 'src/app/pages/home/todo.model';
 
 @Component({
@@ -13,6 +13,7 @@ export class TodoElementComponent {
   @Output() updateCompletedStatus: EventEmitter<any> = new EventEmitter();
   @Output() updateTodoTitle: EventEmitter<string> = new EventEmitter();
   @Output() removeTodo: EventEmitter<any> = new EventEmitter();
+  @ViewChild('editInput') editInput!: ElementRef<HTMLInputElement>;
 
   constructor() { }
 
@@ -22,6 +23,9 @@ export class TodoElementComponent {
 
   activateEditMode(): void {
     this.isEditMode = true;
+    setTimeout(() => {
+      this.editInput.nativeElement.focus();
+    }, 100)
   }
 
   removeThisTodo(): void {

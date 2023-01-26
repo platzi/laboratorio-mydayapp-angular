@@ -21,6 +21,7 @@
       class="edit"
       [value]="todo.title"
       data-testid="edit-input"
+      #editInput
       (keyup)="handleEditInput($event)"
     />
   </li>
