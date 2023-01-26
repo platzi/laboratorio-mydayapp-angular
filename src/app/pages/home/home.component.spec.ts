@@ -12,6 +12,7 @@ import { getAllById, getById } from 'src/app/testing';
 import { Component, Input } from '@angular/core';
 import { Todo } from './todo.model';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-todo-element',
@@ -36,8 +37,11 @@ describe('HomeComponent', () => {
       'clearCompletedTodos',
     ]);
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [HomeComponent, AppTodoElementComponent],
+      imports: [FormsModule, AppRoutingModule],
+      declarations: [
+        HomeComponent,
+        AppTodoElementComponent,
+      ],
       providers: [
         {
           provide: TodosService,
@@ -164,12 +168,9 @@ describe('HomeComponent: integration', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [FormsModule, AppRoutingModule],
       declarations: [HomeComponent, AppTodoElementComponent],
-      providers: [
-        TodosService,
-        LocalStorageService,
-      ],
+      providers: [TodosService, LocalStorageService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);

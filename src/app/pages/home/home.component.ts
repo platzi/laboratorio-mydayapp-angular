@@ -2,23 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { TodosService } from 'src/app/services/todos-service.service';
 import { Todo } from './todo.model';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  todoInput: string = "";
+  todoInput: string = '';
   todos$: Observable<Todo[]> = new Observable();
-  constructor(private _todosService: TodosService) { }
+  todosFilter: 'all' | 'pending' | 'completed' = 'all';
+
+  constructor(
+    private _todosService: TodosService,
+    private _activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this._activatedRoute.url.subscribe(url => this.#setTodosFilterTypeFromPath(url[0].path))
     this.#getTodos();
   }
 
   #getTodos(): void {
     this._todosService.loadTodosFromLocalStorage();
-    this.todos$ = this._todosService.getTodos('all');
+    this.todos$ = this._todosService.getTodos(this.todosFilter);
   }
 
   addNewTodo(event: KeyboardEvent): void {
@@ -38,17 +45,25 @@ export class HomeComponent implements OnInit {
   }
 
   pendingTodos(todos: Todo[]): number {
-    return todos.filter(t => t.completed === false).length;
+    return todos.filter((t) => t.completed === false).length;
   }
 
   addSToLeftItemsMessage(todos: Todo[]): string {
-    const nPending = todos.filter(t => t.completed === false).length;
+    const nPending = todos.filter((t) => t.completed === false).length;
     if (nPending === 1) return '';
-    return 's'
+    return 's';
   }
 
   clearCompletedTodos(): void {
     this._todosService.clearCompletedTodos();
     this.todos$ = this._todosService.getTodos('all');
+  }
+
+  #setTodosFilterTypeFromPath(path: string): void {
+    if (path === '') {
+      this.todosFilter = 'all';
+      return;
+    }
+    this.todosFilter = path as 'pending' | 'completed';
   }
 }
