@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Todo } from '../pages/home/todo.model';
+import { Todo } from '../models/todo.model';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
