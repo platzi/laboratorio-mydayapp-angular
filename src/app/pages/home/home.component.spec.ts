@@ -10,7 +10,7 @@ import { HomeComponent } from './home.component';
 import { TodosService } from 'src/app/services/todos-service.service';
 import { getAllById, getById } from 'src/app/testing';
 import { Component, Input } from '@angular/core';
-import { Todo } from './todo.model';
+import { Todo } from '../../models/todo.model';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 

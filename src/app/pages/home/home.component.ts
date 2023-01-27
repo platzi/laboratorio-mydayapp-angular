@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodosService } from 'src/app/services/todos-service.service';
-import { Todo } from './todo.model';
+import { Todo } from '../../models/todo.model';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 

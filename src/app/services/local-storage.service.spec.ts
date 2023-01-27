@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Todo } from '../pages/home/todo.model';
+import { Todo } from '../models/todo.model';
 
 import { LocalStorageService } from './local-storage.service';
 
