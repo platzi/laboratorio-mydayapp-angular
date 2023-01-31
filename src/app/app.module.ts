@@ -6,16 +6,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
-import { PluralizePipe } from './pipes/pluralize.pipe';
 import { TaskComponent } from './components/task/task.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LayoutComponent,
-    PluralizePipe,
-    TaskComponent
+    TaskComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

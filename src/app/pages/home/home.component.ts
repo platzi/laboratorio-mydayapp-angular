@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   countCompleted = 0;
   countPending = 0;
   totalCount = 0;
-  inputControl = new FormControl('');
   filterName: string | null = '';
 
   constructor(
@@ -45,14 +44,6 @@ export class HomeComponent implements OnInit {
         })
       );
     });
-  }
-
-  addTask() {
-    const task = this.inputControl.value;
-    if (task?.trim()) {
-      this.tasksService.addTask(task.trim());
-    }
-    this.inputControl.setValue('');
   }
 
   clearCompleted() {
