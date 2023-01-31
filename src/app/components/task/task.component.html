@@ -1,0 +1,8 @@
+<li [ngClass]="editing ? 'editing' : checkboxControl.value ? 'completed' : ''">
+  <div class="view">
+    <input class="toggle" type="checkbox" [formControl]="checkboxControl" />
+    <label>{{ task.title}}</label>
+    <button class="destroy" (click)="destroyTask()"></button>
+  </div>
+  <input class="edit" [formControl]="editControl" />
+</li>
