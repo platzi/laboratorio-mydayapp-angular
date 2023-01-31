@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/all',
+        component: HomeComponent,
         pathMatch: 'full',
       },
       {

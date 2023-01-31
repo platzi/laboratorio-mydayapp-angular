@@ -27,4 +27,18 @@ export class TaskComponent implements OnInit {
   destroyTask() {
     this.tasksService.removeTask(this.task.id);
   }
+
+  toggleEdit(state: boolean) {
+    this.editing = state;
+    this.editControl.setValue(this.task.title);
+  }
+
+  editTask() {
+    let value = this.editControl.value;
+    if (value?.trim()) {
+      this.tasksService.editTask(this.task.id, value.trim());
+    } else {
+      this.destroyTask();
+    }
+  }
 }
