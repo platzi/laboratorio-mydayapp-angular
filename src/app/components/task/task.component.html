@@ -1,0 +1,8 @@
+<li [ngClass]="{'completed' : checkboxControl.value, 'editing': editing}">
+  <div class="view">
+    <input class="toggle" type="checkbox" [formControl]="checkboxControl" />
+    <label (dblclick)="toggleEdit(true)">{{ task.title}}</label>
+    <button class="destroy" (click)="destroyTask()"></button>
+  </div>
+  <input class="edit" [formControl]="editControl" (keydown.escape)="toggleEdit(false)" (keydown.enter)="editTask()" />
+</li>
