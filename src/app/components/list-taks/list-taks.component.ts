@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Tarea } from 'src/app/interfaces/task.interface';
 import { TaskListenerService } from '../../services/task-listener.service';
 
@@ -8,15 +9,20 @@ import { TaskListenerService } from '../../services/task-listener.service';
   styleUrls: ['./list-taks.component.css'],
 })
 export class ListTaksComponent implements OnInit {
-  public listTasks!: Tarea[];
+  public listTasks: Tarea[] = [];
   public isEdit: boolean = false;
   public idEdit: string = '';
   public valueTask: string = '';
+  public path: string = '';
 
-  constructor(private tasksListenerService: TaskListenerService) {}
+  constructor(
+    private tasksListenerService: TaskListenerService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.tasksListenerService.getListTasks().subscribe((resp) => {
+    this.path = location.pathname;
+    this.tasksListenerService.getListTasks().subscribe((resp: Tarea[]) => {
       this.listTasks = resp;
     });
   }

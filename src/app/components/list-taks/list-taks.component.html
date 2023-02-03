@@ -1,6 +1,6 @@
-<ul class="todo-list">
+<ul class="todo-list" *ngIf="listTasks && listTasks.length > 0">
   <li
-    *ngFor="let task of listTasks"
+    *ngFor="let task of listTasks | filterData : path"
     [ngClass]="{
       completed: task.completed,
       editing: isEdit && task.id === idEdit
@@ -25,20 +25,3 @@
     />
   </li>
 </ul>
-<!--  
-     <li>
-    <div class="view">
-      <input class="toggle" type="checkbox" />
-      <label>Buy a unicorn</label>
-      <button class="destroy"></button>
-    </div>
-    <input class="edit" value="Buy a unicorn" />
-  </li>
-  <li class="editing">
-    <div class="view">
-      <input class="toggle" type="checkbox" />
-      <label>Make dishes</label>
-      <button class="destroy"></button>
-    </div>
-    <input class="edit" value="Make dishes" />
-  </li> -->

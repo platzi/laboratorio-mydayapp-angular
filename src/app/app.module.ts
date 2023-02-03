@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ListTaksComponent } from './components/list-taks/list-taks.component';
 import { FormsModule } from '@angular/forms';
+import { FilterDataPipe } from './pipes/filter-data.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     HeaderComponent,
     ListTaksComponent,
+    FilterDataPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
