@@ -5,8 +5,6 @@ import { Tarea } from '../interfaces/task.interface';
   providedIn: 'root',
 })
 export class TaskService {
-  constructor() {}
-
   getListTask() {
     const list = localStorage.getItem('mydayapp-angular');
     const listTask = list ? JSON.parse(list) : [];

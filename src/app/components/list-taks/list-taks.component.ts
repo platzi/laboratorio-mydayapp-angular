@@ -31,7 +31,7 @@ export class ListTaksComponent implements OnInit {
     let taskTemp = { ...task };
     taskTemp.completed = taskTemp.completed ? false : true;
     let listTemp = [...this.listTasks];
-    let index = listTemp.findIndex((element) => element.id === taskTemp.id);
+    const index = this.searchIndex(taskTemp.id, listTemp);
     listTemp[index] = taskTemp;
     this.tasksListenerService.setListTaks(listTemp);
   }
@@ -51,7 +51,7 @@ export class ListTaksComponent implements OnInit {
     }
     if (code === 'Enter' && this.valueTask.length > 0) {
       let listTemp = [...this.listTasks];
-      let index = listTemp.findIndex((element) => element.id === this.idEdit);
+      const index = this.searchIndex(this.idEdit, listTemp);
       listTemp[index].title = this.valueTask.trim();
       this.tasksListenerService.setListTaks(listTemp);
       this.isEdit = false;
@@ -61,8 +61,13 @@ export class ListTaksComponent implements OnInit {
 
   eliminarTask(id: string) {
     let listTemp = [...this.listTasks];
-    let index = listTemp.findIndex((element) => element.id === id);
+    const index = this.searchIndex(id, listTemp);
     listTemp.splice(index, 1);
     this.tasksListenerService.setListTaks(listTemp);
+  }
+
+  searchIndex(id: string, list: Tarea[]) {
+    const index = list.findIndex((element) => element.id === id);
+    return index;
   }
 }
