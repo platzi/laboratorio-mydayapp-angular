@@ -12,10 +12,12 @@ export class FooterComponent implements OnInit {
   public countList: number = 0;
   public labelItems: string = 'items';
   public isTaskComplete: boolean = false;
+  public path: string = '';
 
   constructor(private tasksListenerService: TaskListenerService) {}
 
   ngOnInit(): void {
+    this.path = location.pathname;
     this.tasksListenerService.getListTasks().subscribe((resp: Tarea[]) => {
       this.listTasks = resp;
       this.countList = this.listTasks.length;

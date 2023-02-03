@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'completed',
     component: HomeComponent,
   },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 @NgModule({
