@@ -229,6 +229,7 @@ test.describe('Persistence', () => {
 
     // Now reload.
     await page.reload();
+    //Error over here
     await expect(todoItems).toHaveText([TODO_ITEMS[0], TODO_ITEMS[1]]);
     await expect(todoItems).toHaveClass(['completed', '']);
   });
