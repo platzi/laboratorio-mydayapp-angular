@@ -1,29 +1,19 @@
-import { TODOStatus } from "../services/todo.service";
-
 export class TODO {
 
   private _id: number;
-  private _status: TODOStatus;
-  private _description: string;
+  private _completed: boolean;
+  private _title: string;
   private _editing: boolean;
 
-  constructor(description: string, initialStatus: TODOStatus = TODOStatus.pending) {
-    this._id = new Date().getTime();
-    this._status = initialStatus;
-    this._description = description;
+  constructor(title: string, completed: boolean = false) {
+    this._id = new Date().getTime() * Math.random();
+    this._title = title;
     this._editing = false;
+    this._completed = completed;
   }
 
   get id () {
     return this._id;
-  }
-
-  get isCompleted() {
-    return this._status;
-  }
-
-  get status() {
-    return this._status;
   }
 
   get isEditing() {
@@ -34,19 +24,27 @@ export class TODO {
     this._editing = value;
   }
 
-  get description() {
-    return this._description;
+  get title() {
+    return this._title;
   }
 
-  set toogleStatus(value: TODOStatus) {
-    this._status = value;
+  set title(value: string) {
+    this._title = value.trim();
+  }
+
+  get completed() {
+    return this._completed;
+  }
+
+  set completed(value: boolean) {
+    this._completed = value;
   }
 
   getValues() {
     return {
       id: this._id,
-      description: this._description,
-      status: this._status
+      title: this._title,
+      completed: this._completed
     }
   }
 }

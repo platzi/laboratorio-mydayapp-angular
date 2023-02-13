@@ -1,0 +1,11 @@
+<ul class="todo-list">
+  <app-todo
+    *ngFor="let todo of todos; let i = index"
+    [todo]="todo"
+    (updateStatus)="updateStatus.emit(todo)"
+    (updateTodo)="updateTodo.emit(todo)"
+    (cancelEdit)="cancelEdit.emit()"
+    (deleteTodo)="deleteTodo.emit(i)"
+  >
+  </app-todo>
+</ul>

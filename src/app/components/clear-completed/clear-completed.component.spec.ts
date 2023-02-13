@@ -4,7 +4,7 @@ import { TodoService } from 'src/app/services/todo.service';
 
 import { ClearCompletedComponent } from './clear-completed.component';
 
-fdescribe('ClearCompletedComponent', () => {
+describe('ClearCompletedComponent', () => {
   let component: ClearCompletedComponent;
   let fixture: ComponentFixture<ClearCompletedComponent>;
   let todoService: jasmine.SpyObj<TodoService>;

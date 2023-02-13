@@ -1,0 +1,19 @@
+<footer class="footer" >
+  <app-todo-count
+    [quantity]="todoService.pendingTodos"
+  >
+  </app-todo-count>
+
+  <ul class="filters">
+    <app-footer-link
+      *ngFor="let route of routes"
+      [data]="route"
+    >
+    </app-footer-link>
+  </ul>
+
+  <app-clear-completed
+    *ngIf="todoService.completedTodos > 0"
+  >
+  </app-clear-completed>
+</footer>

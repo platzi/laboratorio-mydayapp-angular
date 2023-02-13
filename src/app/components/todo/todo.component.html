@@ -1,0 +1,24 @@
+<li
+  [class.completed]="todo.completed"
+  [class.editing]="todo.isEditing"
+  (keyup.escape)="cancelEdit.emit()"
+>
+  <div class="view">
+    <input
+      class="toggle"
+      type="checkbox"
+      [ngModel]="todo.completed"
+      (change)="updateStatus.emit()"
+    />
+    <label (dblclick)="todo.isEditing = true">{{ todo.title }}</label>
+    <button class="destroy" (click)="deleteTodo.emit()"></button>
+  </div>
+  <input
+    *ngIf="todo.isEditing"
+    class="edit"
+    [(ngModel)]="todo.title"
+    [autofocus]="true"
+    (keyup.enter)="updateTodo.emit()"
+    appAutofocus
+  />
+</li>
