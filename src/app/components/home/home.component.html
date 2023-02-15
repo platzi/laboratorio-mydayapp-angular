@@ -1,0 +1,23 @@
+<section class="todoapp">
+  <app-main
+    (addTaskEvent)="addTask($event)"
+  ></app-main>
+
+  <div *ngIf="tasksBackup.length > 0" class="container todoapp-wrapper">
+
+    <app-task
+      [tasks]="tasks"
+      (editTaskEvent)="editTask($event)"
+      (toggleTaskEvent)="toggleTask($event)"
+      (destroyTaskEvent)="destroyTask($event)"
+    ></app-task>
+
+    <app-footer
+      [setTasks]="tasks"
+      [filterSelected]="filterSelected"
+      (clearCompletedEvent)="clearCompletedEvent($event)"
+    ></app-footer>
+
+  </div>
+
+</section>
