@@ -10,6 +10,7 @@
     class="edit"
     type="text"
     [formControl]="txtInput"
+    (keyup.escape)="finishEditing()"
     (blur)="finishEditing()"
     #inputControl
   />
