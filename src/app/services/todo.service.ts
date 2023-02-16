@@ -40,6 +40,13 @@ export class TodoService {
     this.save();
   }
 
+  editTodo(id: string, title: string) {
+    this._todos = this._todos.map((todo) =>
+      todo.id === id ? { ...todo, title } : todo
+    );
+    this.save();
+  }
+
   private save(): void {
     this._todos$.next(this._todos);
     this.storageService.setTodos(this._todos);

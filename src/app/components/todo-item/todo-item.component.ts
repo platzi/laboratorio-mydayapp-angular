@@ -45,14 +45,8 @@ export class TodoItemComponent implements OnInit {
     if (value === this.todo.title) {
       return;
     }
-
     console.log('finishEditing');
-    // this.store.dispatch(
-    //   actions.edit({
-    //     id: this.todo.id,
-    //     title: this.txtInput.value,
-    //   })
-    // );
+    this.todoService.editTodo(this.todo.id, value);
   }
 
   removeTodo() {
