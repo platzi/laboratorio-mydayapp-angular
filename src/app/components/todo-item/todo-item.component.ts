@@ -22,8 +22,8 @@ export class TodoItemComponent implements OnInit {
   ngOnInit(): void {
     this.chkCompleted = new FormControl(this.todo.completed);
     this.txtInput = new FormControl(this.todo.title, Validators.required);
-    this.chkCompleted.valueChanges.subscribe((tglVal) => {
-      console.log(tglVal);
+    this.chkCompleted.valueChanges.subscribe((toggle) => {
+      this.todo.completed = toggle;
      });
   }
 
