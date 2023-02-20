@@ -1,3 +1,5 @@
+export type todoFilter = 'all' | 'completed' | 'pending';
+
 export class Todo {
   public id: string;
   public title: string;

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { map, tap } from 'rxjs/operators';
 import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
@@ -6,9 +7,19 @@ import { TodoService } from 'src/app/services/todo.service';
   templateUrl: './footer.component.html',
   styles: [],
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   todos$ = this.todoService.getTodos();
-  pendingTodos$ = this.todoService.getPendingTodos();
+  pendingTodos: number = 0;
 
   constructor(private todoService: TodoService) {}
+
+  ngOnInit(): void {
+    this.todoService
+      .getPendingTodos()
+      .subscribe((todos) => (this.pendingTodos = todos.length));
+  }
+
+  clearCompleted() {
+    this.todoService.clearCompleted();
+  }
 }

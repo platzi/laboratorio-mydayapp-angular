@@ -1,10 +1,10 @@
 <ng-container *ngIf="todos$ | async as todos">
   <footer class="footer" *ngIf="todos.length > 0">
     <!-- This should be `0 items left` by default -->
-    <span class="todo-count" *ngIf="pendingTodos$ | async as pendingTodos">
-      <strong>{{ pendingTodos.length }}</strong>
-      <span *ngIf="pendingTodos.length === 1; else multipleTodos"> item </span>
-      <ng-template #multipleTodos> items</ng-template> left
+    <span class="todo-count" >
+      <strong>{{ pendingTodos }}</strong>
+      <span *ngIf="pendingTodos !== 1; else singularTodo"> items </span>
+      <ng-template #singularTodo> item</ng-template> left
     </span>
     <!-- Remove this if you don't implement routing -->
     <ul class="filters">
@@ -19,6 +19,6 @@
       </li>
     </ul>
     <!-- Hidden if no completed items are left ↓ -->
-    <button class="clear-completed">Clear completed</button>
+    <button class="clear-completed" (click)="clearCompleted()">Clear completed</button>
   </footer>
 </ng-container>
