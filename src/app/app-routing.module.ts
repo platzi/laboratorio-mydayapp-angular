@@ -7,8 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
+  {
+    path: ':filter',
+    component: HomeComponent,
+  },
 ];
 
 @NgModule({

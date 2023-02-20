@@ -1,12 +1,7 @@
 <ng-container *ngIf="todos$ | async as todos">
   <section class="main" *ngIf="todos.length > 0">
-    <ul class="todo-list">
-      <!-- TODO: CREATE FILTER PIPE
-        <app-todo-item
-    *ngFor="let todo of todos | filterTodo:currentFilter"
-    [todo]="todo"
-  ></app-todo-item> -->
-      <app-todo-item *ngFor="let todo of todos" [todo]="todo"></app-todo-item>
+    <ul class="todo-list" *ngIf="currentFilter$ | async as currentFilter">
+      <app-todo-item *ngFor="let todo of todos | filterTodos:currentFilter" [todo]="todo"></app-todo-item>
     </ul>
   </section>
 </ng-container>

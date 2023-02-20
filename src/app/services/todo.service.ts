@@ -11,7 +11,7 @@ export class TodoService {
   private _todos$ = new BehaviorSubject<Todo[]>(this._todos);
 
   private _filter: todoFilter = 'all';
-  private _filters$ = new BehaviorSubject<todoFilter>(this._filter);
+  private _filter$ = new BehaviorSubject<todoFilter>(this._filter);
 
   constructor(private storageService: StorageService) {}
 
@@ -26,8 +26,8 @@ export class TodoService {
     return this._todos$.asObservable();
   }
 
-  getFilters() {
-    return this._filters$.asObservable();
+  getFilter() {
+    return this._filter$.asObservable();
   }
 
   addTodo(todo: Todo) {
@@ -69,6 +69,13 @@ export class TodoService {
   clearCompleted() {
     this._todos = this._todos.filter((todo) => !todo.completed);
     this.save();
+  }
+
+  setFilter(filter: todoFilter) {
+    this._filter = filter;
+    this._filter$.next(filter);
+    this._todos$.next(this._todos);
+    console.log('setFilter from service');
   }
 
   private save(): void {

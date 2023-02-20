@@ -9,6 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { FilterTodosPipe } from './pipes/filter-todos.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
     TodoItemComponent,
     HeaderComponent,
     FooterComponent,
+    FilterTodosPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
