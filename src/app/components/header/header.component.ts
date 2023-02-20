@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Todo } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
@@ -7,7 +7,7 @@ import { TodoService } from 'src/app/services/todo.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
   txtInput!: FormControl;

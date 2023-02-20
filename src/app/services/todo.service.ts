@@ -15,13 +15,6 @@ export class TodoService {
 
   constructor(private storageService: StorageService) {}
 
-  initApp(): void {
-    this._todos.push(new Todo('hello world 1'));
-    this._todos.push(new Todo('hello world 2'));
-    this._todos.push(new Todo('hello world 3'));
-    this.save();
-  }
-
   getTodos() {
     return this._todos$.asObservable();
   }
@@ -73,9 +66,13 @@ export class TodoService {
 
   setFilter(filter: todoFilter) {
     this._filter = filter;
-    this._filter$.next(filter);
+    this._filter$.next(this._filter);
     this._todos$.next(this._todos);
-    console.log('setFilter from service');
+  }
+
+  readStorage() {
+    this._todos = this.storageService.getTodos();
+    this.save();
   }
 
   private save(): void {

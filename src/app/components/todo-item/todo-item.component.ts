@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Todo } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
@@ -6,7 +6,7 @@ import { TodoService } from 'src/app/services/todo.service';
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
-  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoItemComponent implements OnInit {
   @Input() todo!: Todo;
@@ -16,7 +16,7 @@ export class TodoItemComponent implements OnInit {
   txtInput!: FormControl;
   isEditing: boolean = false;
 
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.chkCompleted = new FormControl(this.todo.completed);
@@ -29,9 +29,11 @@ export class TodoItemComponent implements OnInit {
   startEdit() {
     this.isEditing = true;
     this.txtInput.setValue(this.todo.title);
-    setTimeout(() => {
-      this.txtInputControl.nativeElement.select();
-    }, 1);
+    this.cdRef.detectChanges();
+    this.txtInputControl.nativeElement.select();
+    // setTimeout(() => {
+    //   this.txtInputControl.nativeElement.select();
+    // }, 1);
   }
 
   finishEditing() {
@@ -40,6 +42,7 @@ export class TodoItemComponent implements OnInit {
     let value = this.txtInput.value.trim();
     if (value === this.todo.title) return;
     this.todoService.editTodo(this.todo.id, value);
+    this.cdRef.detectChanges();
   }
 
   removeTodo() {

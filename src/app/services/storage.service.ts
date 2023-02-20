@@ -10,14 +10,14 @@ export class StorageService {
   constructor() {}
 
   getTodos(): Todo[] {
-    return JSON.parse(localStorage.getItem(this._storageKey) as any) || [];
+    return JSON.parse(localStorage.getItem(this._storageKey) as any) || '[]';
   }
 
   setTodos(todos: Todo[]): void {
     localStorage.setItem(this._storageKey, JSON.stringify(todos));
   }
 
-  clear(): void{
-    localStorage.clear();
+  clear(): void {
+    localStorage.setItem(this._storageKey, '');
   }
 }
