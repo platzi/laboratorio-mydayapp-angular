@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
@@ -6,12 +6,9 @@ import { TodoService } from 'src/app/services/todo.service';
   templateUrl: './footer.component.html',
   styles: [],
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   todos$ = this.todoService.getTodos();
+  pendingTodos$ = this.todoService.getPendingTodos();
 
   constructor(private todoService: TodoService) {}
-
-  ngOnInit(): void {
-    console.log('footer');
-  }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { Todo } from '../models/todo.model';
 import { StorageService } from './storage.service';
 
@@ -9,6 +9,9 @@ import { StorageService } from './storage.service';
 export class TodoService {
   private _todos: Todo[] = [];
   private _todos$ = new BehaviorSubject<Todo[]>(this._todos);
+
+  private _filter = ['all', 'completed', 'pending'];
+  private _filter$ = new BehaviorSubject<string>('all');
 
   constructor(private storageService: StorageService) {}
 
@@ -38,6 +41,7 @@ export class TodoService {
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
     this.save();
+    console.log('toggle from service');
   }
 
   editTodo(id: string, title: string) {
@@ -45,6 +49,12 @@ export class TodoService {
       todo.id === id ? { ...todo, title } : todo
     );
     this.save();
+  }
+
+  getPendingTodos() {
+    return this.getTodos().pipe(
+      map((todos) => todos.filter((todo) => !todo.completed))
+    );
   }
 
   private save(): void {

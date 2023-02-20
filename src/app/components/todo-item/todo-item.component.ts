@@ -23,7 +23,7 @@ export class TodoItemComponent implements OnInit {
     this.chkCompleted = new FormControl(this.todo.completed);
     this.txtInput = new FormControl(this.todo.title, Validators.required);
     this.chkCompleted.valueChanges.subscribe((toggle) => {
-      this.todo.completed = toggle;
+      this.todoService.toggle(this.todo.id);
      });
   }
 
