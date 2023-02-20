@@ -60,6 +60,12 @@ export class TodoService {
     );
   }
 
+  getCompletedTodos() {
+    return this.getTodos().pipe(
+      map((todos) => todos.filter((todo) => todo.completed))
+    );
+  }
+
   clearCompleted() {
     this._todos = this._todos.filter((todo) => !todo.completed);
     this.save();
