@@ -23,50 +23,38 @@
             [index]="i">
           </app-task>
         </ng-container>
-        <!-- <li class="completed">
-          <div class="view">
-            <input class="toggle" type="checkbox" checked />
-            <label>Learn JavaScript</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Learn JavaScript" />
-        </li>
-        <li>
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Buy a unicorn" />
-        </li>
-        <li class="editing">
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Make dishes</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Make dishes" />
-        </li> -->
       </ul>
     </section>
     <!-- This footer should be hidden by default and shown when there are todos -->
-    <footer class="footer" *ngIf="tasks.length > 0">
+    <footer class="footer" *ngIf="getTotal() > 0">
       <!-- This should be `0 items left` by default -->
       <span class="todo-count"><strong>{{getPending()}}</strong> item<span *ngIf="getPending() != 1">s</span> left</span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a routerLink="/" class="selected">All</a>
+          <a
+            routerLink="/all"
+            routerLinkActive="selected"
+            (isActiveChange)="filterTasks('all')">All</a>
         </li>
         <li>
-          <a routerLink="/pending">Pending</a>
+          <a
+            routerLink="/pending"
+            routerLinkActive="selected"
+            (isActiveChange)="filterTasks('pending')">Pending</a>
         </li>
         <li>
-          <a routerLink="/completed">Completed</a>
+          <a
+            routerLink="/completed"
+            routerLinkActive="selected"
+            (isActiveChange)="filterTasks('completed')">Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
-      <button class="clear-completed" (click)="eraseCompleted()">Clear completed</button>
+      <button
+        *ngIf="getCompleted() > 0"
+        class="clear-completed"
+        (click)="eraseCompleted()">Clear completed</button>
     </footer>
   </div>
 </section>
