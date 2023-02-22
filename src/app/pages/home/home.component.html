@@ -19,6 +19,7 @@
       <ul class="todo-list">
         <ng-container *ngFor="let task of tasks; index as i">
           <app-task
+            (updateTasks)="updateTasks()"
             [task]="task"
             [index]="i">
           </app-task>
@@ -33,21 +34,18 @@
       <ul class="filters">
         <li>
           <a
-            routerLink="/all"
-            routerLinkActive="selected"
-            (isActiveChange)="filterTasks('all')">All</a>
+            routerLink='/'
+            [class.selected]="currentRoute === 'all'">All</a>
         </li>
         <li>
           <a
-            routerLink="/pending"
-            routerLinkActive="selected"
-            (isActiveChange)="filterTasks('pending')">Pending</a>
+            routerLink='/pending'
+            routerLinkActive="selected">Pending</a>
         </li>
         <li>
           <a
-            routerLink="/completed"
-            routerLinkActive="selected"
-            (isActiveChange)="filterTasks('completed')">Completed</a>
+            routerLink='/completed'
+            routerLinkActive="selected">Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->

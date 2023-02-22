@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import { TaskManagerService } from 'src/app/services/task-manager.service';
 
@@ -16,6 +16,7 @@ export class TaskComponent implements OnInit {
     title: '',
     completed: false
   }
+  @Output() updateTasks: EventEmitter<any> = new EventEmitter();
 
   constructor(private taskManager: TaskManagerService) { }
 
@@ -28,6 +29,7 @@ export class TaskComponent implements OnInit {
 
   removeTask() {
     this.taskManager.removeTask(this.index);
+    this.updateTasks.emit();
   }
 
   updateTitle() {

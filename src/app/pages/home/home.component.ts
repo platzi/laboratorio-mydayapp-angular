@@ -17,8 +17,17 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private taskManager: TaskManagerService) {
       this.tasks = this.taskManager.getTasks();
-      this.subs = this.route.url.subscribe(url => {
-        this.currentRoute = url[0].path;
+      this.sub = this.route.url.subscribe(url => {
+        console.log("y entonces: ", url);
+        if (url.length === 0) {
+          this.currentRoute = 'all';
+          console.log(this.currentRoute);
+        } else {
+          this.currentRoute = url[0].path;
+        }
+        // console.log(url);
+        // this.currentRoute = url[0].path;
+        console.log(this.currentRoute);
         this.filterTasks(this.currentRoute);
       });
     }
@@ -47,24 +56,24 @@ export class HomeComponent implements OnInit {
     this.filterTasks(this.currentRoute);
   }
 
-  filterTasks(filter: string) {
+  updateTasks() {
+    this.filterTasks(this.currentRoute);
+  }
 
+  filterTasks(filter: string) {
     switch (filter) {
       case 'all':
         this.tasks = this.taskManager.getTasks();
-        console.log(this.tasks);
         break;
       case 'pending':
         this.tasks = this.taskManager.getTasks().filter(task => !task.completed);
-        console.log(this.tasks);
+        console.log("estoy en peding", this.tasks);
         break;
       case 'completed':
         this.tasks = this.taskManager.getTasks().filter(task => task.completed);
-        console.log(this.tasks);
         break;
       default:
         this.tasks = this.taskManager.getTasks();
-         console.log("default switch");
         break;
     }
   }
