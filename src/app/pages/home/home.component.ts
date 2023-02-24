@@ -49,7 +49,6 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     switch (this.classFilter) {
       case 'pending':
         this.filterPending = true;
