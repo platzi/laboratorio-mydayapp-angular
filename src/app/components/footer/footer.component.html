@@ -1,0 +1,31 @@
+<footer class="footer" *ngIf="countList > 0">
+  <!-- This should be `0 items left` by default -->
+  <span class="todo-count"
+    ><strong>{{ countList }}</strong> {{ labelItems }} left</span
+  >
+  <!-- Remove this if you don't implement routing -->
+  <ul class="filters">
+    <li>
+      <a
+        routerLink="/"
+        routerLinkActive="selected"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >All</a
+      >
+    </li>
+    <li>
+      <a routerLink="/pending" routerLinkActive="selected">Pending</a>
+    </li>
+    <li>
+      <a routerLink="/completed" routerLinkActive="selected">Completed</a>
+    </li>
+  </ul>
+  <!-- Hidden if no completed items are left ↓ -->
+  <button
+    *ngIf="isTaskComplete"
+    class="clear-completed"
+    (click)="clearComplete()"
+  >
+    Clear completed
+  </button>
+</footer>

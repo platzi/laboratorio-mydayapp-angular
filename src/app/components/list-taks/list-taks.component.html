@@ -1,0 +1,27 @@
+<ul class="todo-list" *ngIf="listTasks && listTasks.length > 0">
+  <li
+    *ngFor="let task of listTasks | filterData : path"
+    [ngClass]="{
+      completed: task.completed,
+      editing: isEdit && task.id === idEdit
+    }"
+  >
+    <div class="view">
+      <input
+        class="toggle"
+        type="checkbox"
+        [checked]="task.completed"
+        (click)="cambiarEstadoTask(task)"
+      />
+      <label (click)="editarTask(task)">{{ task.title }}</label>
+      <button class="destroy" (click)="eliminarTask(task.id)"></button>
+    </div>
+    <input
+      class="edit"
+      [value]="valueTask"
+      autofocus
+      [(ngModel)]="valueTask"
+      (keydown)="actualizarTask($event)"
+    />
+  </li>
+</ul>
