@@ -1,0 +1,38 @@
+<section class="main">
+    <ul class="todo-list">
+        <!-- <li class="completed">
+            <div class="view">
+                <input class="toggle" type="checkbox" checked />
+                <label>Learn JavaScript</label>
+                <button class="destroy"></button>
+            </div>
+            <input class="edit" value="Learn JavaScript" />
+        </li>
+        <li>
+            <div class="view">
+                <input class="toggle" type="checkbox" />
+                <label>Buy a unicorn</label>
+                <button class="destroy"></button>
+            </div>
+            <input class="edit" value="Buy a unicorn" />
+        </li>
+        <li class="editing">
+            <div class="view">
+                <input class="toggle" type="checkbox" />
+                <label>Make dishes</label>
+                <button class="destroy"></button>
+            </div>
+            <input class="edit" value="Make dishes" />
+        </li> -->
+        <ng-container *ngFor="let taskObject of taskList">
+            <li [ngClass]="{'completed': taskObject.completed}" (keypress)="editEvent($event)" >
+                <div class="view">
+                    <input class="toggle" type="checkbox" (click)="changeState($event)" [attr.data-id]="taskObject.id" [id]="taskObject.id" [checked]="taskObject.completed">
+                    <label (dblclick)="editState($event)">{{taskObject.title}}</label>
+                    <button class="destroy" (click)="deleteElement(taskObject.id)"></button>
+                </div>
+                <input class="edit" [value]="taskObject.title" (cancel)="ups()" (keypress)="editElement($event,taskObject.id)"/>
+            </li>
+        </ng-container>
+    </ul>
+</section>
