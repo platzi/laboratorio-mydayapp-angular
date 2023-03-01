@@ -1,0 +1,27 @@
+<ng-container *ngIf="todos$ | async as todos">
+  <footer class="footer" *ngIf="todos.length > 0">
+    <!-- This should be `0 items left` by default -->
+    <span class="todo-count" *ngIf="pendingTodos$ | async as pendingTodos">
+      <strong>{{ pendingTodos.length }}</strong>
+      <span *ngIf="pendingTodos.length !== 1; else singularTodo"> items </span>
+      <ng-template #singularTodo> item</ng-template> left
+    </span>
+    <!-- Remove this if you don't implement routing -->
+    <ul class="filters" *ngIf="filter$ | async as currentFilter">
+    <li *ngFor="let filter of filters">
+      <a routerLink="/{{filter}}" [class.selected]="filter === currentFilter">
+        {{ filter | titlecase }}
+      </a>
+    </li>
+  </ul>
+    <!-- Hidden if no completed items are left ↓ -->
+    <ng-container *ngIf="completedTodos$ | async as completedTodos">
+      <button *ngIf="completedTodos.length > 0"
+              class="clear-completed"
+              (click)="clearCompleted()"
+              >
+              Clear completed
+      </button>
+    </ng-container>
+  </footer>
+</ng-container>
