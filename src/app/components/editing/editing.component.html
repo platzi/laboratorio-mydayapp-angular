@@ -1,0 +1,8 @@
+<li class="editing">
+  <input
+    class="edit"
+    appAutofocus
+    [(ngModel)]="todo.title"
+    (keydown.escape)="cancelEdition()"
+    (keydown.enter)="updateTitle()"/>
+</li>

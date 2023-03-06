@@ -1,0 +1,15 @@
+<li [ngClass]="{'completed': todo.completed, 'editing': editing }">
+  <div class="view">
+    <input 
+      class="toggle" 
+      type="checkbox" 
+      [checked]="todo.completed" 
+      (click)="toggleTask()"/>
+    <label (dblclick)="editing = true">{{ todo.title }}</label>
+    <button class="destroy"></button>
+  </div>
+  <app-editing [todo]="todo" 
+             *ngIf="editing"
+             (cambioVariable)="actualizarValor($event)"></app-editing>
+
+</li>
