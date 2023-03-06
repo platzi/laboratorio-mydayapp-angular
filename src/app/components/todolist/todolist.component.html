@@ -1,0 +1,5 @@
+<ul class="todo-list" *ngIf="todos.length > 0">
+    <ng-container *ngFor="let todo of todos; index as i">
+      <app-todoitem [todo]="todo"></app-todoitem>
+      </ng-container>      
+</ul>

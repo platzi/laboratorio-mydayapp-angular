@@ -1,0 +1,11 @@
+<ul class="filters">
+  <li>
+    <a routerLink="/" [class.selected]="currentRoute === 'all'">All</a>
+  </li>
+  <li>
+    <a routerLink="/pending" routerLinkActive="selected">Pending</a>
+  </li>
+  <li>
+    <a routerLink="/completed" routerLinkActive="selected">Completed</a>
+  </li>
+</ul>

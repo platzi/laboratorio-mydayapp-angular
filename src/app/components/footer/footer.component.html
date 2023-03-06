@@ -1,0 +1,8 @@
+<footer class="footer">
+  <!-- This should be `0 items left` by default -->
+  <app-todocount [count]="pending"></app-todocount>
+  <!-- Remove this if you don't implement routing -->
+  <app-todofilter></app-todofilter>
+  <!-- Hidden if no completed items are left ↓ -->
+  <app-clearcompleted *ngIf="completed > 0"></app-clearcompleted>
+</footer>
