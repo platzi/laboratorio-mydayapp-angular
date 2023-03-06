@@ -30,8 +30,6 @@ export class TodoService {
 
       this.updateSharedData(todos)
       this.storageService.save(todos);
-
-//      this.updateCounters();
     }
   }
 
@@ -41,19 +39,10 @@ export class TodoService {
     this.sharedService.getTodosData().subscribe(todos => {
       this.storageService.save(todos);
     });
-
-//    this.tasks[index].completed = !this.tasks[index].completed;
-//    this.updateCounters();
-//    this.saveLocalData();
   }
 
   updateSharedData(todos: Array<Todo>) {
     this.sharedService.setTodosData(todos);
-  }
-
-  updateCounters() {
-//    this.pending = this.tasks.filter(task => !task.completed).length;
-//    this.completed = this.tasks.filter(task => task.completed).length;
   }
 
   editTaskTitle() {
@@ -69,6 +58,4 @@ export class TodoService {
        this.storageService.save(todos);
     });
   }
-
-
 }
