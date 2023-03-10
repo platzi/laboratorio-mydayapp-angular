@@ -1,34 +1,16 @@
-<!-- <li class="completed">
-  <div class="view">
-    <input class="toggle" type="checkbox" checked />
-    <label>Learn JavaScript</label>
-    <button class="destroy"></button>
-  </div>
-  <input class="edit" value="Learn JavaScript" />
-</li>
-
-<li>
+<li [ngClass]="{ completed: todo.completed, editing: editing }">
   <div class="view">
     <input class="toggle" type="checkbox" />
-    <label>Buy a unicorn</label>
-    <button class="destroy"></button>
-  </div>
-  <input class="edit" value="Buy a unicorn" />
-</li>
-
-<li class="editing">
-  <div class="view">
-    <input class="toggle" type="checkbox" />
-    <label>Make dishes</label>
-    <button class="destroy"></button>
-  </div>
-  <input class="edit" value="Make dishes" />
-</li> -->
-<li [ngClass]="{completed:todo.completed,editing:editing}">
-  <div class="view">
-    <input class="toggle" type="checkbox" />
-    <label>{{todo.title}}</label>
+    <label (click)="activeEdit()">{{ todo.title }}</label>
     <button class="destroy" (click)="deleteTodo()"></button>
   </div>
-  <input *ngIf="editing" class="edit" value="Learn JavaScript" />
+  <input
+    *ngIf="editing"
+    class="edit"
+    (keydown)="updateTodo($event)"
+    [formControl]="todoControl"
+    [ngModel]="todo.title"
+    [formControl]="todoControl"
+    #todoInput
+  />
 </li>

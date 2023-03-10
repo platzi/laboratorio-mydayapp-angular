@@ -5,34 +5,40 @@ import { ITodo } from '@app/models/Todo.model'
   providedIn: 'root'
 })
 export class TodoService {
-
   private todoListSource = new BehaviorSubject<ITodo[]>([]);
-  key="mydayapp-angular"
-  constructor() {
+
+  constructor () {
     const storedList = localStorage.getItem(this.key);
-    if (storedList) {
+    if (storedList && storedList.length > 0) {
+      this.todoList$.subscribe(v=>this.currentList=v)
       this.todoListSource.next(JSON.parse(storedList));
     }
   }
 
-  todoList$ = this.todoListSource.asObservable();
+  key = "mydayapp-angular"
+  currentList!:ITodo[];
+  todoList$ = this.todoListSource.asObservable()
 
   create(title: string) {
-    const currentList = this.todoListSource.getValue();
     const todo: ITodo = {
       title,
       completed: false
     };
-    currentList.push(todo);
-    this.todoListSource.next(currentList);
-    localStorage.setItem(this.key,JSON.stringify(currentList))
+    this.currentList.push(todo);
+    this.todoListSource.next(this.currentList);
+    localStorage.setItem(this.key, JSON.stringify(this.currentList))
+  }
+
+  update(id: number, todo: ITodo) {
+    this.currentList[id] = todo
+    this.todoListSource.next(this.currentList);
+    localStorage.setItem(this.key, JSON.stringify(this.currentList))
   }
 
   delete(id: number) {
-    const currentList = this.todoListSource.getValue();
-    currentList.splice(id, 1);
-    this.todoListSource.next(currentList);
-    localStorage.setItem(this.key,JSON.stringify(currentList))
+    this.currentList.splice(id, 1);
+    this.todoListSource.next(this.currentList);
+    localStorage.setItem(this.key, JSON.stringify(this.currentList))
   }
 
 }
