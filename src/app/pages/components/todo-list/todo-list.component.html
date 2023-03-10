@@ -1,6 +1,8 @@
 <!-- This section should be hidden by default and shown when there are todos -->
 <section class="main">
   <ul class="todo-list">
-    <app-todo-item />
+    <ng-container *ngFor="let todo of todoList$ | async; index as i;" >
+      <app-todo-item [todo]="todo" [id]="i" />
+    </ng-container>
   </ul>
 </section>

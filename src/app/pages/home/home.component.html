@@ -1,6 +1,6 @@
 <section class="todoapp">
   <app-header/>
-  <div class="container todoapp-wrapper">
+  <div *ngIf="todoLength" class="container todoapp-wrapper">
     <app-todo-list />
     <app-footer />
   </div>

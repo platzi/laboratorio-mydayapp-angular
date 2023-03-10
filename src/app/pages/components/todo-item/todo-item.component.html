@@ -1,4 +1,4 @@
-<li class="completed">
+<!-- <li class="completed">
   <div class="view">
     <input class="toggle" type="checkbox" checked />
     <label>Learn JavaScript</label>
@@ -23,4 +23,12 @@
     <button class="destroy"></button>
   </div>
   <input class="edit" value="Make dishes" />
+</li> -->
+<li [ngClass]="{completed:todo.completed,editing:editing}">
+  <div class="view">
+    <input class="toggle" type="checkbox" />
+    <label>{{todo.title}}</label>
+    <button class="destroy" (click)="deleteTodo()"></button>
+  </div>
+  <input *ngIf="editing" class="edit" value="Learn JavaScript" />
 </li>
