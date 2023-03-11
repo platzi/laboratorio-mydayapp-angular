@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef,EventEmitter, Output} from '@angular/core';
 import { ITodo } from '@app/models/Todo.model';
 import { TodoService } from '@app/services/todo.service'
 import { FormControl, Validators } from '@angular/forms'
@@ -8,15 +8,14 @@ import { FormControl, Validators } from '@angular/forms'
   styleUrls: ['./todo-item.component.css']
 })
 export class TodoItemComponent {
+
   constructor (private todoService: TodoService) { }
 
   @Input() todo!: ITodo;
-  @Input() id!: number;
   @ViewChild('todoInput') todoInput!: ElementRef;
-
+  @Output() todoEditing = new EventEmitter();
   todoControl = new FormControl('', Validators.required)
   editing = false
-
   activeEdit() {
     this.editing = true
     setTimeout(() => {
@@ -25,23 +24,27 @@ export class TodoItemComponent {
       if (title) {
         this.todoInput.nativeElement.setSelectionRange(title.length, title.length);
       }
-    });
+    },0);
+    setTimeout(() => {
+      this.todoEditing.emit({id:this.todo.id,editing:this.editing});
+    },100);
   }
 
   checked(){
     this.todo.completed=!this.todo.completed
-    this.todoService.update(this.id, this.todo)
+    this.todoService.update(this.todo.id, this.todo)
   }
 
   closeEdit() {
     this.editing = false
+    this.todoEditing.emit({id:this.todo.id,editing:this.editing});
   }
 
   updateTodo(event: KeyboardEvent) {
     if (this.todoControl.valid && this.todoControl.value) {
       if (event.key === 'Enter') {
         this.todo.title = this.todoControl.value.trim()
-        this.todoService.update(this.id, this.todo)
+        this.todoService.update(this.todo.id, this.todo)
         this.closeEdit()
       } else if (event.key === 'Escape') {
         this.closeEdit()
@@ -50,7 +53,7 @@ export class TodoItemComponent {
   }
 
   deleteTodo() {
-    this.todoService.delete(this.id)
+    this.todoService.delete(this.todo.id)
   }
 
 }

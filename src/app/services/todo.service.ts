@@ -21,6 +21,7 @@ export class TodoService {
 
   create(title: string) {
     const todo: ITodo = {
+      id:this.currentList.length,
       title,
       completed: false
     };
@@ -30,13 +31,17 @@ export class TodoService {
   }
 
   update(id: number, todo: ITodo) {
-    this.currentList[id] = todo
+    this.currentList.map(item=>{
+      if(item.id==id){
+        item=todo
+      }
+    })
     this.todoListSource.next(this.currentList);
     localStorage.setItem(this.key, JSON.stringify(this.currentList))
   }
 
   delete(id: number) {
-    this.currentList.splice(id, 1);
+    this.currentList=this.currentList.filter((item)=>item.id!==id)
     this.todoListSource.next(this.currentList);
     localStorage.setItem(this.key, JSON.stringify(this.currentList))
   }
