@@ -1,6 +1,6 @@
 <li [ngClass]="{ completed: todo.completed, editing: editing }">
   <div class="view">
-    <input class="toggle" type="checkbox" />
+    <input class="toggle" type="checkbox" (click)="checked()" [checked]="todo.completed" />
     <label (click)="activeEdit()">{{ todo.title }}</label>
     <button class="destroy" (click)="deleteTodo()"></button>
   </div>

@@ -28,6 +28,11 @@ export class TodoItemComponent {
     });
   }
 
+  checked(){
+    this.todo.completed=!this.todo.completed
+    this.todoService.update(this.id, this.todo)
+  }
+
   closeEdit() {
     this.editing = false
   }
