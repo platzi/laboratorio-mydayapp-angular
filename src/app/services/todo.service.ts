@@ -45,5 +45,10 @@ export class TodoService {
     this.todoListSource.next(this.currentList);
     localStorage.setItem(this.key, JSON.stringify(this.currentList))
   }
+  clearCompleted(){
+    this.currentList=this.currentList.filter((item)=>item.completed===false)
+    this.todoListSource.next(this.currentList);
+    localStorage.setItem(this.key, JSON.stringify(this.currentList))
+  }
 
 }

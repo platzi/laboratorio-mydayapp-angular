@@ -14,5 +14,8 @@ export class FooterComponent implements OnInit {
       this.todoLength = todoList.filter(item => item.completed !== true).length
     })
   }
+  clearCompleted(){
+    this.todoService.clearCompleted()
+  }
 
 }
