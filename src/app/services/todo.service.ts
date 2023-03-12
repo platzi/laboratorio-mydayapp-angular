@@ -15,9 +15,9 @@ export class TodoService {
   constructor () {
     const storedList = localStorage.getItem(this.key);
     if (storedList && storedList.length > 0) {
-      this.todoList$.subscribe(v=>this.currentList=v);
       this.todoListSource.next(JSON.parse(storedList));
     }
+    this.todoList$.subscribe(v=>this.currentList=v);
   }
 
   saveStorage(currentList:ITodo[]){
@@ -30,9 +30,11 @@ export class TodoService {
       title,
       completed: false
     };
-    this.currentList.push(todo);
-    this.todoListSource.next(this.currentList);
-    this.saveStorage(this.currentList);
+    if(title){
+      this.currentList.push(todo);
+      this.todoListSource.next(this.currentList);
+      this.saveStorage(this.currentList);
+    }
   }
 
   update(id: number, todo: ITodo) {

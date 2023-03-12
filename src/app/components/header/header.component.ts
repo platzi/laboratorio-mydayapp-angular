@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { TodoService } from '@app/services/todo.service'
 import { FormControl, Validators } from '@angular/forms';
 
@@ -22,13 +22,16 @@ import { FormControl, Validators } from '@angular/forms';
 `
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   constructor (private todoService: TodoService) { }
+  @ViewChild('todoInput') todoInput!: ElementRef;
 
   todoControl = new FormControl('', Validators.required);
   todoList$ = this.todoService.todoList$;
-
+ngOnInit(){
+  this.todoInput.nativeElement.focus();
+}
   createTodo() {
     if (this.todoControl.valid && this.todoControl.value) {
       this.todoService.create(this.todoControl.value.trim());

@@ -22,11 +22,9 @@ export class TodoItemComponent {
       const title = this.todoControl.value;
       if (title) {
         this.todoInput.nativeElement.setSelectionRange(title.length, title.length);
+        this.todoEditing.emit({id:this.todo.id,editing:this.editing});
       }
     },0);
-    setTimeout(() => {
-      this.todoEditing.emit({id:this.todo.id,editing:this.editing});
-    },100);
   }
 
   checked(){
