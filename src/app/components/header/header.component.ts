@@ -4,8 +4,22 @@ import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  template:`
+  <header class="header">
+  <div class="container">
+    <h1>My Day</h1>
+    <p>All my tasks in one place</p>
+    <input
+      class="new-todo"
+      placeholder="Type new todo"
+      autofocus
+      [formControl]="todoControl"
+      type="text"
+      (keydown.enter)="createTodo()"
+    />
+  </div>
+</header>
+`
 })
 
 export class HeaderComponent {

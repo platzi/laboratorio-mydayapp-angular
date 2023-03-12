@@ -1,23 +1,28 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ITodo } from '@app/models/Todo.model'
+import { ITodo } from '@app/models/Todo.model';
+
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
+
   private todoListSource = new BehaviorSubject<ITodo[]>([]);
+  key = "mydayapp-angular"
+  currentList!:ITodo[];
+  todoList$ = this.todoListSource.asObservable()
 
   constructor () {
     const storedList = localStorage.getItem(this.key);
     if (storedList && storedList.length > 0) {
-      this.todoList$.subscribe(v=>this.currentList=v)
+      this.todoList$.subscribe(v=>this.currentList=v);
       this.todoListSource.next(JSON.parse(storedList));
     }
   }
 
-  key = "mydayapp-angular"
-  currentList!:ITodo[];
-  todoList$ = this.todoListSource.asObservable()
+  saveStorage(currentList:ITodo[]){
+    localStorage.setItem(this.key, JSON.stringify(currentList));
+  }
 
   create(title: string) {
     const todo: ITodo = {
@@ -27,7 +32,7 @@ export class TodoService {
     };
     this.currentList.push(todo);
     this.todoListSource.next(this.currentList);
-    localStorage.setItem(this.key, JSON.stringify(this.currentList))
+    this.saveStorage(this.currentList);
   }
 
   update(id: number, todo: ITodo) {
@@ -37,18 +42,19 @@ export class TodoService {
       }
     })
     this.todoListSource.next(this.currentList);
-    localStorage.setItem(this.key, JSON.stringify(this.currentList))
+    this.saveStorage(this.currentList);
   }
 
   delete(id: number) {
-    this.currentList=this.currentList.filter((item)=>item.id!==id)
+    this.currentList=this.currentList.filter((item)=>item.id!==id);
     this.todoListSource.next(this.currentList);
-    localStorage.setItem(this.key, JSON.stringify(this.currentList))
+    this.saveStorage(this.currentList);
   }
+
   clearCompleted(){
-    this.currentList=this.currentList.filter((item)=>item.completed===false)
+    this.currentList=this.currentList.filter((item)=>item.completed===false);
     this.todoListSource.next(this.currentList);
-    localStorage.setItem(this.key, JSON.stringify(this.currentList))
+    this.saveStorage(this.currentList);
   }
 
 }

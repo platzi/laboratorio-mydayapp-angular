@@ -1,7 +1,4 @@
-<li
-  [ngClass]="{ completed: todo.completed, editing: editing }"
-
->
+<li [ngClass]="{ completed: todo.completed, editing: editing }">
   <div class="view">
     <input
       class="toggle"
@@ -16,7 +13,6 @@
     *ngIf="editing"
     class="edit"
     (keydown)="updateTodo($event)"
-    [formControl]="todoControl"
     [ngModel]="todo.title"
     [formControl]="todoControl"
     #todoInput

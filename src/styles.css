@@ -397,3 +397,9 @@ html .clear-completed:active {
 :focus {
   outline: 0;
 }
+.filter_page{
+  margin-top: 3rem;
+}
+.title_filter{
+  text-align: center;
+}

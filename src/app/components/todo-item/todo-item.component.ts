@@ -4,8 +4,7 @@ import { TodoService } from '@app/services/todo.service'
 import { FormControl, Validators } from '@angular/forms'
 @Component({
   selector: 'app-todo-item',
-  templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.css']
+  templateUrl: './todo-item.component.html'
 })
 export class TodoItemComponent {
 
