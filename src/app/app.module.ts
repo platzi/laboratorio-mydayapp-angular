@@ -9,6 +9,8 @@ import { MainComponent } from './components/main/main.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { InputGenericComponent } from './shared/input-generic/input-generic.component';
 import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
+import { FormsModule } from '@angular/forms';
+import { InputHeaderComponent } from './components/input-header/input-header.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { InputCheckboxComponent } from './components/input-checkbox/input-checkb
     MainComponent,
     FooterComponent,
     InputGenericComponent,
-    InputCheckboxComponent
+    InputCheckboxComponent,
+    InputHeaderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
