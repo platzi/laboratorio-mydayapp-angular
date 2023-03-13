@@ -12,8 +12,10 @@
   <input
     *ngIf="editing"
     class="edit"
-    (keydown)="updateTodo($event)"
+    (keydown.escape)="closeEdit()"
+    (keydown.enter)="updateTodo()"
     [ngModel]="todo.title"
+    [value]="todo.title"
     [formControl]="todoControl"
     #todoInput
   />

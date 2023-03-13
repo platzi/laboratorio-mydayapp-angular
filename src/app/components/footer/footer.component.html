@@ -31,7 +31,7 @@
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->
-  <button *ngIf="todoLength" (click)="clearCompleted()" class="clear-completed">
+  <button *ngIf="todoLengthCompleted" (click)="clearCompleted()" class="clear-completed">
     Clear completed
   </button>
 </footer>

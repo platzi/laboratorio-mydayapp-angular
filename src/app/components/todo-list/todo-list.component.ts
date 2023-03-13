@@ -11,7 +11,6 @@ import { ITodo } from '@app/models/Todo.model';
         <app-todo-item
           *ngFor="let todo of todoList;"
           [todo]="todo"
-          (todoEditing)="handleValueChange($event)"
         />
     </ul>
   </section>
@@ -23,27 +22,14 @@ export class TodoListComponent {
     editing: false
   };
   constructor (private todoService: TodoService) { }
+
   todoList$ = this.todoService.todoList$;
   todoList:ITodo[] = []
+
   @Input()
   set TodoList(value: ITodo[]) {
     this.todoList = value;
   }
 
-  handleValueChange(value: any) {
-    this.todoEditing = value;
-    this.todoService.todoList$.subscribe((value) => {
-      if (this.todoEditing.editing) {
-        const todoItem = value.find((v) => v.id == this.todoEditing.id)
-        let todo: ITodo[] = []
-        if (todoItem) {
-          todo = [todoItem]
-          this.todoList = todo
-        }
-      }else{
-        this.todoList = value
-      }
-    })
-  }
 
 }

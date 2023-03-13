@@ -15,6 +15,7 @@ import { FormControl, Validators } from '@angular/forms';
       autofocus
       [formControl]="todoControl"
       type="text"
+      #todoInput
       (keydown.enter)="createTodo()"
     />
   </div>
@@ -30,7 +31,9 @@ export class HeaderComponent implements OnInit {
   todoControl = new FormControl('', Validators.required);
   todoList$ = this.todoService.todoList$;
 ngOnInit(){
-  this.todoInput.nativeElement.focus();
+  setTimeout(() => {
+    this.todoInput.nativeElement.focus();
+  }, 0);
 }
   createTodo() {
     if (this.todoControl.valid && this.todoControl.value) {

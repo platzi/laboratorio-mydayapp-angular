@@ -8,11 +8,14 @@ export class FooterComponent implements OnInit {
   constructor (private todoService: TodoService) { }
   todoList$ = this.todoService.todoList$;
   todoLength: number = 0
+  todoLengthCompleted: number = 0
   ngOnInit() {
     this.todoList$.subscribe(todoList => {
-      this.todoLength = todoList.filter(item => item.completed ===true).length
+      this.todoLength = todoList.filter(item => item.completed ===false).length
+      this.todoLengthCompleted = todoList.filter(item => item.completed ===true).length
     })
   }
+
   clearCompleted(){
     this.todoService.clearCompleted()
   }
