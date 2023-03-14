@@ -393,13 +393,18 @@ html .clear-completed:active {
     bottom: 10px;
   }
 }
+@media (max-width: 430px) {
+  .container {
+    width: 350px;
+  }
+}
 
 :focus {
   outline: 0;
 }
-.filter_page{
+.filter_page {
   margin-top: 3rem;
 }
-.title_filter{
+.title_filter {
   text-align: center;
 }
