@@ -1,0 +1,25 @@
+<section class="main">
+  <ul class="todo-list">
+    <li
+      [ngClass]="{'completed': task.completed, 'editing': task.edit}"
+      *ngFor="let task of tasks"
+
+    >
+      <div class="view">
+        <app-input-checkbox
+          [checked]="task.completed"
+          [label]="task.title"
+          [idTask]="task.id"
+          (doubleClick)="onDoubleClick($event)"
+        ></app-input-checkbox>
+        <button class="destroy" (click)="deleteTask(task.id)"></button>
+      </div>
+      <input
+      class="edit"
+      [value]="task.title"
+      (keyup.enter)="onEditTask(task.id, inputEdit.value)"
+      #inputEdit/>
+    </li>
+  </ul>
+</section>
+
