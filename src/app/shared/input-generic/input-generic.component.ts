@@ -11,5 +11,5 @@ import { InputInterface } from 'src/app/shared/model/input.model';
 export class InputGenericComponent {
   @Input() type: InputInterface = 'text';
   @Input() class: string = '';
-  @Input() value: any;
+  @Input() value: any = '';
 }
