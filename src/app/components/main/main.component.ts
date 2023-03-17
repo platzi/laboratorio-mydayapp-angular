@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, QueryList, ViewChildren, } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks.service';
 import { Tasks } from 'src/app/shared/model/tasks.model';
 
@@ -9,16 +9,26 @@ import { Tasks } from 'src/app/shared/model/tasks.model';
 })
 export class MainComponent {
   @Input() tasks: Tasks[];
+  @ViewChildren('inputEdit') inputs!: QueryList<ElementRef>;
 
-  constructor(private tasksService: TasksService){
-    this.tasks = this.tasksService.tasksList
+  constructor(private tasksService: TasksService, private elementRef: ElementRef){
+    this.tasks = this.tasksService.tasksList;
   }
   onDoubleClick(id: number){
-   this.tasksService.editMode(id, true);
+    this.tasksService.editMode(id, true);
+    setTimeout(() => {
+      const input = this.inputs.toArray()[id - 1].nativeElement;
+      input.focus();
+    }, 100);
   }
   onEditTask(id: number, value: string){
     this.tasksService.editTask(id, value);
     this.tasksService.editMode(id, false);
+  }
+  onDiscardChanges(id: number, value: string){
+    this.tasksService.editMode(id, false);
+    const input = this.inputs.toArray()[id - 1].nativeElement;
+    input.value = value;
   }
   deleteTask(idTask: number){
     this.tasksService.deleteTask(idTask);
