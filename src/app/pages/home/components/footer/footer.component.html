@@ -1,16 +1,16 @@
 <footer class="footer">
-    <span class="todo-count"><strong>{{ itemsLeft }}</strong> item{{ itemsLeft == 1 ? '' : 's' }} left</span>
+    <span class="todo-count"><strong>{{ itemsLeft }}</strong> item{{ itemsLeft === 1 ? '' : 's' }} left</span>
     <ul class="filters">
         <li>
-            <a (click)="changeFilter('all')" ngClass="{{ filterSelected == 'all' ? 'selected' : '' }}">All</a>
+            <a (click)="changeFilter('all')" ngClass="{{ filterSelected === 'all' ? 'selected' : '' }}">All</a>
         </li>
         <li>
             <a (click)="changeFilter('pending')"
-                ngClass="{{ filterSelected == 'pending' ? 'selected' : '' }}">Pending</a>
+                ngClass="{{ filterSelected === 'pending' ? 'selected' : '' }}">Pending</a>
         </li>
         <li>
             <a (click)="changeFilter('completed')"
-                ngClass="{{ filterSelected == 'completed' ? 'selected' : '' }}">Completed</a>
+                ngClass="{{ filterSelected === 'completed' ? 'selected' : '' }}">Completed</a>
         </li>
     </ul>
     <button *ngIf="itemsDone > 0" (click)="clearItemsCompleted()" class="clear-completed">Clear completed</button>
