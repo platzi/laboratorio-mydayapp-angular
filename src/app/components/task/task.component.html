@@ -1,0 +1,9 @@
+<li [ngClass]="{ 'completed': task.completed, 'editing': editing }">
+  <div class="view">
+    <input
+      class="toggle"
+      type="checkbox"
+      [checked]="task.completed"/>
+    <label>{{task.title}}</label>
+  </div>
+</li>

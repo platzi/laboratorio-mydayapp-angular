@@ -8,10 +8,11 @@
         placeholder="Type new todo"
         Autofocus
         type="text"
+        [(ngModel)]="taskTitle"
       />
     </div>
   </header>
-  <div class="container todoapp-wrapper">
+  <div class="container todoapp-wrapper" *ngIf="tasks.length > 0">
     <!-- This section should be hidden by default and shown when there are todos -->
     <section class="main">
       <ul class="todo-list">
