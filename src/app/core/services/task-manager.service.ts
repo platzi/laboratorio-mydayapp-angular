@@ -44,6 +44,13 @@ export class TaskManagerService {
     this.saveLocalData();
   }
 
+  editTaskTitle(index: number, newTitle: string) {
+    if (newTitle != '') {
+      this.tasks[index].title = newTitle;
+      this.saveLocalData();
+    }
+  }
+
   updatePending() {
     this.pending = this.tasks.filter(task => task.completed === false).length;
   }

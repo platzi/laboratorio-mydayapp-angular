@@ -26,4 +26,13 @@ export class TaskComponent {
     this.taskManager.removeTask(this.index);
   }
 
+  updateTitle() {
+    this.taskManager.editTaskTitle(this.index, this.task.title);
+    this.editing = false;
+  }
+
+  cancelEdition() {
+    this.editing = false;
+  }
+
 }
