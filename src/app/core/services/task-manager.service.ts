@@ -7,11 +7,13 @@ import { Task } from 'src/app/core/models/task.model';
 export class TaskManagerService {
   tasks: Array<Task> = [];
   pending: number = 0;
+  completed: number = 0;
 
   constructor() {
     let data = localStorage.getItem('mydayapp-angular');
     if (data) {
       this.tasks = JSON.parse(data);
+      this.updateCounters();
     }
   }
 
@@ -23,14 +25,14 @@ export class TaskManagerService {
         completed: false
       }
       this.tasks.push(newTask);
-      this.updatePending();
+      this.updateCounters();
       this.saveLocalData();
     }
   }
 
   removeTask(index: number) {
     this.tasks.splice(index, 1);
-    this.updatePending();
+    this.updateCounters();
     this.saveLocalData();
   }
 
@@ -40,7 +42,7 @@ export class TaskManagerService {
 
   completedTask(index: number) {
     this.tasks[index].completed = !this.tasks[index].completed;
-    this.updatePending();
+    this.updateCounters();
     this.saveLocalData();
   }
 
@@ -51,12 +53,14 @@ export class TaskManagerService {
     }
   }
 
-  updatePending() {
-    this.pending = this.tasks.filter(task => task.completed === false).length;
+  updateCounters() {
+    this.pending = this.tasks.filter(task => !task.completed).length;
+    this.completed = this.tasks.filter(task => task.completed).length;
   }
 
   eraseCompleted() {
     this.tasks = this.tasks.filter(task => !task.completed);
+    this.updateCounters()
     this.saveLocalData();
     return this.tasks;
   }

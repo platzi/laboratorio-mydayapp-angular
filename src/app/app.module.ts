@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +21,7 @@ import { CoreModule } from "./core/core.module";
     FormsModule,
     CoreModule
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

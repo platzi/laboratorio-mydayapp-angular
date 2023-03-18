@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from 'src/app/core/models/task.model';
 import { TaskManagerService } from 'src/app/core/services/task-manager.service';
 
@@ -14,6 +14,7 @@ export class TaskComponent {
     completed: false
   }
   @Input() index: number = -1;
+  @Output() updateTasks: EventEmitter<any> = new EventEmitter();
   editing: boolean = false;
 
   constructor( private taskManager: TaskManagerService ) { }
@@ -24,6 +25,7 @@ export class TaskComponent {
 
   removeTask() {
     this.taskManager.removeTask(this.index);
+    this.updateTasks.emit();
   }
 
   updateTitle() {
