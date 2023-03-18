@@ -25,4 +25,9 @@ export class HomeComponent implements OnInit {
   getPending() {
     return this.taskManager.pending;
   }
+
+  eraseCompleted() {
+    this.tasks = this.taskManager.eraseCompleted();
+  }
+
 }

@@ -46,13 +46,19 @@ export class TaskManagerService {
 
   editTaskTitle(index: number, newTitle: string) {
     if (newTitle != '') {
-      this.tasks[index].title = newTitle;
+      this.tasks[index].title = newTitle.trim();
       this.saveLocalData();
     }
   }
 
   updatePending() {
     this.pending = this.tasks.filter(task => task.completed === false).length;
+  }
+
+  eraseCompleted() {
+    this.tasks = this.tasks.filter(task => !task.completed);
+    this.saveLocalData();
+    return this.tasks;
   }
 
   saveLocalData() {
