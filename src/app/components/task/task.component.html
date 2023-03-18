@@ -1,0 +1,18 @@
+<li [ngClass]="{ 'completed': task.completed, 'editing': editing }">
+  <div class="view">
+    <input
+      class="toggle"
+      type="checkbox"
+      [checked]="task.completed"
+      (click)="toggleTask()"/>
+    <label (dblclick)="editing = true">{{task.title}}</label>
+    <button class="destroy" (click)="removeTask()"></button>
+  </div>
+  <input
+    *ngIf="editing"
+    class="edit"
+    appAutofocus
+    [(ngModel)]="task.title"
+    (keydown.escape)="cancelEdition()"
+    (keydown.enter)="updateTitle()"/>
+</li>
