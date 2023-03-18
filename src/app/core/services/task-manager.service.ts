@@ -5,7 +5,8 @@ import { Task } from 'src/app/core/models/task.model';
   providedIn: 'root'
 })
 export class TaskManagerService {
-  tasks: Task[] = [];
+  tasks: Array<Task> = [];
+  pending: number = 0;
 
   constructor() {
     let data = localStorage.getItem('mydayapp-angular');
@@ -22,14 +23,31 @@ export class TaskManagerService {
         completed: false
       }
       this.tasks.push(newTask);
+      this.updatePending();
       this.saveLocalData();
     }
   }
 
+  removeTask(index: number) {
+    this.tasks.splice(index, 1);
+    this.updatePending();
+    this.saveLocalData();
+  }
 
   getTasks() {
     return this.tasks;
   }
+
+  completedTask(index: number) {
+    this.tasks[index].completed = !this.tasks[index].completed;
+    this.updatePending();
+    this.saveLocalData();
+  }
+
+  updatePending() {
+    this.pending = this.tasks.filter(task => task.completed === false).length;
+  }
+
   saveLocalData() {
     localStorage.setItem('mydayapp-angular', JSON.stringify(this.tasks));
   }

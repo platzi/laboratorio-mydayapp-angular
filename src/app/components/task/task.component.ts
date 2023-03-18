@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Task } from 'src/app/core/models/task.model';
+import { TaskManagerService } from 'src/app/core/services/task-manager.service';
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -11,6 +13,17 @@ export class TaskComponent {
     title: '',
     completed: false
   }
+  @Input() index: number = -1;
+  editing: boolean = false;
 
-  constructor( ) { }
+  constructor( private taskManager: TaskManagerService ) { }
+
+  toggleTask() {
+    this.taskManager.completedTask(this.index);
+  }
+
+  removeTask() {
+    this.taskManager.removeTask(this.index);
+  }
+
 }

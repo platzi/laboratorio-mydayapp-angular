@@ -3,7 +3,9 @@
     <input
       class="toggle"
       type="checkbox"
-      [checked]="task.completed"/>
     <label>{{task.title}}</label>
+      [checked]="task.completed"
+      (click)="toggleTask()"/>
+    <button class="destroy" (click)="removeTask()"></button>
   </div>
 </li>

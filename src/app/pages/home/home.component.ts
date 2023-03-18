@@ -21,4 +21,8 @@ export class HomeComponent implements OnInit {
     this.taskManager.addTask(this.taskTitle);
     this.taskTitle = '';
   }
+
+  getPending() {
+    return this.taskManager.pending;
+  }
 }
