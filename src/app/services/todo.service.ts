@@ -41,30 +41,25 @@ export class TodoService {
       })
     )
   }
-
   get todosQuantity() {
     return this._todos.length;
   }
-
   get pendingTodos() {
     return this._todos.filter(todo => !todo.completed).length
   }
   get completedTodos() {
     return this._todos.filter(todo => todo.completed).length
   }
-
   set todos(todo: TODO) {
     this._todos.push(todo);
     this._updateStorage(this._todos);
     this._todosSubject.next(this._todos);
   }
-
   set updateTodos(todos: TODO[]) {
     this._todos = todos;
     this._updateStorage(this._todos);
     this._todosSubject.next(this._todos)
   }
-
   set deleteTodo(id: number) {
     const todoPos = this._todos.findIndex(todo => todo.id === id);
     this._todos.splice(todoPos, 1);
@@ -83,7 +78,7 @@ export class TodoService {
     window.localStorage.setItem('mydayapp-angular',JSON.stringify(valueToStore));
   }
 
-  private _clearStorage() {
+  public clearStorage() {
     window.localStorage.removeItem('mydayapp-angular');
   }
 

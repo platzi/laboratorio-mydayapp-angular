@@ -39,9 +39,7 @@ describe('ClearCompletedComponent', () => {
 
   it('should call removeCompletedTodos function', () => {
     const debugElement = fixture.debugElement.query(By.css('[data-testid="clear-completed-btn"]'));
-
     debugElement.triggerEventHandler('click');
-
     expect(todoService.removeCompletedTodos).toHaveBeenCalled();
   })
 });

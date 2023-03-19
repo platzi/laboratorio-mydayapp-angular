@@ -10,7 +10,8 @@
     "test": "ng test",
     "e2e": "npm run build && playwright test",
     "e2e:install": "playwright install",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "coverage": "ng test --code-coverage --no-watch"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@angular/platform-browser": "15.2.0",
     "@angular/platform-browser-dynamic": "15.2.0",
     "@angular/router": "15.2.0",
+    "karma-mocha-reporter": "2.2.5",
     "rxjs": "7.5.0",
     "tslib": "2.3.0",
     "zone.js": "0.11.4"

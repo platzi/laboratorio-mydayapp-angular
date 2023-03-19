@@ -27,9 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit (): void {
-    this._ar.params.pipe(
-
-    ).subscribe({
+    this._ar.params.subscribe({
       next: ({ filter = '' }) => {
         this.getTodos(filter as TodoStatus)
       }

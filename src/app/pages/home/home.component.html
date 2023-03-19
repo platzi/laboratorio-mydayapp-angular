@@ -4,7 +4,7 @@
     *ngIf="todoService.todosQuantity > 0"
     class="container todoapp-wrapper"
   >
-    <section class="main">
+    <section class="main" data-testid="main">
       <app-todo-list
         [todos]="todos"
         (updateStatus)="updateStatus( $event )"

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { TodoService } from 'src/app/services/todo.service';
 import { FooterLink } from 'src/app/utils/interfaces/footerLink.interface';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  styles: []
 })
 export class FooterComponent {
 
