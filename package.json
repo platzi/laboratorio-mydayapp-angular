@@ -10,7 +10,8 @@
     "test": "ng test",
     "e2e": "npm run build && playwright test",
     "e2e:install": "playwright install",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "coverage": "ng test --code-coverage --no-watch"
   },
   "private": true,
   "dependencies": {

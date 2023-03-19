@@ -6,8 +6,16 @@ import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
   {
     path: '',
+    component: HomeComponent
+  },
+  {
+    path: ':filter',
     component: HomeComponent,
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '',
   }
 ];
 

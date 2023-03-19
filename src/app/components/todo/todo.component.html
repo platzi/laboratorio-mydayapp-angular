@@ -1,0 +1,38 @@
+<li
+  *ngIf="todo"
+  data-testid="todo"
+  [class.completed]="todo.completed"
+  [class.editing]="todo.isEditing"
+  (keyup.escape)="cancelEdit.emit()"
+>
+  <div class="view">
+    <input
+      class="toggle"
+      type="checkbox"
+      data-testid="edit-todo-checkbox"
+      [ngModel]="todo.completed"
+      (change)="updateStatus.emit()"
+    />
+    <label
+      data-testid="edit-todo-label"
+      (dblclick)="todo.isEditing = true"
+    >
+      {{ todo.title }}
+    </label>
+    <button
+      class="destroy"
+      (click)="deleteTodo.emit()"
+      data-testid="edit-todo-delete"
+      >
+    </button>
+  </div>
+  <input
+    *ngIf="todo.isEditing"
+    data-testid="edit-todo-input"
+    class="edit"
+    [(ngModel)]="todo.title"
+    [autofocus]="true"
+    (keyup.enter)="updateTodo.emit()"
+    appAutofocus
+  />
+</li>
