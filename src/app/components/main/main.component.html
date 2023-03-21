@@ -1,8 +1,8 @@
 <section class="main">
   <ul class="todo-list">
     <li
-      [ngClass]="{'completed': task.completed, 'editing': task.edit}"
       *ngFor="let task of tasks"
+      [ngClass]="{'completed': task.completed, 'editing': task.edit}"
     >
       <div class="view">
         <app-input-checkbox

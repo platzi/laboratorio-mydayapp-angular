@@ -2,8 +2,14 @@
   <app-header></app-header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
-    <app-main *ngIf="tasks.length> 0" [tasks]="tasks"></app-main>
+    <app-main
+      *ngIf="(tasks$ | async)?.length! > 0"
+      [tasks]="tasks$ | async"
+    ></app-main>
     <!-- This footer should be hidden by default and shown when there are todos -->
-    <app-footer *ngIf="tasks.length > 0"></app-footer>
+    <app-footer
+      *ngIf="(tasks$ | async)?.length! > 0"
+      [tasks]="tasks$ | async"
+    ></app-footer>
   </div>
 </section>
