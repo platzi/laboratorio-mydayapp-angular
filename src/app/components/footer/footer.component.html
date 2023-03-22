@@ -1,16 +1,16 @@
 <footer class="footer">
   <!-- This should be `0 items left` by default -->
-  <span class="todo-count"><strong>{{0}}</strong> item left</span>
+  <span class="todo-count"><strong>{{ getPendingTasksCount() }}</strong> item{{ getPendingTasksCount() === 1 ? '' : 's' }} left</span>
   <!-- Remove this if you don't implement routing -->
   <ul class="filters">
     <li>
-      <a routerLink="/" class="selected">All</a>
+      <a routerLink="/all" ngClass="{{ filterSelected === 'all' ? 'selected' : '' }}">All</a>
     </li>
     <li>
-      <a routerLink="/pending">Pending</a>
+      <a routerLink="/pending" ngClass="{{ filterSelected === 'pending' ? 'selected' : '' }}">Pending</a>
     </li>
     <li>
-      <a routerLink="/completed">Completed</a>
+      <a routerLink="/completed" ngClass="{{ filterSelected === 'completed' ? 'selected' : '' }}">Completed</a>
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->
