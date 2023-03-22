@@ -8,6 +8,16 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'pending',
+    component: HomeComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'completed',
+    component: HomeComponent,
+    pathMatch: 'full'
   }
 ];
 
