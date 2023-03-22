@@ -10,11 +10,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'all',
-    component: HomeComponent,
-    pathMatch: 'full'
-  },
-  {
     path: 'pending',
     component: HomeComponent,
     pathMatch: 'full'
