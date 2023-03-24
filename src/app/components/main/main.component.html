@@ -1,0 +1,5 @@
+<section id="main" class="main">
+  <ul class="todo-list">
+    <app-task *ngFor="let task of tasks" [task]="task" (updateTask)="onUpdateTask($event)"></app-task>
+  </ul>
+</section>
