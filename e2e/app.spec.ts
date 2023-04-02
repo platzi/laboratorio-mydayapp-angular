@@ -222,7 +222,7 @@ test.describe('Persistence', () => {
     const todoItems = page.locator('.todo-list li');
     await todoItems.nth(0).locator('.toggle').check();
     await expect(todoItems).toHaveText([TODO_ITEMS[0], TODO_ITEMS[1]]);
-    await expect(todoItems).toHaveClass(['completed', 'view']);
+    await expect(todoItems).toHaveClass(['completed', '']);
 
     // Ensure there is 1 completed item.
     checkNumberOfCompletedTodosInLocalStorage(page, 1);
@@ -230,7 +230,7 @@ test.describe('Persistence', () => {
     // Now reload.
     await page.reload();
     await expect(todoItems).toHaveText([TODO_ITEMS[0], TODO_ITEMS[1]]);
-    await expect(todoItems).toHaveClass(['completed', 'view']);
+    await expect(todoItems).toHaveClass(['completed', '']);
   });
 });
 

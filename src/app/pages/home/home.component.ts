@@ -43,6 +43,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.tareasToLocalStorage();
   }
 
+  changeClass(itemSelected: Tarea): string {
+    let classType: string = '';
+
+    const typeClass = {
+      new: '',
+      completed: 'completed',
+      editing: 'editing'
+    };
+
+    if (itemSelected.completed) {
+      classType = typeClass.completed
+    }
+
+    if (itemSelected.editMode) {
+      classType = typeClass.editing
+    }
+
+    return classType;
+  }
+
   stateRoute(estadoUrl: string){
     if(estadoUrl === estadoBusqueda[estadoBusqueda.all]){
       this.tareasArray = this.tareas.value

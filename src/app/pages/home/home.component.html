@@ -17,7 +17,7 @@
     <!-- This section should be hidden by default and shown when there are todos -->
     <section class="main" *ngIf="tareas.value.length > 0">
       <ul class="todo-list" *ngFor="let tarea of tareasArray; let i = index; trackBy: trackByFn">
-        <li [ngClass]="{'completed': tarea.completed, 'editing': tarea.editMode, 'view': !tarea.completed && !tarea.editMode}">
+        <li [ngClass]="changeClass(tarea)">
 <!--        <li [ngClass]="tarea.editMode === true ? 'editing' : (tarea.completed ? 'completed' : 'view')">-->
           <div class="view">
             <input class="toggle" type="checkbox" [checked]="tarea.completed" (click)="tareaCompletada(tarea)"/>
