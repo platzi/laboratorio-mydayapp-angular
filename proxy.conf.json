@@ -1,0 +1,7 @@
+{
+  "/daly-app/*": {
+    "target": "https://daly-app.netlify.app/",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
