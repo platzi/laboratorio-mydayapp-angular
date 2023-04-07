@@ -6,59 +6,78 @@
       <input
         class="new-todo"
         placeholder="Type new todo"
-        autofocus
+        autofocus="true"
         type="text"
+        (keydown)="addTask($event)"
+        [(ngModel)]="this.newTask.title"
       />
     </div>
   </header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
-    <section class="main">
+    <section class="main" *ngIf="completeTasksList.length !== 0">
       <ul class="todo-list">
-        <li class="completed">
+        <li
+          *ngFor="let task of filterTasksList; index as i"
+          [ngClass]="{ completed: task.completed, editing: task.editMode }"
+        >
           <div class="view">
-            <input class="toggle" type="checkbox" checked />
-            <label>Learn JavaScript</label>
-            <button class="destroy"></button>
+            <input
+              class="toggle"
+              type="checkbox"
+              [checked]="task.completed"
+              (click)="changeStatus(task)"
+            />
+            <label (dblclick)="activeEditMode(task)">{{ task.title }}</label>
+            <button class="destroy" (click)="deleteTask(task)"></button>
           </div>
-          <input class="edit" value="Learn JavaScript" />
-        </li>
-        <li>
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Buy a unicorn" />
-        </li>
-        <li class="editing">
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Make dishes</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Make dishes" />
+          <input
+            #inputEdit
+            class="edit"
+            value="{{ task.title }}"
+            (blur)="task.editMode = false"
+            (keydown)="updateTask($event, task)"
+            [(ngModel)]="this.task.title"
+          />
         </li>
       </ul>
     </section>
     <!-- This footer should be hidden by default and shown when there are todos -->
-    <footer class="footer">
+    <footer class="footer" *ngIf="completeTasksList.length !== 0">
       <!-- This should be `0 items left` by default -->
-      <span class="todo-count"><strong>0</strong> item left</span>
+      <span class="todo-count"
+        ><strong>{{ completeTasksList.length }}</strong>
+        {{ completeTasksList.length !== 1 ? "items" : "item" }} left</span
+      >
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a routerLink="/" class="selected">All</a>
+          <a
+            routerLink="/all"
+            routerLinkActive="selected"
+            [class.selected]="filter === ''"
+            >All</a
+          >
         </li>
         <li>
-          <a routerLink="/pending">Pending</a>
+          <a
+            routerLink="/pending"
+            routerLinkActive="selected"
+            >Pending</a
+          >
         </li>
         <li>
-          <a routerLink="/completed">Completed</a>
+          <a
+            routerLink="/completed"
+            routerLinkActive="selected"
+            >Completed</a
+          >
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
-      <button class="clear-completed">Clear completed</button>
+      <button class="clear-completed" (click)="clearCompleted()" [hidden]="isHiddenClearButton">
+        Clear completed
+      </button>
     </footer>
   </div>
 </section>
