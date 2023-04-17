@@ -1,3 +1,8 @@
+.inactive{
+  display: none;
+}
+
+
 html,
 body {
   margin: 0;

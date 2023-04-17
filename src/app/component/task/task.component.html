@@ -1,0 +1,9 @@
+<li [ngClass]="{'completed' : terminada}">
+
+          <div class="view">
+            <input class="toggle" type="checkbox" [checked]="terminada" (click)="toggleTask()" />
+            <label>{{tarea.nombre}}</label>
+            <button class="destroy" (click)="eliminar()"></button>
+          </div>
+          <input class="edit" value="{{tarea.nombre}}" />
+</li>
