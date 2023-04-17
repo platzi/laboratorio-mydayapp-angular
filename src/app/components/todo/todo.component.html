@@ -1,0 +1,8 @@
+<li [ngClass]="{'completed': class === 'completed', 'editing': class === 'editing'}" (dblclick)="editTodo()">
+  <div class="view">
+    <input class="toggle" type="checkbox" [formControl]="checkBox"  />
+    <label>{{todo.title}}</label>
+    <button (click)="delete()" class="destroy"></button>
+  </div>
+  <input [formControl]="title" class="edit" value="{{todo.title}}" (keydown.escape)="setClass()" (keydown.enter)="updateTitle()" [autofocus]="autoFocus" (dblclick)="editTodo()"/>
+</li>
