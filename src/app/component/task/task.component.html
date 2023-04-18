@@ -2,8 +2,15 @@
 
           <div class="view">
             <input class="toggle" type="checkbox" [checked]="terminada" (click)="toggleTask()" />
-            <label>{{tarea.nombre}}</label>
+            <label (dblclick)="click()">{{tarea.title}}</label>
             <button class="destroy" (click)="eliminar()"></button>
           </div>
-          <input class="edit" value="{{tarea.nombre}}" />
+
+
+</li>
+<li *ngIf="editar" class="editing">
+      <form (submit)="editContent($event)">
+      <input [formControl]="tareaEdited" class="edit" autofocus #edit placeholder="{{tarea.title}}" />
+      <button class="destroy" (click)="click()"></button>
+      </form>
 </li>

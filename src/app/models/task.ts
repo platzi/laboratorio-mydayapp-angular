@@ -1,6 +1,6 @@
 export interface Tarea{
 id : number
-nombre :string,
-status : string
+title :string,
+completed : boolean
 
 }

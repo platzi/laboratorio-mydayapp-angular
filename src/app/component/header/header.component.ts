@@ -13,7 +13,7 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 export class HeaderComponent implements OnInit{
 
 tareas : Tarea[] = []
-nuevaTarea : Tarea = {id: 0, nombre : '', status: ''}
+nuevaTarea : Tarea = {id: 0, title : '', completed: false}
 tarea = new FormControl()
 error = false
 limpiar = ''
@@ -31,8 +31,8 @@ agregarTarea(e:any){
   if (this.tareaField.trim() != '') {
     this.error = false
     this.nuevaTarea.id = Math.floor(Math.random() * 100000);
-    this.nuevaTarea.nombre = this.tareaField.trim()
-    this.nuevaTarea.status = 'pending'
+    this.nuevaTarea.title = this.tareaField.trim()
+    this.nuevaTarea.completed = false
 
     //?guardando en LS
     const local = localStorage.getItem('mydayapp-angular')

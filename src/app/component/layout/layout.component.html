@@ -1,0 +1,9 @@
+<section class="todoapp">
+  <app-header></app-header>
+  <div #main *ngIf="mostrar" class="container todoapp-wrapper">
+
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+
+  </div>
+</section>
