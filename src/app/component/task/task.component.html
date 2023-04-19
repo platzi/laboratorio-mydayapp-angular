@@ -10,7 +10,7 @@
 </li>
 <li *ngIf="editar" class="editing">
       <form (submit)="editContent($event)">
-      <input [formControl]="tareaEdited" class="edit" autofocus #edit placeholder="{{tarea.title}}" />
-      <button class="destroy" (click)="click()"></button>
+      <input [formControl]="tareaEdited" (keydown)="onKeyDown($event)" class="edit" placeholder="{{tarea.title}}" />
+
       </form>
 </li>

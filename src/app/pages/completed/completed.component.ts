@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Tarea } from 'src/app/models/task';
 import { ComunicationService } from 'src/app/services/comunication.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-completed',
@@ -9,7 +10,7 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 })
 export class CompletedComponent {
 
-  constructor(private comunicationService : ComunicationService) { }
+  constructor(private comunicationService : ComunicationService, private ls: LocalstorageService) { }
   tareas : Tarea[] = []
   datos: Tarea[] = []
 
@@ -19,9 +20,7 @@ export class CompletedComponent {
   }
 
   reaload(){
-    const existe = localStorage.getItem('mydayapp-angular')
-  if (existe){
-    this.datos = JSON.parse(existe)
+    this.datos = this.ls.getLocalStorage()
 
    this.tareas = []
    for (let index = 0; index < this.datos.length; index++) {
@@ -30,7 +29,7 @@ export class CompletedComponent {
       this.tareas.push(this.datos[index])
     }
 
-   }
+
   }
 
   }

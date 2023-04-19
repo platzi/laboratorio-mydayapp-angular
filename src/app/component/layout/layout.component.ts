@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Tarea } from 'src/app/models/task';
 import { ComunicationService } from 'src/app/services/comunication.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-layout',
@@ -9,7 +10,7 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 })
 export class LayoutComponent {
 
-  constructor(private comunicationService : ComunicationService) { }
+  constructor(private comunicationService : ComunicationService, private ls:LocalstorageService) { }
   tareas : Tarea[] = []
   mostrar = false
 ngOnInit(): void{
@@ -19,10 +20,9 @@ ngOnInit(): void{
 
 
 show(){
-  const existe = localStorage.getItem('mydayapp-angular')
-  if (existe){
-    this.tareas = JSON.parse(existe)
-   }
+
+   this.tareas = this.ls.getLocalStorage()
+
    if(this.tareas.length > 0 ){
     this.mostrar = true
    }else{this.mostrar = false}
