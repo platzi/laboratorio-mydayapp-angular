@@ -17,12 +17,14 @@ dataLocal : Tarea[] = []
 terminada = false
 editar = false
 tareaEdited = new FormControl()
+titulo= ''
 constructor(private comunication: ComunicationService, private ls: LocalstorageService){}
 
 ngOnInit(): void{
   if(this.tarea.completed == true) {
     this.terminada = true
   }
+  this.titulo = this.tarea.title
 
 }
 
@@ -86,7 +88,7 @@ get tareaEditedField(){
 onKeyDown(e: any){
   if(e.key === "Escape"){
    this.editar = false
-    this.tareaEdited.reset()
+    this.titulo = this.tarea.title
   }
 }
 }

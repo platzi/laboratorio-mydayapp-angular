@@ -7,7 +7,7 @@
           </div>
 
           <form (submit)="editContent($event)">
-            <input [formControl]="tareaEdited" (keydown)="onKeyDown($event)" class="edit" value="tarea.title" />
+            <input [formControl]="tareaEdited" (keydown)="onKeyDown($event)" class="edit" [(ngModel)]="titulo"  />
 
           </form>
 
