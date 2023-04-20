@@ -1,4 +1,4 @@
-<li [ngClass]="{'completed' : terminada}">
+<li [ngClass]="{'completed' : terminada, 'editing': editar}">
 
           <div class="view">
             <input class="toggle" type="checkbox" [checked]="terminada" (click)="toggleTask()" />
@@ -6,11 +6,12 @@
             <button class="destroy" (click)="eliminar()"></button>
           </div>
 
+          <form (submit)="editContent($event)">
+            <input [formControl]="tareaEdited" (keydown)="onKeyDown($event)" class="edit" value="tarea.title" />
+
+          </form>
 
 </li>
-<li *ngIf="editar" class="editing">
-      <form (submit)="editContent($event)">
-      <input [formControl]="tareaEdited" (keydown)="onKeyDown($event)" class="edit" placeholder="{{tarea.title}}" />
 
-      </form>
-</li>
+
+

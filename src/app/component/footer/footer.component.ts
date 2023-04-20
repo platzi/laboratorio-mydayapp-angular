@@ -4,6 +4,8 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -16,16 +18,19 @@ contador = 0
 contadorCompleted = 0
 index = 0
 ocultar = false
+varRuta = ''
 
 
-constructor(private comunicate: ComunicationService, private ls: LocalstorageService){}
+constructor(private comunicate: ComunicationService, private ls: LocalstorageService, private route: ActivatedRoute){}
 ngOnInit(): void{
   this.reCount()
-
-
   this.comunicate.addTask.subscribe(value=>{this.reCount()})
   this.comunicate.reCount.subscribe(value=>{this.reCount()})
+
+
 }
+
+
 
 reCount(){
 

@@ -32,6 +32,7 @@ agregarTarea(e:any){
     this.error = false
     this.nuevaTarea.id = Math.floor(Math.random() * 100000);
     this.nuevaTarea.title = this.tareaField.trim()
+
     this.nuevaTarea.completed = false
 
     //?guardando en LS

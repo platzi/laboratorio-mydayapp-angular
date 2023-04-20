@@ -68,7 +68,8 @@ editContent(e:any){
 
     var indice = this.dataLocal.map(producto => producto.id).indexOf(this.tarea.id)
     if(this.tareaEditedField){
-      this.dataLocal[indice].title = this.tareaEditedField
+      var valor = this.tareaEditedField
+      this.dataLocal[indice].title = valor.trim()
 
 
 

@@ -6,14 +6,14 @@
   <!-- Remove this if you don't implement routing -->
   <ul class="filters">
     <li>
-      <a routerLink="/"class="selected">All</a>
+      <a routerLink="/" routerLinkActive="selected" [routerLinkActiveOptions]="{exact: true}">All</a>
       <!--   -->
     </li>
     <li>
-      <a routerLink="/pending" class="selected">Pending</a>
+      <a routerLink="/pending" routerLinkActive="selected" >Pending</a>
     </li>
     <li>
-      <a routerLink="/completed" class="selected">Completed</a>
+      <a routerLink="/completed" routerLinkActive="selected">Completed</a>
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->
