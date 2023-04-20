@@ -40,7 +40,7 @@ toggleTask(){
       this.terminada = false
     }
 
-    localStorage.setItem('mydayapp-angular', JSON.stringify(this.dataLocal))
+    this.ls.setLocalStorage(this.dataLocal)
     this.comunication.reCount.emit()
 
 }
@@ -50,7 +50,7 @@ eliminar(){
   var indice = this.dataLocal.map(producto => producto.id).indexOf(this.tarea.id)
 
   this.dataLocal.splice(indice,1)
-  localStorage.setItem('mydayapp-angular', JSON.stringify(this.dataLocal))
+  this.ls.setLocalStorage(this.dataLocal)
   this.comunication.addTask.emit()
 
 }
@@ -72,8 +72,7 @@ editContent(e:any){
       this.dataLocal[indice].title = valor.trim()
 
 
-
-    localStorage.setItem('mydayapp-angular', JSON.stringify(this.dataLocal))
+    this.ls.setLocalStorage(this.dataLocal)
     this.comunication.addTask.emit()
     this.comunication.reCount.emit()
     }

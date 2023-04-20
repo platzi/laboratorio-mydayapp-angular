@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { timestamp } from 'rxjs';
 import { Tarea } from 'src/app/models/task';
 import { ComunicationService } from 'src/app/services/comunication.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ nuevaTarea : Tarea = {id: 0, title : '', completed: false}
 tarea = new FormControl()
 error = false
 limpiar = ''
-constructor(private comunicationService: ComunicationService){}
+constructor(private comunicationService: ComunicationService, private ls: LocalstorageService){}
 ngOnInit(): void{
 
 }
@@ -45,7 +46,7 @@ agregarTarea(e:any){
       this.tareas.push(this.nuevaTarea)
 
     }
-    localStorage.setItem('mydayapp-angular', JSON.stringify(this.tareas))
+    this.ls.setLocalStorage(this.tareas)
     this.comunicationService.addTask.emit()
 
 

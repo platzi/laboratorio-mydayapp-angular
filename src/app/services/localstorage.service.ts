@@ -13,4 +13,8 @@ export class LocalstorageService {
     return JSON.parse(existe)
     }else{return null}
   }
+
+  setLocalStorage(item: any){
+    localStorage.setItem('mydayapp-angular', JSON.stringify(item))
+  }
 }

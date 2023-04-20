@@ -60,7 +60,7 @@ clearCompleted(){
     });
 
   var resultArray = this.tareas
-  localStorage.setItem('mydayapp-angular', JSON.stringify(resultArray))
+  this.ls.setLocalStorage(resultArray)
   this.comunicate.addTask.emit()
   this.comunicate.reCount.emit()
 
