@@ -1,0 +1,16 @@
+<li [ngClass]="{'completed' : terminada, 'editing': editar}">
+
+          <div class="view">
+            <input class="toggle" type="checkbox" [checked]="terminada" (click)="toggleTask()" />
+            <label (dblclick)="click()">{{tarea.title}}</label>
+            <button class="destroy" (click)="eliminar()"></button>
+          </div>
+<!-- Formulario -->
+          <form (submit)="editContent($event)">
+            <input [formControl]="tareaEdited" (keydown)="onKeyDown($event)" class="edit" [(ngModel)]="titulo"/>
+          </form>
+
+</li>
+
+
+

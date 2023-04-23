@@ -1,0 +1,10 @@
+<header class="header">
+  <div class="container">
+    <h1>My Day</h1>
+    <p>All my tasks in one place</p>
+    <form (submit)="agregarTarea($event)" (submit)="reset()">
+    <input  [(ngModel)]="limpiar" class="new-todo" [formControl]="tarea" placeholder="Type new todo" autofocus type="text"/>
+    <label style="color: red" *ngIf="error">Por favor, agregue una tarea válida</label>
+    </form>
+  </div>
+</header>
