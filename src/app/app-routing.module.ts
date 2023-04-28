@@ -6,9 +6,8 @@ import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    pathMatch: 'full'
-  }
+    loadChildren: () => import('./modules/task/task.module').then(m => m.TaskModule)
+  },
 ];
 
 @NgModule({
