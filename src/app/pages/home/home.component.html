@@ -8,57 +8,60 @@
         placeholder="Type new todo"
         autofocus
         type="text"
+        [(ngModel)]="tarea" #ctrl="ngModel" required
+        (keyup.enter)="agregarTarea();"
       />
     </div>
   </header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
-    <section class="main">
+    <section class="main" *ngIf="tareas.length">
       <ul class="todo-list">
-        <li class="completed">
-          <div class="view">
-            <input class="toggle" type="checkbox" checked />
-            <label>Learn JavaScript</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Learn JavaScript" />
-        </li>
-        <li>
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Buy a unicorn" />
-        </li>
-        <li class="editing">
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Make dishes</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Make dishes" />
-        </li>
+        <ng-container *ngFor="let tarea of tareas; index as i">
+          <li [ngClass]="{'completed' : tarea.status === 'completed', 'editing': tarea.status === 'editing' && modoEditando}">
+            <div class="view">
+              <input class="toggle" type="checkbox" (change)="cambiarEstadoTarea(i)" [(ngModel)]="tarea.completed"/>
+
+              <div *ngIf="tarea.status === 'editing' && modoEditando; then thenLabelBlock else elseLabelBlock"></div>
+              <ng-template #thenLabelBlock>
+                <label>{{ tarea.title }}</label>
+              </ng-template>
+              <ng-template #elseLabelBlock>
+                <label (dblclick)="activaModoEdicion(i)">{{ tarea.title }}</label>
+              </ng-template>
+              
+              <button class="destroy" (click)="eliminarTarea(i)"></button>
+            </div>
+            <div *ngIf="tarea.status === 'editing' && modoEditando; then thenInputBlock else elseInputBlock"></div>
+            <ng-template #thenInputBlock>
+              <input class="edit" [(ngModel)]="tareaEditada" #ctrl="ngModel" (keyup.enter)="editarTarea(i);"/>
+            </ng-template>
+            <ng-template #elseInputBlock>
+              <input class="edit" [value]="tarea.title" />
+            </ng-template>
+            
+          </li>
+        </ng-container> 
       </ul>
     </section>
     <!-- This footer should be hidden by default and shown when there are todos -->
-    <footer class="footer">
+    <footer class="footer" *ngIf="getTotal() > 0">
       <!-- This should be `0 items left` by default -->
-      <span class="todo-count"><strong>0</strong> item left</span>
+      <span class="todo-count"><strong>{{ totalRegistros() }}</strong> item{{ totalRegistros() | pluralOrSingular  }} left</span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a routerLink="/" class="selected">All</a>
+          <a routerLink="/" [ngClass]="{'selected' : activeRoute === 'all'}">All</a>
         </li>
         <li>
-          <a routerLink="/pending">Pending</a>
+          <a routerLink="/pending" routerLinkActive="selected">Pending</a>
         </li>
         <li>
-          <a routerLink="/completed">Completed</a>
+          <a routerLink="/completed" routerLinkActive="selected">Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
-      <button class="clear-completed">Clear completed</button>
+      <button class="clear-completed" (click)="eliminarTareasCompletadas()" *ngIf="tareasCompletadas() > 0">Clear completed</button>
     </footer>
   </div>
 </section>
