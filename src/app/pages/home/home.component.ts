@@ -81,8 +81,13 @@ export class HomeComponent implements OnInit {
 
   saveEdit(event: any, editInputIndex: number): void {
     const inputValue = (event.target as HTMLInputElement).value.trim();
-    this.tasks[editInputIndex].title = inputValue;
-    this.isEditTask = false;
+
+    if (inputValue != '') {
+      this.tasks[editInputIndex].title = inputValue;
+      this.isEditTask = false;
+    } else {
+      alert('The task is empty, type your task, please');
+    }
 
   }
 
