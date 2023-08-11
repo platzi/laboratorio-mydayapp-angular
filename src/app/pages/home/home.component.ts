@@ -95,4 +95,14 @@ export class HomeComponent implements OnInit {
     this.isEditTask = false;
   }
 
+  getPendingTasks(): Task[] {
+    const pendingTasks: Task[] = [];
+    this.tasks.forEach((task: Task) => {
+      if(!task.completed) {
+        pendingTasks.push(task);
+      }
+    });
+    return pendingTasks;
+  }
+
 }
