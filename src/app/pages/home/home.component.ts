@@ -98,11 +98,33 @@ export class HomeComponent implements OnInit {
   getPendingTasks(): Task[] {
     const pendingTasks: Task[] = [];
     this.tasks.forEach((task: Task) => {
-      if(!task.completed) {
+      if (!task.completed) {
         pendingTasks.push(task);
       }
     });
     return pendingTasks;
   }
 
+  getCompletedTasks(): Task[] {
+    const completedTasks: Task[] = [];
+    this.tasks.forEach((task: Task) => {
+      if (task.completed) {
+        completedTasks.push(task);
+      }
+    });
+    return completedTasks;
+  }
+
+  deleteCompletedTasks(): void {
+    const uncompletedTasks: Task[] = [];
+    if (this.getCompletedTasks().length > 0) {
+      this.tasks.map((task: Task) => {
+        if (!task.completed) {
+          uncompletedTasks.push(task);
+        }
+      });
+      this.tasks = uncompletedTasks;
+      console.log('tasks', this.tasks);
+    }
+  }
 }
