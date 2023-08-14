@@ -22,6 +22,16 @@ export class HomeComponent implements OnInit {
     this.taskForm = this.formBuilder.group({
       task: ['', Validators.required]
     });
+
+    const storedTaskString = localStorage.getItem('mydayapp-angular');
+
+    if(storedTaskString !== null) {
+      const storedTasks = JSON.parse(storedTaskString);
+      this.tasks = storedTasks;
+      console.log('localStorage', this.tasks);
+    }
+
+
   }
 
   onSubmit() {
@@ -49,6 +59,7 @@ export class HomeComponent implements OnInit {
       //console.log('Task', task);
 
       this.clearInput(this.taskForm.get('task'));
+      localStorage.setItem('mydayapp-angular', JSON.stringify(this.tasks));
     } else {
       alert('The task is empty, type your task, please');
     }
@@ -84,6 +95,7 @@ export class HomeComponent implements OnInit {
 
     if (inputValue != '') {
       this.tasks[editInputIndex].title = inputValue;
+      localStorage.setItem('mydayapp-angular', JSON.stringify(this.tasks));
       this.isEditTask = false;
     } else {
       alert('The task is empty, type your task, please');
@@ -124,6 +136,7 @@ export class HomeComponent implements OnInit {
         }
       });
       this.tasks = uncompletedTasks;
+      localStorage.setItem('mydayapp-angular', JSON.stringify(this.tasks));
       console.log('tasks', this.tasks);
     }
   }
