@@ -3,3 +3,9 @@ export interface Task {
   title: string;
   completed: boolean;
 }
+
+export interface ViewConfig {
+  all: boolean,
+  completed: boolean,
+  uncompleted: boolean
+}
