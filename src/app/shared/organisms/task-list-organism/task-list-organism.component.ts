@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Task, ViewConfig } from 'src/app/models/task.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list-organism',
@@ -16,11 +17,16 @@ export class TaskListOrganismComponent implements OnInit {
   isEditTask: boolean = false;
   taskToEdit!: number;
   @ViewChild('editInput') editInput!: ElementRef;
+  currentUrl!: string;
 
-
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
+
+    this.currentUrl = this.router.url;
+
     this.taskForm = this.formBuilder.group({
       task: ['', Validators.required]
     });
