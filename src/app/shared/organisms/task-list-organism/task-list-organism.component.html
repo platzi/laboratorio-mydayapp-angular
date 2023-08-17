@@ -1,0 +1,87 @@
+<section class="todoapp">
+  <header class="header">
+    <div class="container">
+      <h1>My Day</h1>
+      <p>All my tasks in one place</p>
+      <form [formGroup]="taskForm">
+        <input class="new-todo" placeholder="Type new todo" autofocus type="text"
+          (keyup.enter)="saveNewTask($event)" formControlName="task" />
+      </form>
+    </div>
+  </header>
+  <div class="container todoapp-wrapper">
+    <!-- This section should be hidden by default and shown when there are todos -->
+    <section *ngIf="tasks.length > 0" id="main" class="main">
+      <ul class="todo-list" *ngIf="viewConfig.all">
+    
+        <li [ngClass]="{'completed': item.completed && !isEditTask, 'editing': isEditTask}"
+          *ngFor="let item of tasks; let i = index;">
+          <div class="view">
+            <input class="toggle" type="checkbox" (click)="changeTaskState($event, item)" [checked]="item.completed" />
+            <label (dblclick)="changeToEdit(i)"> {{ item.title }} </label>
+            <button class="destroy"></button>
+          </div>
+          <input #editInput *ngIf="isEditTask && i === taskToEdit" class="edit" [value]="item.title" type="text"
+            (keyup.enter)="saveEdit($event, i)" (keydown.escape)="cancelEdit()" />
+    
+        </li>
+      </ul>
+
+      <ul class="todo-list todo-list-completed" *ngIf="viewConfig.completed">
+    
+        <li [ngClass]="{'completed': item.completed && !isEditTask, 'editing': isEditTask}"
+          *ngFor="let item of tasks; let i = index;">
+          <div *ngIf="item.completed" class="view">
+            <input class="toggle" type="checkbox" (click)="changeTaskState($event, item)" [checked]="item.completed" />
+            <label (dblclick)="changeToEdit(i)"> {{ item.title }} </label>
+            <button class="destroy"></button>
+          </div>
+          <input #editInput *ngIf="isEditTask && i === taskToEdit" class="edit" [value]="item.title" type="text"
+            (keyup.enter)="saveEdit($event, i)" (keydown.escape)="cancelEdit()" />
+    
+        </li>
+      </ul>
+
+      <ul class="todo-list todo-list-uncompleted" *ngIf="viewConfig.uncompleted">
+    
+        <li [ngClass]="{'completed': item.completed && !isEditTask, 'editing': isEditTask}"
+          *ngFor="let item of tasks; let i = index;">
+          <div *ngIf="!item.completed" class="view">
+            <input class="toggle" type="checkbox" (click)="changeTaskState($event, item)" [checked]="item.completed" />
+            <label (dblclick)="changeToEdit(i)"> {{ item.title }} </label>
+            <button class="destroy"></button>
+          </div>
+          <input #editInput *ngIf="isEditTask && i === taskToEdit" class="edit" [value]="item.title" type="text"
+            (keyup.enter)="saveEdit($event, i)" (keydown.escape)="cancelEdit()" />
+    
+        </li>
+      </ul>
+
+    </section>
+    <!-- This footer should be hidden by default and shown when there are todos -->
+    <footer *ngIf="tasks.length > 0" id="footer" class="footer">
+      <!-- This should be `0 items left` by default -->
+      <span class="todo-count">
+        <strong>
+          {{getPendingTasks().length}}
+        </strong>
+        <span *ngIf="getPendingTasks().length === 1">item left</span>
+        <span *ngIf="getPendingTasks().length !== 1">items left</span>
+      </span>
+      <!-- Remove this if you don't implement routing -->
+      <ul class="filters">
+        <li>
+          <a routerLink="/" [ngClass]="{'selected': currentUrl === '/'}">All</a>
+        </li>
+        <li>
+          <a routerLink="/pending" [ngClass]="{'selected': currentUrl === '/pending'}">Pending</a>
+        </li>
+        <li>
+          <a routerLink="/completed" [ngClass]="{'selected': currentUrl === '/completed'}">Completed</a>
+        </li>
+      </ul>
+      <!-- Hidden if no completed items are left ↓ -->
+      <button *ngIf="getCompletedTasks().length>0" (click)="deleteCompletedTasks()" class="clear-completed">Clear completed</button>
+    </footer>
+  </div>
+</section>

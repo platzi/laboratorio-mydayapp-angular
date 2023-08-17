@@ -247,8 +247,8 @@ test.describe('Routing', () => {
     await page.locator('.todo-list li .toggle').nth(1).check();
     await checkNumberOfCompletedTodosInLocalStorage(page, 1);
     await page.locator('.filters >> text=Pending').click();
-    await expect(page.locator('.todo-list li')).toHaveCount(2);
-    await expect(page.locator('.todo-list li')).toHaveText([
+    await expect(page.locator('.todo-list-uncompleted li div')).toHaveCount(2);
+    await expect(page.locator('.todo-list-uncompleted li div')).toHaveText([
       TODO_ITEMS[0],
       TODO_ITEMS[2],
     ]);
@@ -260,7 +260,7 @@ test.describe('Routing', () => {
 
     await test.step('Showing all items', async () => {
       await page.locator('.filters >> text=All').click();
-      await expect(page.locator('.todo-list li')).toHaveCount(3);
+      await expect(page.locator('.todo-list li div')).toHaveCount(3);
     });
 
     await test.step('Showing pending items', async () => {
@@ -271,18 +271,18 @@ test.describe('Routing', () => {
       await page.locator('.filters >> text=Completed').click();
     });
 
-    await expect(page.locator('.todo-list li')).toHaveCount(1);
+    await expect(page.locator('.todo-list li div')).toHaveCount(1);
     await page.goBack();
-    await expect(page.locator('.todo-list li')).toHaveCount(2);
+    await expect(page.locator('.todo-list li div')).toHaveCount(2);
     await page.goBack();
-    await expect(page.locator('.todo-list li')).toHaveCount(3);
+    await expect(page.locator('.todo-list li div')).toHaveCount(3);
   });
 
   test('should allow me to display completed items', async ({ page }) => {
     await page.locator('.todo-list li .toggle').nth(1).check();
     await checkNumberOfCompletedTodosInLocalStorage(page, 1);
     await page.locator('.filters >> text=Completed').click();
-    await expect(page.locator('.todo-list li')).toHaveCount(1);
+    await expect(page.locator('.todo-list-completed li div')).toHaveCount(1);
   });
 
   test('should allow me to display all items', async ({ page }) => {
