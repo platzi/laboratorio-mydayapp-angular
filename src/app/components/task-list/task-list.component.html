@@ -1,0 +1,7 @@
+<ng-container *ngIf="tasks$ |async as tasks">
+  <section *ngIf="tasks.length > 0" class="main">
+    <ul class="todo-list">
+      <app-task *ngFor="let task of tasks" [task]="task"></app-task>
+    </ul>
+  </section>
+</ng-container>

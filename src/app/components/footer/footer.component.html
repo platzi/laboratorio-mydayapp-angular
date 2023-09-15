@@ -1,0 +1,20 @@
+<ng-container *ngIf="tasks$ |async as tasks">
+  <footer *ngIf="tasks.length > 0" class="footer">
+    <!-- This should be `0 items left` by default -->
+    <app-task-counter></app-task-counter>
+    <!-- Remove this if you don't implement routing -->
+    <ul *ngIf="filter$ |async as filter" class="filters">
+      <li>
+        <a routerLink="/" [class.selected]="filter === 'all'">All</a>
+      </li>
+      <li>
+        <a routerLink="/pending" [class.selected]="filter === 'pending'">Pending</a>
+      </li>
+      <li>
+        <a routerLink="/completed" [class.selected]="filter === 'completed'">Completed</a>
+      </li>
+    </ul>
+    <!-- Hidden if no completed items are left ↓ -->
+    <app-clear-button></app-clear-button>
+  </footer>
+</ng-container>

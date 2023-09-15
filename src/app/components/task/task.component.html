@@ -1,0 +1,11 @@
+<li [ngClass]="{
+  'completed': _task.completed,
+  'editing': editMode
+}">
+  <div class="view">
+    <input class="toggle" type="checkbox" [checked]="_task.completed" (change)="handleCheck()" />
+    <label (dblclick)="handleDoubleClick()">{{_task.title}}</label>
+    <button (click)="handleRemove()" class="destroy"></button>
+  </div>
+  <input #inputElement class="edit" [formControl]="input" (keyup)="handleEdit($event)" />
+</li>
