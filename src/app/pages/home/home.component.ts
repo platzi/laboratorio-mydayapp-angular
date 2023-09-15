@@ -5,10 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  tareasNuevas: string[] = [];
+  constructor() {}
 
   ngOnInit(): void {
+    console.log('Hola');
   }
-
 }
