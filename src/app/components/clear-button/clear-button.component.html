@@ -1,0 +1,5 @@
+<ng-container *ngIf="completedTasks$ |async as completedTasks">
+  <button *ngIf="completedTasks.length > 0" (click)="handleClearCompleted()" class="clear-completed">
+    Clear completed
+  </button>
+</ng-container>

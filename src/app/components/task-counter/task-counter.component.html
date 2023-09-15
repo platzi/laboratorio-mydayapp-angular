@@ -1,0 +1,3 @@
+<span *ngIf="pendingTasks$ |async as pendingTasks" class="todo-count">
+  <strong>{{pendingTasks.length}}</strong>  {{pendingTasks.length === 1 ?'item left' :'items left'}}
+</span>
