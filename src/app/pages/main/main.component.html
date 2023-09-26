@@ -1,0 +1,16 @@
+<section class="main">
+    <ul class="todo-list" *ngFor="let tarea of tareasTemp; index as i">
+
+      <li [ngClass]="{'completed': tarea.completed === true, 'editing': tarea.id === tareaEdit.id }">
+        <div class="view" *ngIf="isEditing === false">
+          <input class="toggle" type="checkbox" (checked)="tarea.completed" [(ngModel)]="tarea.completed" (ngModelChange)="updateTarea(tarea)"/>
+          <label (dblclick)="editTarea(tarea)">{{ tarea.title }}</label>
+          <button class="destroy" type="button" (click)="deleteTarea(i)"></button>
+        </div>
+        <input *ngIf="isEditing === true" class="edit" appAutofocus #edit [(ngModel)]="tareaEdit.title" (keydown)="key($event)"/>
+      </li>
+
+    </ul>
+</section>
+
+<app-footer *ngIf="contador > 0" [contador]="contador" [showButton]="showButton" [word]="word"></app-footer>
