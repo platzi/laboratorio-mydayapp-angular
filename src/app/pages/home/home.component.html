@@ -29,10 +29,19 @@
               (input)="onCompleteTask($event)"
               value="task-{{ task.id }}"
             />
-            <label>{{ task.title }}</label>
+            <label (dblclick)="onEditTask($event)" >{{ task.title }}</label>
             <button class="destroy"></button>
           </div>
           <input class="edit" [value]="task.title"/>
+        </li>
+
+        <li class="editing">
+          <div class="view">
+            <input class="toggle" type="checkbox" />
+            <label>Make dishes</label>
+            <button class="destroy"></button>
+          </div>
+          <input class="edit" value="Make dishes" />
         </li>
 
         <!-- <li class="completed">
@@ -67,7 +76,9 @@
     <!-- This footer should be hidden by default and shown when there are todos -->
     <footer class="footer">
       <!-- This should be `0 items left` by default -->
-      <span class="todo-count"><strong>0</strong> item left</span>
+      <span class="todo-count">
+        <strong>{{ this.tasksLength }}</strong> {{ this.todoCount() }} pending
+      </span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>

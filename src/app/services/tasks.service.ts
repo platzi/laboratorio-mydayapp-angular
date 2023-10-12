@@ -34,6 +34,7 @@ export class TasksService {
     const index = this.storage.findIndex(task => task.id == taskId);
     const task = { ...this.storage[index], completed: value };
     this.storage.splice(index, 1, task);
+    this.storageS.next(this.storage);
     localStorage.setItem(this.storageName, JSON.stringify(this.storage));
   }
 

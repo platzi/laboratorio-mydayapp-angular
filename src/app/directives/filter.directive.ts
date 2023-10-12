@@ -15,8 +15,12 @@ export class FilterDirective implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    const isCompleted = this.li.nativeElement.classList as DOMTokenList;
-    console.log(isCompleted.contains('completed'));
-    console.log(this.currentUrl);
+    const task = this.li.nativeElement.classList as DOMTokenList;
+    if(this.currentUrl === '/completed' && !task.contains('completed')){
+      task.add('task-hidden');
+    }
+    if(this.currentUrl === '/pending' && task.contains('completed')){
+      task.add('task-hidden');
+    }
   }
 }

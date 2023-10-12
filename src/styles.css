@@ -370,6 +370,10 @@ html .clear-completed:active {
   text-decoration: underline;
 }
 
+.task-hidden{
+  display: none !important;
+}
+
 /*
 	Hack to remove background from Mobile Safari.
 	Can't use it globally since it destroys checkboxes in Firefox
