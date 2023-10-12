@@ -6,8 +6,20 @@ import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    pathMatch: 'full'
+    redirectTo: 'all',
+    pathMatch: 'full',
+  },
+  {
+    path: 'all',
+    component: HomeComponent
+  },
+  {
+    path: 'pending',
+    component: HomeComponent
+  },
+  {
+    path: 'completed',
+    component: HomeComponent
   }
 ];
 

@@ -326,11 +326,12 @@ body {
   border-radius: 3px;
 }
 
-.filters li a:hover {
-  border-color: #6e49fe;
+.filters li a.selected {
+  border-color: #4c33b1;
 }
 
-.filters li a.selected {
+.filters li a.active,
+.filters li a:hover{
   border-color: #4c33b1;
 }
 

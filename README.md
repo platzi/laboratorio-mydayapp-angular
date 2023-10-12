@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MyDayApp - Angular
 
 MyDayApp es una aplicación para gestionar tareas de forma sencilla, fácil y en donde pondrás a pruebas tus conocimientos en Angular.
@@ -186,3 +187,7 @@ Este proyecto se lanza bajo la licencia [MIT](https://opensource.org/licenses/MI
 
 - [TodoMVC Project](https://todomvc.com/)
 - [MyDayApp - JavaScript](https://github.com/platzi/laboratorio-mydayapp-js)
+=======
+# platziTechnicalTest
+this is a technical test from Platzi. 
+>>>>>>> 59c166ee35a7fe99216ecd2766af7327fc8503d7
