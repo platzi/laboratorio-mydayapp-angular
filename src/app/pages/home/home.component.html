@@ -20,7 +20,7 @@
     <section class="main">
       <ul class="todo-list">
 
-        <li *ngFor="let task of this.tasks" [class.completed]="task.completed === true" appFilter>
+        <li *ngFor="let task of this.tasks" [class.completed]="task.completed === true" appFilter [attr.data-checked]="task.completed">
           <div class="view">
             <input
               class="toggle"
@@ -30,18 +30,17 @@
               value="task-{{ task.id }}"
             />
             <label (dblclick)="onEditTask($event)" >{{ task.title }}</label>
-            <button class="destroy"></button>
+            <button class="destroy" (click)="onDeleteTask(task.id)"></button>
           </div>
-          <input class="edit" [value]="task.title"/>
-        </li>
 
-        <li class="editing">
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Make dishes</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Make dishes" />
+          <input
+            class="edit"
+            [value]="task.title"
+            (keydown.enter)="onEditFinished($event)"
+            [attr.data-task-id]="task.id"
+            (keydown.esc)="closeEditMode($event)"
+            (blur)="closeEditMode($event)"
+          />
         </li>
 
         <!-- <li class="completed">
@@ -77,7 +76,7 @@
     <footer class="footer">
       <!-- This should be `0 items left` by default -->
       <span class="todo-count">
-        <strong>{{ this.tasksLength }}</strong> {{ this.todoCount() }} pending
+        <strong>{{ this.tasksLength }}</strong> {{ this.todoCount() }} left
       </span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
@@ -101,7 +100,13 @@
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
-      <button class="clear-completed">Clear completed</button>
+      <button
+        *ngIf="this.tasks.length - this.tasksLength > 0"
+        class="clear-completed"
+        (click)="onDeleteCompletedTasks()"
+      >
+        Clear completed
+      </button>
     </footer>
   </div>
 </section>

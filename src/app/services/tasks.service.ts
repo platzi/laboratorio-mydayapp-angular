@@ -32,10 +32,30 @@ export class TasksService {
   completeTask(id: string, value: boolean){
     const [_, taskId] = id.split('-');
     const index = this.storage.findIndex(task => task.id == taskId);
-    const task = { ...this.storage[index], completed: value };
+    const task: Task = { ...this.storage[index], completed: value };
     this.storage.splice(index, 1, task);
     this.storageS.next(this.storage);
     localStorage.setItem(this.storageName, JSON.stringify(this.storage));
+  }
+  editTask(id: string, title: Task['title']){
+    const idArr = this.storage.findIndex(task => task.id == id);
+    const task: Task = { ...this.storage[idArr], title: title };
+    this.storage.splice(idArr, 1, task);
+    this.storageS.next(this.storage);
+    localStorage.setItem(this.storageName, JSON.stringify(this.storage));
+  }
+
+  deleteTask(taskId: number){
+    const index = this.storage.findIndex(element => element.id == taskId);
+    this.storage.splice(index, 1);
+    this.storageS.next(this.storage);
+    localStorage.setItem(this.storageName, JSON.stringify(this.storage));
+  }
+
+  deleteCompletedTasks(){
+    let completedTask = this.storage.filter(element => !element.completed);
+    this.storageS.next(completedTask);
+    localStorage.setItem(this.storageName, JSON.stringify(completedTask));
   }
 
   private newTask(title: string): Task{
