@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs';
+import { filter, take, tap } from 'rxjs';
 import { Task } from 'src/app/models/task.model';
+import { Router, NavigationEnd } from '@angular/router';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -10,11 +11,16 @@ import { TasksService } from 'src/app/services/tasks.service';
 export class HomeComponent implements OnInit{
   inputValue = '';
   tasks!: Task[];
-  tasksLength!: number;
+  completedTasks!: number;
+  currentUrl: string;
 
   constructor(
-    private tasksService: TasksService
-  ) { }
+    private tasksService: TasksService,
+    private router: Router
+  ) {
+    this.currentUrl = this.router.url;
+    this.tasksService.filterTasks(this.currentUrl);
+  }
 
   createNewTask(){
     if(this.inputValue.length > 0){
@@ -24,12 +30,22 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.router.events
+    .pipe(
+      filter(event => event instanceof NavigationEnd),
+    )
+    .subscribe(event =>{
+      if(event instanceof NavigationEnd){
+        this.tasksService.filterTasks(event.url);
+      }
+    });
+
     this.tasksService.storage$
     .pipe(tap(tasksArr =>{
-      this.tasksLength = 0;
+      this.completedTasks = 0;
       tasksArr.forEach(task =>{
-        if(!task.completed){
-          this.tasksLength++;
+        if(task.completed){
+          this.completedTasks++;
         }
       });
     }))
@@ -82,7 +98,7 @@ export class HomeComponent implements OnInit{
   }
 
   todoCount(): string{
-    if(this.tasksLength == 1){
+    if(this.tasks.length == 1){
       return 'item';
     }
     return 'items';

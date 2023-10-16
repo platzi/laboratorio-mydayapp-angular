@@ -12,6 +12,7 @@ export class FilterDirective implements AfterViewInit{
     private router: Router
   ){
     this.currentUrl = this.router.url;
+    console.log(this.currentUrl);
   }
 
   ngAfterViewInit(): void {

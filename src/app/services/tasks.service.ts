@@ -58,6 +58,21 @@ export class TasksService {
     localStorage.setItem(this.storageName, JSON.stringify(completedTask));
   }
 
+  filterTasks(url: string){
+    let aux: Task[] = [];
+
+    if(url === '/pending'){
+      aux = this.storage.filter(element => !element.completed);
+    }
+    if(url === '/completed'){
+      aux = this.storage.filter(element => element.completed);
+    }
+    if(url === '/all' || url === '/'){
+      aux = this.storage;
+    }
+    this.storageS.next(aux);
+  }
+
   private newTask(title: string): Task{
     this.id++;
     localStorage.setItem('ids', this.id.toString());

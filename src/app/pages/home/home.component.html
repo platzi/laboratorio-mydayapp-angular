@@ -20,7 +20,7 @@
     <section class="main">
       <ul class="todo-list">
 
-        <li *ngFor="let task of this.tasks" [class.completed]="task.completed === true" appFilter [attr.data-checked]="task.completed">
+        <li *ngFor="let task of this.tasks" [class.completed]="task.completed" [attr.data-checked]="task.completed">
           <div class="view">
             <input
               class="toggle"
@@ -76,32 +76,33 @@
     <footer class="footer">
       <!-- This should be `0 items left` by default -->
       <span class="todo-count">
-        <strong>{{ this.tasksLength }}</strong> {{ this.todoCount() }} left
+        <strong>{{ this.tasks.length }}</strong> {{ this.todoCount() }} left
       </span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
           <a
             routerLink="/all"
-            routerLinkActive="active"
+            routerLinkActive="selected"
+            [ngClass]="this.currentUrl === '/' ? 'selected' : ''"
           >All</a>
         </li>
         <li>
           <a
             routerLink="/pending"
-            routerLinkActive="active"
+            routerLinkActive="selected"
           >Pending</a>
         </li>
         <li>
           <a
             routerLink="/completed"
-            routerLinkActive="active"
+            routerLinkActive="selected"
           >Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
       <button
-        *ngIf="this.tasks.length - this.tasksLength > 0"
+        *ngIf="this.completedTasks > 0"
         class="clear-completed"
         (click)="onDeleteCompletedTasks()"
       >
