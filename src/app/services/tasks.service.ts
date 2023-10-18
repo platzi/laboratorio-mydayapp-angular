@@ -54,6 +54,7 @@ export class TasksService {
 
   deleteCompletedTasks(){
     let completedTask = this.storage.filter(element => !element.completed);
+    this.storage = [...completedTask];
     this.storageS.next(completedTask);
     localStorage.setItem(this.storageName, JSON.stringify(completedTask));
   }
