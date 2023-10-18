@@ -252,6 +252,7 @@ body {
 .todo-list li .destroy {
   display: none;
   position: absolute;
+  cursor: pointer;
   top: 0;
   right: 10px;
   bottom: 0;
@@ -326,11 +327,11 @@ body {
   border-radius: 3px;
 }
 
-.filters li a:hover {
-  border-color: #6e49fe;
+.filters li a.selected {
+  border-color: #4c33b1;
 }
 
-.filters li a.selected {
+.filters li a:hover{
   border-color: #4c33b1;
 }
 
@@ -367,6 +368,10 @@ html .clear-completed:active {
 
 .info a:hover {
   text-decoration: underline;
+}
+
+.task-hidden{
+  display: none !important;
 }
 
 /*
