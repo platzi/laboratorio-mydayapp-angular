@@ -12,7 +12,7 @@
     </div>
   </header>
   <div class="container todoapp-wrapper">
-    <app-main></app-main>
-    <app-footer></app-footer>
+    <app-main *ngIf="showMainFooter"></app-main>
+    <app-footer *ngIf="showMainFooter"></app-footer>
   </div>
 </section>
