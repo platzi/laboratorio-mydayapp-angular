@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Task } from 'src/app/core/models/task.model';
 import { TasksService } from 'src/app/core/services/tasks.service';
 
@@ -6,11 +6,15 @@ import { TasksService } from 'src/app/core/services/tasks.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  listTasks: Task[] = [];
 
   constructor(private tasksService: TasksService) { }
 
-  listTasks: Task[] = [];
+  ngOnInit(): void {
+    this.listTasks = this.tasksService.getAllTasks();
+  }
 
   onkeyup(event: any) {
     if (event.keyCode === 13) {
@@ -25,6 +29,7 @@ export class HomeComponent {
   addTask(taskName: string) {
     this.listTasks = this.tasksService.addTask(taskName);
   }
+
 
   get showMainFooter(): boolean {
     return this.tasksService.getAllTasks().length > 0;
