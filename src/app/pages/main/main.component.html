@@ -3,7 +3,7 @@
   <ul class="todo-list">
     <li *ngFor="let task of listTasks" [ngClass]="{ completed: isTaskCompleted(task) }">
       <div class="view">
-        <input class="toggle" type="checkbox" [checked]="isTaskCompleted(task)" />
+        <input class="toggle" type="checkbox" [checked]="isTaskCompleted(task)" (change)="changeStatusTask(task)" />
         <label>{{ task.name }}</label>
         <button class="destroy"></button>
       </div>

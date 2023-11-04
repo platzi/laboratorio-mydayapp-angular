@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from 'src/app/core/models/task.model';
 
 @Component({
@@ -8,13 +8,16 @@ import { Task } from 'src/app/core/models/task.model';
 export class MainComponent {
 
   @Input() listTasks: Task[] = [];
+  @Output() changeStatus = new EventEmitter<Task>();
 
   isCompleted = false;
 
-  constructor() { }
-
   isTaskCompleted(task: Task): boolean {
     return task.completed;
+  }
+
+  changeStatusTask(task: Task): void {
+    this.changeStatus.emit(task);
   }
 
 }
