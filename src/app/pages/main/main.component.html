@@ -7,7 +7,7 @@
         <label>{{ task.name }}</label>
         <button class="destroy"></button>
       </div>
-      <input class="edit" value="Buy a unicorn" />
+      <input class="edit" [value]="task.name" />
     </li>
     <li class="completed">
       <div class="view">
