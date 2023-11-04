@@ -39,7 +39,7 @@ export class TasksService {
     return listTasks;
   }
 
-  updateStateTask(task: Task): Task[] {
+  changeStatusTask(task: Task): Task[] {
     let listTasks = this.getAllTasks();
     listTasks = listTasks.map(t => {
       if (t.id === task.id) {
