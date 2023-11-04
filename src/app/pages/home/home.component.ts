@@ -30,6 +30,9 @@ export class HomeComponent implements OnInit {
     this.listTasks = this.tasksService.addTask(taskName);
   }
 
+  changeStatus(task: Task): void {
+    this.listTasks = this.tasksService.changeStatusTask(task);
+  }
 
   get showMainFooter(): boolean {
     return this.tasksService.getAllTasks().length > 0;
