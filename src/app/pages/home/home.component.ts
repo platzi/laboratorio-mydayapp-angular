@@ -1,59 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { Task } from 'src/app/models/task.model';
+import { Component } from '@angular/core';
+import { Task } from 'src/app/core/models/task.model';
+import { TasksService } from 'src/app/core/services/tasks.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+
+  constructor(private tasksService: TasksService) { }
 
   listTasks: Task[] = [];
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onkeyup(event: any) {
+    if (event.keyCode === 13) {
+      const taskName = event.target.value.trim();
+      if (taskName.length > 0) {
+        this.addTask(taskName);
+        event.target.value = '';
+      }
+    }
   }
 
   addTask(taskName: string) {
-    const task: Task = {
-      id: this.listTasks.length + 1,
-      name: taskName,
-      completed: false
-    };
-    this.listTasks.push(task);
+    this.listTasks = this.tasksService.addTask(taskName);
   }
-
-  deleteTask(task: Task) {
-    this.listTasks = this.listTasks.filter(t => t.id !== task.id);
-  }
-
-  updateTask(task: Task) {
-    this.listTasks = this.listTasks.map(t => {
-      if (t.id === task.id) {
-        t.completed = !t.completed;
-      }
-      return t;
-    });
-  }
-
-  get pendingTasks() {
-    return this.listTasks.filter(t => !t.completed).length;
-  }
-
-  get completedTasks() {
-    return this.listTasks.filter(t => t.completed).length;
-  }
-
-  get totalTasks() {
-    return this.listTasks.length;
-  } 
 
   get showMainFooter(): boolean {
-    return this.listTasks.length > 0;
-  }
-
-  addtest(){
-    this.addTask("test");
+    return this.tasksService.getAllTasks().length > 0;
   }
 
 }

@@ -8,11 +8,12 @@
         placeholder="Type new todo"
         autofocus
         type="text"
+        (keyup.enter)="onkeyup($event)"
       />
     </div>
   </header>
   <div class="container todoapp-wrapper">
-    <app-main *ngIf="showMainFooter"></app-main>
+    <app-main *ngIf="showMainFooter" [listTasks]="listTasks"></app-main>
     <app-footer *ngIf="showMainFooter"></app-footer>
   </div>
 </section>
