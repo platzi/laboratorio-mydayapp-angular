@@ -39,6 +39,13 @@ export class TasksService {
     return listTasks;
   }
 
+  deleteCompletedTasks(): Task[] {
+    let listTasks = this.getAllTasks();
+    listTasks = listTasks.filter(t => !t.completed);
+    this.saveAllTasks(listTasks);
+    return listTasks;
+  }
+
   changeStatusTask(task: Task): Task[] {
     let listTasks = this.getAllTasks();
     listTasks = listTasks.map(t => {
