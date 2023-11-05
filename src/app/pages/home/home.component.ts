@@ -56,6 +56,14 @@ export class HomeComponent implements OnInit {
   }
 
   refreshListTasks(): void {
+    this.route.params.subscribe(params => {
+      const filter = params['filtered'];
+      if (filter) {
+        this.listTasks = this.tasksService.getTasksByStatus(filter);
+      } else {
+        this.listTasks = this.tasksService.getAllTasks();
+      }
+    });
     this.route.url.subscribe(url => {
       const filter = url[0]?.path;
       if (filter) {
@@ -74,7 +82,7 @@ export class HomeComponent implements OnInit {
     return this.tasksService.getAllTasks().filter(t => !t.completed).length;
   }
 
-  get itemsCompleted(): number {    
+  get itemsCompleted(): number {
     return this.tasksService.getAllTasks().filter(t => t.completed).length;
   }
 
