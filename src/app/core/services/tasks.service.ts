@@ -16,11 +16,21 @@ export class TasksService {
     return listTasks;
   }
 
+  getTasksByStatus(status: string): Task[] {
+    const listTasks = this.getAllTasks();
+    if (status === 'pending') {
+      return listTasks.filter(t => !t.completed);
+    } else if (status === 'completed') {
+      return listTasks.filter(t => t.completed);
+    }
+    return listTasks;
+  }
+
   private saveAllTasks(listTasks: Task[]): void {
     localStorage.setItem('mydayapp-angular', JSON.stringify(listTasks));
   }
 
-  addTask(taskName: string): Task[] {
+  addTask(taskName: string): void {
     const listTasks = this.getAllTasks();
     const task: Task = {
       id: listTasks.length + 1,
@@ -29,24 +39,21 @@ export class TasksService {
     };
     listTasks.push(task);
     this.saveAllTasks(listTasks);
-    return listTasks;
   }
 
-  deleteTask(task: Task): Task[] {
+  deleteTask(task: Task): void {
     let listTasks = this.getAllTasks();
     listTasks = listTasks.filter(t => t.id !== task.id);
     this.saveAllTasks(listTasks);
-    return listTasks;
   }
 
-  deleteCompletedTasks(): Task[] {
+  deleteCompletedTasks(): void {
     let listTasks = this.getAllTasks();
     listTasks = listTasks.filter(t => !t.completed);
     this.saveAllTasks(listTasks);
-    return listTasks;
   }
 
-  changeStatusTask(task: Task): Task[] {
+  changeStatusTask(task: Task): void {
     let listTasks = this.getAllTasks();
     listTasks = listTasks.map(t => {
       if (t.id === task.id) {
@@ -55,10 +62,9 @@ export class TasksService {
       return t;
     });
     this.saveAllTasks(listTasks);
-    return listTasks;
   }
 
-  updateNameTask(task: Task, newName: string): Task[] {
+  updateNameTask(task: Task, newName: string): void {
     let listTasks = this.getAllTasks();
     listTasks = listTasks.map(t => {
       if (t.id === task.id) {
@@ -67,6 +73,5 @@ export class TasksService {
       return t;
     });
     this.saveAllTasks(listTasks);
-    return listTasks;
   }
 }
