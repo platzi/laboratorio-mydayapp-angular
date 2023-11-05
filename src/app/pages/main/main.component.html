@@ -1,7 +1,7 @@
 <!-- This section should be hidden by default and shown when there are todos -->
 <section class="main">
   <ul class="todo-list">
-    <li
+    <li (dblclick)="startEditingTask(task)"
       *ngFor="let task of listTasks"
       [ngClass]="{
         completed: isTaskCompleted(task),
@@ -15,7 +15,7 @@
           [checked]="isTaskCompleted(task)"
           (change)="changeStatusTask(task)"
         />
-        <label (dblclick)="startEditingTask(task)">{{ task.name }}</label>
+        <label>{{ task.name }}</label>
         <button class="destroy" (click)="deleteTask(task)"></button>
       </div>
       <input
