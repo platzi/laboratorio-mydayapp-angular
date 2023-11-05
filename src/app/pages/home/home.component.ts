@@ -74,6 +74,10 @@ export class HomeComponent implements OnInit {
     return this.tasksService.getAllTasks().filter(t => !t.completed).length;
   }
 
+  get itemsCompleted(): number {    
+    return this.tasksService.getAllTasks().filter(t => t.completed).length;
+  }
+
   get countItems(): number {
     return this.tasksService.getAllTasks().length;
   }
