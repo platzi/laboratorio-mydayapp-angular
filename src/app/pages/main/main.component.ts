@@ -9,7 +9,9 @@ export class MainComponent {
 
   @Input() listTasks: Task[] = [];
   @Output() changeStatus = new EventEmitter<Task>();
+  @Output() changeName = new EventEmitter<{ task: Task, newName: string }>();
 
+  editingTaskId: number | null = null;
   isCompleted = false;
 
   isTaskCompleted(task: Task): boolean {
@@ -18,6 +20,22 @@ export class MainComponent {
 
   changeStatusTask(task: Task): void {
     this.changeStatus.emit(task);
+  }
+
+  updateNameTask(event: any, task: Task): void {    
+    const newName: string = event.target.value.trim();
+    this.changeName.emit({ task, newName });
+    this.editingTaskId = null;
+  }
+
+  startEditingTask(task: Task): void {
+    this.editingTaskId = task.id;
+    const inputElement = document.getElementById(`inputTaskName${task.id}`);
+    setTimeout(() => {
+      if (inputElement) {
+        inputElement.focus();
+      }
+    }, 100);
   }
 
 }
