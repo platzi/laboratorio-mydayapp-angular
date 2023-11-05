@@ -38,11 +38,7 @@ export class MainComponent {
   startEditingTask(task: Task): void {
     this.editingTaskId = task.id;
     const inputElement = document.getElementById(`inputTaskName${task.id}`);
-    setTimeout(() => {
-      if (inputElement) {
-        inputElement.focus();
-      }
-    }, 100);
+    inputElement?.focus();
   }
 
   cancelEditingTask(): void {
