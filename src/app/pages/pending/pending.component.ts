@@ -4,12 +4,12 @@ import { Task } from 'src/app/models/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: 'app-pending',
+  templateUrl: './pending.component.html'
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class PendingComponent implements OnInit, OnDestroy {
 
-  allTask: Task[] = [];
+  pendingTask: Task[] = [];
   suscription !: Subscription;
 
   constructor(
@@ -17,10 +17,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.taskService.initTasks();
     this.suscription = this.taskService.tasksList$.subscribe( tasks => {
       if(tasks){
-        this.allTask = tasks;
+        this.pendingTask = this.taskService.getTaskPeding();
       }
     });
   }

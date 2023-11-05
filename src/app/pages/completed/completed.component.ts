@@ -4,12 +4,12 @@ import { Task } from 'src/app/models/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: 'app-completed',
+  templateUrl: './completed.component.html'
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class CompletedComponent implements OnInit, OnDestroy {
 
-  allTask: Task[] = [];
+  completedTask: Task[] = [];
   suscription !: Subscription;
 
   constructor(
@@ -17,10 +17,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.taskService.initTasks();
     this.suscription = this.taskService.tasksList$.subscribe( tasks => {
       if(tasks){
-        this.allTask = tasks;
+        this.completedTask = this.taskService.getTaskCompleted();
       }
     });
   }
