@@ -51,11 +51,11 @@ export class TasksService {
     return listTasks;
   }
 
-  updateNameTask(task: Task): Task[] {
+  updateNameTask(task: Task, newName: string): Task[] {
     let listTasks = this.getAllTasks();
     listTasks = listTasks.map(t => {
       if (t.id === task.id) {
-        t.name = task.name;
+        t.name = newName;
       }
       return t;
     });
