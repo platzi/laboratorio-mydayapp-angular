@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class FooterComponent {
 
   @Input() countItems: number = 0;
+  @Input() countItemsCompleted: number = 0;
   @Output() deleteCompleteTasks = new EventEmitter<void>();
 
   getWord(): string {

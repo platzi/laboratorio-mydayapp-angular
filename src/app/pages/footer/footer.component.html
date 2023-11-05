@@ -9,7 +9,7 @@
     <li>
       <a
         routerLink="/"
-        [ngClass]="{ 'selected': home.isActive }"
+        [ngClass]="{ selected: home.isActive }"
         routerLinkActive
         [routerLinkActiveOptions]="{ exact: true }"
         #home="routerLinkActive"
@@ -19,7 +19,7 @@
     <li>
       <a
         routerLink="/pending"
-        [ngClass]="{ 'selected': pending.isActive }"
+        [ngClass]="{ selected: pending.isActive }"
         #pending="routerLinkActive"
         routerLinkActive
         >Pending</a
@@ -29,14 +29,18 @@
       <a
         routerLink="/completed"
         #completed="routerLinkActive"
-        [ngClass]="{ 'selected': completed.isActive }"
+        [ngClass]="{ selected: completed.isActive }"
         routerLinkActive
         >Completed</a
       >
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->
-  <button class="clear-completed" (click)="deleteCompletedTasks()">
+  <button
+    *ngIf="countItemsCompleted > 0"
+    class="clear-completed"
+    (click)="deleteCompletedTasks()"
+  >
     Clear completed
   </button>
 </footer>
