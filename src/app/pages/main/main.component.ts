@@ -25,8 +25,10 @@ export class MainComponent {
 
   updateNameTask(event: any, task: Task): void {
     const newName: string = event.target.value.trim();
-    this.changeName.emit({ task, newName });
-    this.editingTaskId = null;
+    if (newName) {
+      this.changeName.emit({ task, newName });
+      this.editingTaskId = null;
+    }
   }
 
   deleteTask(task: Task): void {
