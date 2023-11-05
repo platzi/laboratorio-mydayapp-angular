@@ -43,7 +43,15 @@ export class HomeComponent implements OnInit {
   }
 
   get showMainFooter(): boolean {
-    return this.tasksService.getAllTasks().length > 0;
+    return this.countItems > 0;
+  }
+
+  get itemsLeft(): number {
+    return this.tasksService.getAllTasks().filter(t => !t.completed).length;
+  }
+
+  get countItems(): number {
+    return this.tasksService.getAllTasks().length;
   }
 
 }

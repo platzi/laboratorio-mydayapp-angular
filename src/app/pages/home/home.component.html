@@ -20,6 +20,6 @@
       (changeName)="updateName($event)"
       (deleteTasks)="deleteTask($event)"
     ></app-main>
-    <app-footer *ngIf="showMainFooter"></app-footer>
+    <app-footer *ngIf="showMainFooter" [countItems]="itemsLeft"></app-footer>
   </div>
 </section>
