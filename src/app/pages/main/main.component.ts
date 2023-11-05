@@ -10,6 +10,7 @@ export class MainComponent {
   @Input() listTasks: Task[] = [];
   @Output() changeStatus = new EventEmitter<Task>();
   @Output() changeName = new EventEmitter<{ task: Task, newName: string }>();
+  @Output() deleteTasks = new EventEmitter<Task>();
 
   editingTaskId: number | null = null;
   isCompleted = false;
@@ -22,10 +23,14 @@ export class MainComponent {
     this.changeStatus.emit(task);
   }
 
-  updateNameTask(event: any, task: Task): void {    
+  updateNameTask(event: any, task: Task): void {
     const newName: string = event.target.value.trim();
     this.changeName.emit({ task, newName });
     this.editingTaskId = null;
+  }
+
+  deleteTask(task: Task): void {
+    this.deleteTasks.emit(task);
   }
 
   startEditingTask(task: Task): void {

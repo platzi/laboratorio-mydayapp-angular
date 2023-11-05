@@ -16,7 +16,7 @@
           (change)="changeStatusTask(task)"
         />
         <label (dblclick)="startEditingTask(task)">{{ task.name }}</label>
-        <button class="destroy"></button>
+        <button class="destroy" (click)="deleteTask(task)"></button>
       </div>
       <input
         [id]="'inputTaskName' + task.id"
