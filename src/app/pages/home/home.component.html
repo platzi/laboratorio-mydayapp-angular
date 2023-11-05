@@ -17,6 +17,7 @@
       *ngIf="showMainFooter"
       [listTasks]="listTasks"
       (changeStatus)="changeStatus($event)"
+      (changeName)="updateName($event)"
     ></app-main>
     <app-footer *ngIf="showMainFooter"></app-footer>
   </div>

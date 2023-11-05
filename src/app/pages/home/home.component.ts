@@ -34,6 +34,10 @@ export class HomeComponent implements OnInit {
     this.listTasks = this.tasksService.changeStatusTask(task);
   }
 
+  updateName(info: { task: Task, newName: string }): void {
+    this.listTasks = this.tasksService.updateNameTask(info.task, info.newName);
+  }
+
   get showMainFooter(): boolean {
     return this.tasksService.getAllTasks().length > 0;
   }
