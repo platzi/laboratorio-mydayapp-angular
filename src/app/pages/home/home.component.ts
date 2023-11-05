@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Task } from 'src/app/core/models/task.model';
 import { TasksService } from 'src/app/core/services/tasks.service';
 
@@ -10,10 +11,13 @@ export class HomeComponent implements OnInit {
 
   listTasks: Task[] = [];
 
-  constructor(private tasksService: TasksService) { }
+  constructor(
+    private tasksService: TasksService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    this.listTasks = this.tasksService.getAllTasks();
+    this.refreshListTasks();
   }
 
   onkeyup(event: any) {
@@ -27,23 +31,39 @@ export class HomeComponent implements OnInit {
   }
 
   addTask(taskName: string) {
-    this.listTasks = this.tasksService.addTask(taskName);
+    this.tasksService.addTask(taskName);
+    this.refreshListTasks();
   }
 
   changeStatus(task: Task): void {
-    this.listTasks = this.tasksService.changeStatusTask(task);
+    this.tasksService.changeStatusTask(task);
+    this.refreshListTasks();
   }
 
   updateName(info: { task: Task, newName: string }): void {
-    this.listTasks = this.tasksService.updateNameTask(info.task, info.newName);
+    this.tasksService.updateNameTask(info.task, info.newName);
+    this.refreshListTasks();
   }
 
   deleteTask(task: Task): void {
-    this.listTasks = this.tasksService.deleteTask(task);
+    this.tasksService.deleteTask(task);
+    this.refreshListTasks();
   }
 
   deleteCompletedTasks(): void {
-    this.listTasks = this.tasksService.deleteCompletedTasks();
+    this.tasksService.deleteCompletedTasks();
+    this.refreshListTasks();
+  }
+
+  refreshListTasks(): void {
+    this.route.url.subscribe(url => {
+      const filter = url[0]?.path;
+      if (filter) {
+        this.listTasks = this.tasksService.getTasksByStatus(filter);
+      } else {
+        this.listTasks = this.tasksService.getAllTasks();
+      }
+    });
   }
 
   get showMainFooter(): boolean {
