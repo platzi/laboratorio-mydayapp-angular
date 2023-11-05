@@ -1,0 +1,8 @@
+<li [ngClass]="{'completed': task.completed, 'editing':editing}">
+  <div class="view">
+    <input class="toggle" type="checkbox" [checked]="task.completed" (change)="toggle()" />
+    <label (dblclick)="editTask()">{{task.title}}</label>
+    <button class="destroy" (click)="deleteTask(task)"></button>
+  </div>
+  <input #editInput (keypress)="saveTask($event)" [value]="task.title" [formControl]="inputTask" [placeholder]="task.title" class="edit"/>
+</li>

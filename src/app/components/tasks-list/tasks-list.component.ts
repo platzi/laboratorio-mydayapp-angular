@@ -1,26 +1,28 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Task } from 'src/app/models/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: 'app-tasks-list',
+  templateUrl: './tasks-list.component.html'
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class TasksListComponent implements OnInit, OnDestroy {
 
-  allTask: Task[] = [];
+  showList: boolean = false;
+  @Input() tasksList: Task[] = [];
   suscription !: Subscription;
 
   constructor(
     private taskService: TasksService
-  ) { }
+  ){
+    this.showList = this.taskService.isEmpty();
+  }
 
   ngOnInit(): void {
-    this.taskService.initTasks();
     this.suscription = this.taskService.tasksList$.subscribe( tasks => {
       if(tasks){
-        this.allTask = tasks;
+        this.showList = this.taskService.isEmpty();
       }
     });
   }
@@ -28,5 +30,4 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.suscription.unsubscribe();
   }
-
 }
