@@ -23,6 +23,7 @@
         class="edit"
         [value]="task.name"
         (keyup.enter)="updateNameTask($event, task)"
+        (keyup.escape)="cancelEditingTask()"
       />
     </li>
   </ul>

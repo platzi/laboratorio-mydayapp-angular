@@ -43,4 +43,8 @@ export class MainComponent {
     }, 100);
   }
 
+  cancelEditingTask(): void {
+    this.editingTaskId = null;
+  }
+
 }
