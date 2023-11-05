@@ -42,6 +42,10 @@ export class HomeComponent implements OnInit {
     this.listTasks = this.tasksService.deleteTask(task);
   }
 
+  deleteCompletedTasks(): void {
+    this.listTasks = this.tasksService.deleteCompletedTasks();
+  }
+
   get showMainFooter(): boolean {
     return this.countItems > 0;
   }
