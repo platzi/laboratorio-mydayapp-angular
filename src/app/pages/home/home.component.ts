@@ -38,6 +38,10 @@ export class HomeComponent implements OnInit {
     this.listTasks = this.tasksService.updateNameTask(info.task, info.newName);
   }
 
+  deleteTask(task: Task): void {
+    this.listTasks = this.tasksService.deleteTask(task);
+  }
+
   get showMainFooter(): boolean {
     return this.tasksService.getAllTasks().length > 0;
   }
