@@ -1,6 +1,10 @@
-<div class="view">
-  <input class="toggle" type="checkbox" checked />
+<div class="view" (dblclick)="editTaskFunc()">
+  <input class="toggle" type="checkbox"[checked]="task?.completed" (click)="completeTaskFunc()"/>
   <label>{{task?.title}}</label>
-  <button class="destroy"></button>
+  <button class="destroy" (click)="deleteTaskFunc()"></button>
 </div>
-<input class="edit" value="Learn JavaScript" />
+<input
+  class="edit"
+  [value]="task?.title"
+  (keydown.enter)="updateTaskFunc($event)"
+/>

@@ -15,12 +15,9 @@ export class HomeComponent{
   constructor() { }
 
   //Las tareas que se van a desplegar
-  tasks = signal<task[]>([{
-    id: "juanda",
-    title: "Soy una tarea",
-    completed: false
-  }])
+  tasks = signal<task[]>([])
 
+  //Añade una tarea a la lista
   addTask(title: string){
     this.tasks.update(prev => {
       return[
@@ -28,8 +25,67 @@ export class HomeComponent{
         {
           id: Date.now().toString(),
           title: title,
-          completed: false
+          completed: false,
+          editing: false,
         }]
+    })
+  }
+
+  //Completa una tarea
+  completeTask(task: task){
+    this.tasks.update(prev => {
+      return prev.map(t => {
+        if(task.id === t.id){
+          return {
+            ...task,
+            completed: !task.completed
+          }
+        }
+        return {
+          ...t
+        }
+      })
+    })
+  }
+
+  //Pone una tarea en modo edición
+  editTask(task: task){
+    this.tasks.update(prev => {
+      return prev.map(t => {
+        if(task.id === t.id){
+          return {
+            ...task,
+            editing: true
+          }
+        }
+        return {
+          ...t,
+          editing: false
+        }
+      })
+    })
+  }
+
+  //Actualiza una tarea
+  updateTask(event: [task, string]){
+    const [t, title] = event
+    this.tasks.update(prev => {
+      return prev.map((task) => {
+        if (task.id == t.id){
+          return {
+            ...task,
+            title: title,
+            editing: false
+          }
+        }
+        return task
+      })
+    })
+  }
+
+  deleteTask(task: task){
+    this.tasks.update(prev => {
+      return prev.filter(t => t.id != task.id)
     })
   }
 }

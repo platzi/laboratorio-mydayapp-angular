@@ -6,8 +6,13 @@
       <section class="main">
         <ul class="todo-list">
           @for(task of tasks(); track task){
-            <li [class.completed]="task.completed">
-              <app-task [task]="task"/>
+            <li [class.editing]="task.editing && !task.completed" [class.completed]="task.completed">
+              <app-task
+                [task]="task"
+                (completeTask)="completeTask($event)"
+                (editTask)="editTask($event)"
+                (updateTask)="updateTask($event)"
+                (deleteTask)="deleteTask($event)"/>
             </li>
           }
         </ul>
