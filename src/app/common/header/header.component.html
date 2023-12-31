@@ -7,6 +7,8 @@
       placeholder="Type new todo"
       autofocus
       type="text"
+      [formControl]="newTaskCtrl"
+      (keydown.enter)="createNewTask()"
     />
   </div>
 </header>

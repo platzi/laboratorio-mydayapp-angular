@@ -1,5 +1,5 @@
 <section class="todoapp">
-  <app-header />
+  <app-header (taskTitle)="addTask($event)"/>
   @if(tasks().length > 0){
     <div class="container todoapp-wrapper">
       <!-- This section should be hidden by default and shown when there are todos -->

@@ -11,14 +11,14 @@ import { TaskComponent } from './components/task/task.component';
 @NgModule({
   declarations: [
     AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
     HomeComponent,
     HeaderComponent,
     FooterComponent,
     TaskComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
