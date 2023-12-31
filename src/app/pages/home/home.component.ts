@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
+import { task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,11 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  tasks = signal<task[]>([{
+    id: "juanda",
+    title: "Soy una tarea",
+    completed: false
+  }])
 
   ngOnInit(): void {
   }

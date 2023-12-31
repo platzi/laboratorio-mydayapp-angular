@@ -1,14 +1,18 @@
 <section class="todoapp">
   <app-header />
-  <div class="container todoapp-wrapper">
-    <!-- This section should be hidden by default and shown when there are todos -->
-    <section class="main">
-      <ul class="todo-list">
-        <li class="completed">
-          <app-task />
-        </li>
-      </ul>
-    </section>
-   <app-footer />
-  </div>
+  @if(tasks().length > 0){
+    <div class="container todoapp-wrapper">
+      <!-- This section should be hidden by default and shown when there are todos -->
+      <section class="main">
+        <ul class="todo-list">
+          @for(task of tasks(); track task){
+            <li [class.completed]="task.completed">
+              <app-task [task]="task"/>
+            </li>
+          }
+        </ul>
+      </section>
+    <app-footer />
+    </div>
+  }
 </section>
