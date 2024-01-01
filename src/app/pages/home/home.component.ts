@@ -55,7 +55,7 @@ export class HomeComponent{
         if(task.id === t.id){
           return {
             ...task,
-            editing: true
+            editing: !task.editing
           }
         }
         return {
@@ -69,12 +69,15 @@ export class HomeComponent{
   //Actualiza una tarea
   updateTask(event: [task, string]){
     const [t, title] = event
+
+    if(title === "") return
+
     this.tasks.update(prev => {
       return prev.map((task) => {
         if (task.id == t.id){
           return {
             ...task,
-            title: title,
+            title: title.trim(),
             editing: false
           }
         }
