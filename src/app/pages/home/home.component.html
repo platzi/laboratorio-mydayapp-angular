@@ -5,7 +5,7 @@
       <!-- This section should be hidden by default and shown when there are todos -->
       <section class="main">
         <ul class="todo-list">
-          @for(task of tasks(); track task){
+          @for(task of filtered(); track task){
             <li [class.editing]="task.editing && !task.completed" [class.completed]="task.completed">
               <app-task
                 [task]="task"
@@ -17,7 +17,10 @@
           }
         </ul>
       </section>
-    <app-footer />
+    <app-footer
+      [numTasks]="filtered().length"
+      [completed]="completed()"
+      (clearTasks)="deleteCompleteTasks()"/>
     </div>
   }
 </section>
