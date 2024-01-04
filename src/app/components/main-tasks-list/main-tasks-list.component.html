@@ -1,0 +1,9 @@
+<section class="main">
+  <ul class="todo-list">
+    <app-task
+      *ngFor="let task of tasks"
+      [task]="task"
+      (tasksRefresh)="onRefresh($event)"
+    ></app-task>
+  </ul>
+</section>
